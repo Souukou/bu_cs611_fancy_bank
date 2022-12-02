@@ -9,7 +9,7 @@
     git push -u origin stock_market
     ```
 
-2. Push any number of commits you want into your branch. Remember to write unit tests for every method you provide. Run unit tests using `mvn test`. You can find an example unit test in src/test/java/FancyBank
+2. Push any number of commits you want into your branch. Remember to write unit tests for every method you provide. Run unit tests using `mvn test`. You can find an example unit test in src/test/java/fancybank
     ```
     git add .
     git commit -m "Add a fancy stock market"
