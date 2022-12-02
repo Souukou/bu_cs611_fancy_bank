@@ -1,4 +1,4 @@
-package FancyBank;
+package fancybank;
 
 import org.junit.jupiter.api.Assertions;
 
