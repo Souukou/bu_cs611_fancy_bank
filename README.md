@@ -25,3 +25,13 @@
     You will see a green badge near your commit ID that shows that your code passed the builder check.
 
 4. When you are ready to merge, click **Squash and merge**. (**NOT Merge Pull Request**) This will combine all your commits into one single commit and merge it into main branch.
+
+## Auto Format
+
+To avoid different formatting rules by different IDE, we provided an xml format specification `java-formatter.xml` that could be imported to your own IDE.
+
+* If you use the latest version of IDEA, you do not need to do anything. This format file is exported from IDEA.
+
+* If you use VSCode, ctrl+shift+P, `Java Formatter Settings with Preview`, replace the `.vscode\java-formatter.xml` with our xml file.
+
+* If you use Eclipse, Google it.
