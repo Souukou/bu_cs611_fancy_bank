@@ -1,6 +1,6 @@
 package fancybank.account;
 
-public class CheckAccount extends Account {
+public class CheckAccount extends Account implements CashOperable {
 
     public CheckAccount() {
         super(0, "Check");
@@ -22,6 +22,22 @@ public class CheckAccount extends Account {
             return;
         }
         super.setBalance(balance);
+    }
+
+    @Override
+    public void deposit(double amount) {
+        if (amount < 0) {
+            return;
+        }
+        setBalance(getBalance() + amount);
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (amount < 0) {
+            return;
+        }
+        setBalance(getBalance() - amount);
     }
 
 }
