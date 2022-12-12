@@ -26,5 +26,22 @@ public class AccountTest {
         Assertions.assertEquals(400, checkAccount4.getBalance());
         checkAccount4.setBalance(-500);
         Assertions.assertEquals(400, checkAccount4.getBalance());
+
+        Account checkAccount5 = new CheckAccount(10004);
+        Assertions.assertTrue(checkAccount5 instanceof CheckAccount);
+    }
+
+    @Test
+    public void TestSavingAccouunt() {
+        SavingAccount savingAccount1 = new SavingAccount(10001);
+        Assertions.assertEquals(10001, savingAccount1.getAccountNumber());
+        Assertions.assertEquals(0, savingAccount1.getBalance());
+        savingAccount1.setBalance(100);
+        Assertions.assertEquals(100, savingAccount1.getBalance());
+        savingAccount1.setBalance(-200);
+        Assertions.assertEquals(100, savingAccount1.getBalance());
+
+        Account savingAccount2 = new SavingAccount(10002, 200);
+        Assertions.assertTrue(savingAccount2 instanceof SavingAccount);
     }
 }

@@ -1,29 +1,27 @@
 package fancybank.account;
 
 public class CheckAccount extends Account {
-    private double balance;
 
     public CheckAccount() {
+        super(0, "Check");
     }
 
     public CheckAccount(int accountNumber) {
-        super(accountNumber);
-        this.balance = 0;
+        super(accountNumber, "Check");
     }
 
     public CheckAccount(int accountNumber, double balance) {
-        super(accountNumber);
-        this.setBalance(balance);
-    }
+        super(accountNumber, "Check");
+        setBalance(balance);
 
-    public double getBalance() {
-        return balance;
     }
 
     public void setBalance(double balance) {
+        // check account balance cannot be negative
         if (balance < 0) {
             return;
         }
-        this.balance = balance;
+        super.setBalance(balance);
     }
+
 }
