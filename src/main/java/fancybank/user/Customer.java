@@ -28,7 +28,7 @@ public class Customer extends User {
         this.accounts = accounts;
     }
 
-    public Customer(int uid, String firstName, String middleName, String lastName, String street, String city, String state, String zip, String country, String email, Password password) {
+    public Customer(int uid, String firstName, String middleName, String lastName, String street, String city, String state, String zip, String country, String email, String password) {
         super(uid, firstName, middleName, lastName, street, city, state, zip, country, email, password);
         this.accounts = new ArrayList<Account>();
     }
@@ -83,6 +83,16 @@ public class Customer extends User {
         return securityAccounts;
     }
 
+    public ArrayList<Account> getAccountByCurrency(String currency) {
+        ArrayList<Account> accounts = new ArrayList<Account>();
+        for (Account account : this.accounts) {
+            if (account.getBalance().getCurrency().getName().equals(currency)) {
+                accounts.add(account);
+            }
+        }
+        return accounts;
+    }
+
     // if only have one check accont, use this
     public CheckAccount getOneCheckAccount() {
         ArrayList<CheckAccount> checkAccounts = getCheckAccount();
@@ -106,6 +116,15 @@ public class Customer extends User {
         ArrayList<SecurityAccount> securityAccounts = getSecurityAccounts();
         if (securityAccounts.size() >= 1) {
             return securityAccounts.get(0);
+        }
+        return null;
+    }
+
+    // if only one currency per account, use this
+    public Account getOneAccountByCurrency(String currency) {
+        ArrayList<Account> accounts = getAccountByCurrency(currency);
+        if (accounts.size() >= 1) {
+            return accounts.get(0);
         }
         return null;
     }
@@ -206,7 +225,7 @@ public class Customer extends User {
         return TransferSameCurrency(from, to, amout, "");
     }
 
-    public boolean Exchange(Account from, Account to, Balance exchangeBalance) {
+    public boolean ExchangeCurrency(Account from, Account to, Balance exchangeBalance) {
         if (!(from instanceof Transferable)) {
             return false;
         }
