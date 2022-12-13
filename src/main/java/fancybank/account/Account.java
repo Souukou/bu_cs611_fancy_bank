@@ -2,7 +2,7 @@ package fancybank.account;
 
 public abstract class Account {
     private int accountNumber;
-    private double balance;
+    private Balance balance;
     private String accountType;
 
     public Account() {
@@ -15,18 +15,20 @@ public abstract class Account {
     public Account(int accountNumber, String accountType) {
         this.accountNumber = accountNumber;
         this.accountType = accountType;
+        this.balance = new Balance();
     }
 
     public Account(int accountNumber, double balance) {
         this.accountNumber = accountNumber;
-        this.balance = balance;
+        this.balance = new Balance(balance);
     }
 
-    public Account(int accountNumber, double balance, String accountType) {
+    public Account(int accountNumber, String accountType, double balance) {
         this.accountNumber = accountNumber;
-        this.balance = balance;
+        this.balance = new Balance(balance);
         this.accountType = accountType;
     }
+
 
     public int getAccountNumber() {
         return accountNumber;
@@ -36,11 +38,11 @@ public abstract class Account {
         this.accountNumber = accountNumber;
     }
 
-    public double getBalance() {
+    public Balance getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Balance balance) {
         this.balance = balance;
     }
 

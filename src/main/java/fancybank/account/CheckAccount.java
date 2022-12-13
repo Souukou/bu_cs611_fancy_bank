@@ -1,27 +1,22 @@
 package fancybank.account;
 
-public class CheckAccount extends Account implements CashOperable {
+public class CheckAccount extends Account implements CashOperable, Transferable {
 
     public CheckAccount() {
-        super(0, "Check");
+        super(0, "Check", 0);
     }
 
     public CheckAccount(int accountNumber) {
-        super(accountNumber, "Check");
+        super(accountNumber, "Check", 0);
     }
 
     public CheckAccount(int accountNumber, double balance) {
-        super(accountNumber, "Check");
-        setBalance(balance);
+        super(accountNumber, "Check", balance);
 
     }
 
     public void setBalance(double balance) {
-        // check account balance cannot be negative
-        if (balance < 0) {
-            return;
-        }
-        super.setBalance(balance);
+        getBalance().set(balance);
     }
 
     @Override
@@ -29,15 +24,23 @@ public class CheckAccount extends Account implements CashOperable {
         if (amount < 0) {
             return;
         }
-        setBalance(getBalance() + amount);
+        getBalance().add(amount);
     }
 
     @Override
     public void withdraw(double amount) {
+        getBalance().subtract(amount);
+    }
+
+    @Override
+    public void transferTo(Account target, double amount) {
         if (amount < 0) {
             return;
         }
-        setBalance(getBalance() - amount);
+        if (!getBalance().isSufficient(amount)) {
+            return;
+        }
+        getBalance().subtract(amount);
+        target.getBalance().add(amount);
     }
-
 }
