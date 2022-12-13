@@ -19,6 +19,7 @@ public abstract class User {
         this.name = name;
         this.address = address;
         this.email = email;
+        this.password = password;
     }
 
     public User(int uid, String firstName, String middleName, String lastName, String street, String city, String state, String zip, String country, String email, Password password) {
