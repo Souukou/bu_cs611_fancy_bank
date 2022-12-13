@@ -65,7 +65,7 @@ public class Customer extends User {
     public ArrayList<SavingAccount> getSavingAccount() {
         ArrayList<SavingAccount> savingAccounts = new ArrayList<SavingAccount>();
         for (Account account : accounts) {
-            if (!(account instanceof SavingAccount)) {
+            if (account instanceof SavingAccount) {
                 savingAccounts.add((SavingAccount) account);
             }
         }
@@ -109,7 +109,7 @@ public class Customer extends User {
         return null;
     }
 
-    public void createAccount(String type, int accountNumber, double balance) {
+    public void createAccount(String type, double balance) {
         Account account = null;
         int nextAccountNumber = Data.getInstance().getMaxAccountNumber() + 1;
 

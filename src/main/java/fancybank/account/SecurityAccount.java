@@ -3,7 +3,7 @@
  */
 package fancybank.account;
 
-public class SecurityAccount extends Account {
+public class SecurityAccount extends Account implements Transferable {
     private StockHoldingList stockHoldingList = new StockHoldingList();
 
     public SecurityAccount() {
@@ -22,4 +22,19 @@ public class SecurityAccount extends Account {
         return stockHoldingList;
     }
 
+    public void setStockHoldingList(StockHoldingList stockHoldingList) {
+        this.stockHoldingList = stockHoldingList;
+    }
+
+    @Override
+    public void transferTo(Account target, double amount) {
+        if (amount < 0) {
+            return;
+        }
+        if (!getBalance().isSufficient(amount)) {
+            return;
+        }
+        getBalance().subtract(amount);
+        target.getBalance().add(amount);
+    }
 }
