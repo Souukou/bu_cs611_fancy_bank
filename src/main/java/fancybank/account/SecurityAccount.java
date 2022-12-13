@@ -7,15 +7,15 @@ public class SecurityAccount extends Account {
     private StockHoldingList stockHoldingList = new StockHoldingList();
 
     public SecurityAccount() {
-        super(0, "Security", 0);
+        super(0, "security", 0);
     }
 
     public SecurityAccount(int accountNumber) {
-        super(accountNumber, "Security", 0);
+        super(accountNumber, "security", 0);
     }
 
     public SecurityAccount(int accountNumber, double balance) {
-        super(accountNumber, "Security", balance);
+        super(accountNumber, "security", balance);
     }
 
     public StockHoldingList getStockHoldingList() {
