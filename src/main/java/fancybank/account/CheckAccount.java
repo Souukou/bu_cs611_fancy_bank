@@ -1,17 +1,17 @@
 package fancybank.account;
 
-public class CheckAccount extends Account implements CashOperable, Transferable {
+public class CheckAccount extends Account implements CashOperable, Transferable, Exchangeable {
 
     public CheckAccount() {
-        super(0, "checking", 0);
+        super(0, "checking", 0, "USD");
     }
 
     public CheckAccount(int accountNumber) {
-        super(accountNumber, "checking", 0);
+        super(accountNumber, "checking", 0, "USD");
     }
 
-    public CheckAccount(int accountNumber, double balance) {
-        super(accountNumber, "checking", balance);
+    public CheckAccount(int accountNumber, double balance, String currency) {
+        super(accountNumber, "checking", balance, currency);
 
     }
 
@@ -42,5 +42,21 @@ public class CheckAccount extends Account implements CashOperable, Transferable 
         }
         getBalance().subtract(amount);
         target.getBalance().add(amount);
+    }
+
+    @Override
+    public boolean exchangeTo(Account targetAccount, Balance exBalance) {
+        if (!(targetAccount instanceof Exchangeable)) {
+            return false;
+        }
+        if (exBalance.get() < 0) {
+            return false;
+        }
+        if (!getBalance().isSufficient(exBalance)) {
+            return false;
+        }
+        this.getBalance().subtract(exBalance);
+        targetAccount.getBalance().add(exBalance);
+        return true;
     }
 }

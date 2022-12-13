@@ -22,11 +22,12 @@ public abstract class User {
         this.password = password;
     }
 
-    public User(int uid, String firstName, String middleName, String lastName, String street, String city, String state, String zip, String country, String email, Password password) {
+    public User(int uid, String firstName, String middleName, String lastName, String street, String city, String state, String zip, String country, String email, String password) {
         this.UID = new UID(uid);
         this.name = new Name(firstName, middleName, lastName);
         this.address = new Address(street, city, state, zip, country);
         this.email = new Email(email);
+        this.password = new Password(password);
     }
 
     public UID getUID() {

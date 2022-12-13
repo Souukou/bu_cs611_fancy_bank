@@ -3,6 +3,7 @@ package fancybank.user;
 import org.junit.jupiter.api.Test;
 
 import fancybank.account.Account;
+import fancybank.account.Balance;
 import fancybank.account.CheckAccount;
 import fancybank.account.SavingAccount;
 import fancybank.account.SecurityAccount;
@@ -35,7 +36,7 @@ public class CustomerTest {
         Assertions.assertFalse(customer1.getPassword().validate("123456"));
         Assertions.assertEquals(0, customer1.getAccounts().size());
 
-        customer1.createAccount("checking", 0);
+        customer1.createAccount("checking", 0, "USD");
         Assertions.assertEquals(1, customer1.getAccounts().size());
         Account curAccount = customer1.getAccounts().get(0);
         Assertions.assertTrue(curAccount instanceof CheckAccount);
@@ -47,14 +48,14 @@ public class CustomerTest {
         curCheckAccount.withdraw(100);
         Assertions.assertEquals(900, curCheckAccount.getBalance().get());
 
-        customer1.createAccount("saving", 0);
+        customer1.createAccount("saving", 0, "USD");
         Assertions.assertEquals(1, customer1.getSavingAccount().size());
         Assertions.assertEquals(1, customer1.getSavingAccount().size());
         SavingAccount curSavingAccount = customer1.getSavingAccount().get(0);
         curSavingAccount.deposit(50);
         Assertions.assertEquals(50, curSavingAccount.getBalance().get());
 
-        customer1.createAccount("security", 0);
+        customer1.createAccount("security", 0, "USD");
         Assertions.assertEquals(3, customer1.getAccounts().size());
         SecurityAccount securityAccount = customer1.getOneSecurityAccount();
         Assertions.assertEquals(0, securityAccount.getBalance().get());
@@ -72,5 +73,46 @@ public class CustomerTest {
         Assertions.assertEquals(150, securityAccount.getBalance().get());
 
 
+    }
+
+
+    @Test
+    public void TestCustomerExchangeCurrency() {
+        Customer customer1 = new Customer(
+                100001, "Albert", "J", "Williams", "123 Commonwealth St", "Anytown", "MA", "02215", "USA", "a@b.com", "xxxxxxxx");
+
+        customer1.createAccount("checking", 0, "USD");
+        customer1.createAccount("checking", 0, "CNY");
+        customer1.createAccount("checking", 0, "EUR");
+
+        CheckAccount curUSDAccount = (CheckAccount) customer1.getOneAccountByCurrency("USD");
+        Assertions.assertEquals(0, curUSDAccount.getBalance().get());
+        CheckAccount curCNYAccount = (CheckAccount) customer1.getAccountByCurrency("CNY").get(0);
+        Assertions.assertEquals(0, curCNYAccount.getBalance().get());
+        CheckAccount curEURAccount = (CheckAccount) customer1.getAccountByCurrency("EUR").get(0);
+        Assertions.assertEquals(0, curEURAccount.getBalance().get());
+
+        curUSDAccount.deposit(1000);
+
+        customer1.ExchangeCurrency(curUSDAccount, curCNYAccount, new Balance(100, "USD"));
+        Assertions.assertEquals(900, curUSDAccount.getBalance().get());
+        Assertions.assertEquals(700, curCNYAccount.getBalance().get());
+
+        customer1.ExchangeCurrency(curUSDAccount, curCNYAccount, new Balance(700, "CNY"));
+        Assertions.assertEquals(800, curUSDAccount.getBalance().get());
+        Assertions.assertEquals(1400, curCNYAccount.getBalance().get());
+
+        customer1.ExchangeCurrency(curCNYAccount, curEURAccount, new Balance(700, "CNY"));
+        Assertions.assertEquals(700, curCNYAccount.getBalance().get());
+        Assertions.assertEquals(90, curEURAccount.getBalance().get());
+
+        customer1.ExchangeCurrency(curCNYAccount, curEURAccount, new Balance(45, "EUR"));
+        Assertions.assertEquals(350, curCNYAccount.getBalance().get());
+        Assertions.assertEquals(135, curEURAccount.getBalance().get());
+
+        // the Balance Currency is NOT required to be same as to or from account
+        customer1.ExchangeCurrency(curCNYAccount, curEURAccount, new Balance(50, "USD"));
+        Assertions.assertEquals(0, curCNYAccount.getBalance().get());
+        Assertions.assertEquals(180, curEURAccount.getBalance().get());
     }
 }
