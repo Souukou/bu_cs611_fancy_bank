@@ -10,6 +10,8 @@ public abstract class Account {
 
     public Account(int accountNumber) {
         this.accountNumber = accountNumber;
+        this.balance = new Balance();
+        this.accountType = "";
     }
 
     public Account(int accountNumber, String accountType) {
@@ -18,14 +20,14 @@ public abstract class Account {
         this.balance = new Balance();
     }
 
-    public Account(int accountNumber, double balance) {
+    public Account(int accountNumber, double balance, String currency) {
         this.accountNumber = accountNumber;
-        this.balance = new Balance(balance);
+        this.balance = new Balance(balance, currency);
     }
 
-    public Account(int accountNumber, String accountType, double balance) {
+    public Account(int accountNumber, String accountType, double balance, String currency) {
         this.accountNumber = accountNumber;
-        this.balance = new Balance(balance);
+        this.balance = new Balance(balance, currency);
         this.accountType = accountType;
     }
 

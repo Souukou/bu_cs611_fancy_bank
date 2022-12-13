@@ -3,6 +3,7 @@ package fancybank.data;
 import java.util.ArrayList;
 
 import fancybank.account.Account;
+import fancybank.account.Balance;
 import fancybank.currency.Currency;
 import fancybank.user.Customer;
 
@@ -27,6 +28,10 @@ public class Data {
     }
 
     public void AddTransaction(Account from, Account to, double amount, String memo) {
+
+    }
+
+    public void AddTransaction(Account from, Account to, Balance amount, String memo) {
 
     }
 

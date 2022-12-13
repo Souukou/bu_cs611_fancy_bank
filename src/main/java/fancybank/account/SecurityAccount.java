@@ -7,15 +7,16 @@ public class SecurityAccount extends Account implements Transferable {
     private StockHoldingList stockHoldingList = new StockHoldingList();
 
     public SecurityAccount() {
-        super(0, "security", 0);
+        super(0, "security", 0, "USD");
     }
 
     public SecurityAccount(int accountNumber) {
-        super(accountNumber, "security", 0);
+        super(accountNumber, "security", 0, "USD");
     }
 
+    // we only allow USD for stock account
     public SecurityAccount(int accountNumber, double balance) {
-        super(accountNumber, "security", balance);
+        super(accountNumber, "security", balance, "USD");
     }
 
     public StockHoldingList getStockHoldingList() {

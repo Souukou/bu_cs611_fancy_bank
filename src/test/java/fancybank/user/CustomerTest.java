@@ -35,7 +35,7 @@ public class CustomerTest {
         Assertions.assertFalse(customer1.getPassword().validate("123456"));
         Assertions.assertEquals(0, customer1.getAccounts().size());
 
-        customer1.createAccount("checking", 0);
+        customer1.createAccount("checking", 0, "USD");
         Assertions.assertEquals(1, customer1.getAccounts().size());
         Account curAccount = customer1.getAccounts().get(0);
         Assertions.assertTrue(curAccount instanceof CheckAccount);
@@ -47,14 +47,14 @@ public class CustomerTest {
         curCheckAccount.withdraw(100);
         Assertions.assertEquals(900, curCheckAccount.getBalance().get());
 
-        customer1.createAccount("saving", 0);
+        customer1.createAccount("saving", 0, "USD");
         Assertions.assertEquals(1, customer1.getSavingAccount().size());
         Assertions.assertEquals(1, customer1.getSavingAccount().size());
         SavingAccount curSavingAccount = customer1.getSavingAccount().get(0);
         curSavingAccount.deposit(50);
         Assertions.assertEquals(50, curSavingAccount.getBalance().get());
 
-        customer1.createAccount("security", 0);
+        customer1.createAccount("security", 0, "USD");
         Assertions.assertEquals(3, customer1.getAccounts().size());
         SecurityAccount securityAccount = customer1.getOneSecurityAccount();
         Assertions.assertEquals(0, securityAccount.getBalance().get());

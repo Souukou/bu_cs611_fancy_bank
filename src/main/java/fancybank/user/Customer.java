@@ -3,6 +3,7 @@ package fancybank.user;
 import java.util.ArrayList;
 
 import fancybank.account.Account;
+import fancybank.account.Balance;
 import fancybank.account.CheckAccount;
 import fancybank.account.SavingAccount;
 import fancybank.account.SecurityAccount;
@@ -109,14 +110,14 @@ public class Customer extends User {
         return null;
     }
 
-    public void createAccount(String type, double balance) {
+    public void createAccount(String type, double balance, String currency) {
         Account account = null;
         int nextAccountNumber = Data.getInstance().getMaxAccountNumber() + 1;
 
         if (type.equals("checking")) {
-            account = new CheckAccount(nextAccountNumber, balance);
+            account = new CheckAccount(nextAccountNumber, balance, currency);
         } else if (type.equals("saving")) {
-            account = new SavingAccount(nextAccountNumber, balance);
+            account = new SavingAccount(nextAccountNumber, balance, currency);
         } else if (type.equals("security")) {
             account = new SecurityAccount(nextAccountNumber, balance);
         }
@@ -124,6 +125,53 @@ public class Customer extends User {
             this.accounts.add(account);
         }
         Data.getInstance().saveAccount(this, account);
+    }
+
+    public ArrayList<Account> getCurrancyAccountList(String currency) {
+        ArrayList<Account> currencyAccountList = new ArrayList<Account>();
+        for (Account account : accounts) {
+            if (account.getBalance().getCurrency().getName().equals(currency)) {
+                currencyAccountList.add(account);
+            }
+        }
+        return currencyAccountList;
+    }
+
+    public boolean createCheckAccount(double balance, String currency) {
+        // our logic is to limit one checking account per currency
+        ArrayList<Account> currencyAccountList = getCurrancyAccountList(currency);
+        for (Account account : currencyAccountList) {
+            if (account instanceof CheckAccount) {
+                return false;
+            }
+        }
+        // create account
+        createAccount("checking", balance, currency);
+        return true;
+    }
+
+    public boolean createSavingAccount(double balance, String currency) {
+        // our logic is to limit one checking account per currency
+        ArrayList<Account> currencyAccountList = getCurrancyAccountList(currency);
+        for (Account account : currencyAccountList) {
+            if (account instanceof SavingAccount) {
+                return false;
+            }
+        }
+        // create account
+        createAccount("saving", balance, currency);
+        return true;
+    }
+
+    public boolean createSecurityAccount(double balance) {
+        // our logic is to limit one checking account
+        ArrayList<SecurityAccount> securityAccountList = getSecurityAccounts();
+        if (securityAccountList.size() >= 1) {
+            return false;
+        }
+        // create account
+        createAccount("security", balance, "USD");
+        return true;
     }
 
     public boolean Transfer(Account from, Account to, double amount, String memo) {
@@ -136,13 +184,41 @@ public class Customer extends User {
         if (!from.getBalance().isSufficient(amount)) {
             return false;
         }
-        from.getBalance().subtract(amount);
-        to.getBalance().add(amount);
+        Balance exchangeBalance = new Balance(amount, from.getBalance().getCurrency());
+        from.getBalance().subtract(exchangeBalance);
+        to.getBalance().add(exchangeBalance);
         Data.getInstance().AddTransaction(from, to, amount, memo);
         return true;
     }
 
     public boolean Transfer(Account from, Account to, double amount) {
         return Transfer(from, to, amount, "");
+    }
+
+    public boolean TransferSameCurrency(Account from, Account to, double amout, String memo) {
+        if (from.getBalance().getCurrency().getName().equals(to.getBalance().getCurrency().getName())) {
+            return Transfer(from, to, amout, memo);
+        }
+        return false;
+    }
+
+    public boolean TransferSameCurrency(Account from, Account to, double amout) {
+        return TransferSameCurrency(from, to, amout, "");
+    }
+
+    public boolean Exchange(Account from, Account to, Balance exchangeBalance) {
+        if (!(from instanceof Transferable)) {
+            return false;
+        }
+        if (!(to instanceof Transferable)) {
+            return false;
+        }
+        if (!from.getBalance().isSufficient(exchangeBalance)) {
+            return false;
+        }
+        from.getBalance().subtract(exchangeBalance);
+        to.getBalance().add(exchangeBalance);
+        Data.getInstance().AddTransaction(from, to, exchangeBalance, "");
+        return true;
     }
 }

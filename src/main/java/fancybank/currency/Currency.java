@@ -3,12 +3,12 @@ package fancybank.currency;
 public class Currency {
     private String name;
     private String symbol;
-    private double rateToUSD;
+    private double rate;
 
-    public Currency(String name, String symbol, double rateToUSD) {
+    public Currency(String name, String symbol, double rate) {
         this.name = name;
         this.symbol = symbol;
-        this.rateToUSD = rateToUSD;
+        this.rate = rate;
     }
 
     public String getName() {
@@ -19,8 +19,8 @@ public class Currency {
         return symbol;
     }
 
-    public double getRateToUSD() {
-        return rateToUSD;
+    public double getRate() {
+        return rate;
     }
 
     public boolean equals(Object obj) {

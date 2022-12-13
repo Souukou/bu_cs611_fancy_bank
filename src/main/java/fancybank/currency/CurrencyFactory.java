@@ -34,4 +34,13 @@ public class CurrencyFactory {
         return currencyList;
     }
 
+    public boolean hasCurrency(String name) {
+        for (Currency currency : currencyList) {
+            if (currency.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
