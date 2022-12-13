@@ -1,16 +1,16 @@
 package fancybank.account;
 
 public class SavingAccount extends Account implements CashOperable, Transferable {
-    SavingAccount() {
-        super(0, "Saving", 0);
+    public SavingAccount() {
+        super(0, "saving", 0);
     }
 
-    SavingAccount(int accountNumber) {
-        super(accountNumber, "Saving", 0);
+    public SavingAccount(int accountNumber) {
+        super(accountNumber, "saving", 0);
     }
 
-    SavingAccount(int accountNumber, double balance) {
-        super(accountNumber, "Saving", balance);
+    public SavingAccount(int accountNumber, double balance) {
+        super(accountNumber, "saving", balance);
     }
 
     @Override

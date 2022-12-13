@@ -3,15 +3,15 @@ package fancybank.account;
 public class CheckAccount extends Account implements CashOperable, Transferable {
 
     public CheckAccount() {
-        super(0, "Check", 0);
+        super(0, "checking", 0);
     }
 
     public CheckAccount(int accountNumber) {
-        super(accountNumber, "Check", 0);
+        super(accountNumber, "checking", 0);
     }
 
     public CheckAccount(int accountNumber, double balance) {
-        super(accountNumber, "Check", balance);
+        super(accountNumber, "checking", balance);
 
     }
 
