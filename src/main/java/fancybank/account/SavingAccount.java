@@ -1,29 +1,20 @@
 package fancybank.account;
 
-public class CheckAccount extends Account implements CashOperable, Transferable {
-
-    public CheckAccount() {
-        super(0, "Check", 0);
+public class SavingAccount extends Account implements CashOperable, Transferable {
+    SavingAccount() {
+        super(0, "Saving", 0);
     }
 
-    public CheckAccount(int accountNumber) {
-        super(accountNumber, "Check", 0);
+    SavingAccount(int accountNumber) {
+        super(accountNumber, "Saving", 0);
     }
 
-    public CheckAccount(int accountNumber, double balance) {
-        super(accountNumber, "Check", balance);
-
-    }
-
-    public void setBalance(double balance) {
-        getBalance().set(balance);
+    SavingAccount(int accountNumber, double balance) {
+        super(accountNumber, "Saving", balance);
     }
 
     @Override
     public void deposit(double amount) {
-        if (amount < 0) {
-            return;
-        }
         getBalance().add(amount);
     }
 
