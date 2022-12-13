@@ -3,25 +3,31 @@
  */
 package fancybank.account;
 
-// import java.util.ArrayList;
+import java.util.ArrayList;
+
+import fancybank.stock.StockHolding;
 
 public class SecurityAccount extends Account {
-    // private ArrayList<Stock> stocks;
+    private ArrayList<StockHolding> stockList;
 
     public SecurityAccount() {
         super(0, "Security");
-        // stocks = new ArrayList<Stock>();
+        stockList = new ArrayList<StockHolding>();
     }
 
     public SecurityAccount(int accountNumber) {
         super(accountNumber, "Security");
-        // stocks = new ArrayList<Stock>();
+        stockList = new ArrayList<StockHolding>();
     }
 
     public SecurityAccount(int accountNumber, double balance) {
         super(accountNumber, "Security");
-        // stocks = new ArrayList<Stock>();
+        stockList = new ArrayList<StockHolding>();
         setBalance(balance);
+    }
+
+    public ArrayList<StockHolding> getStockList() {
+        return stockList;
     }
 
 }
