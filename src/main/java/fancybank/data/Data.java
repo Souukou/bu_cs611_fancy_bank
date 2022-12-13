@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import fancybank.account.Account;
 import fancybank.account.Balance;
 import fancybank.currency.Currency;
+import fancybank.user.Address;
 import fancybank.user.Customer;
+import fancybank.user.Name;
+import fancybank.user.Password;
+import fancybank.user.UID;
+import fancybank.user.Email;
 
 public class Data {
     public static Data instance = new Data();
@@ -33,6 +38,13 @@ public class Data {
 
     public void AddTransaction(Account from, Account to, Balance amount, String memo) {
 
+    }
+
+    public int getMaxUID() {
+        return 10023;
+    }
+
+    public void saveCustomer(Customer customer) {
     }
 
     public ArrayList<Currency> getCurrencyList() {
@@ -70,6 +82,20 @@ public class Data {
         currencyList.add(new Currency("PLN", "zł", 3.8));
         currencyList.add(new Currency("ILS", "₪", 3.5));
         return currencyList;
+    }
+
+    public Customer getCustomerByEmail(String email) {
+        //Test only
+//@formatter:off
+        Customer customer1 = new Customer(
+            new UID(100001),
+            new Name("Albert", "J", "Williams"),
+            new Address("123 Commonwealth St", "Anytown", "MA", "02215", "USA"),
+            new Email("albertwilliams@gmail.com"),
+            new Password("12345678")
+        );
+//@formatter:on
+        return customer1;
     }
 
 
