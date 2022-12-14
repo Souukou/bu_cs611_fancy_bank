@@ -18,18 +18,18 @@ public class Customer extends User {
         this.accounts = new ArrayList<Account>();
     }
 
-    public Customer(UID UID, Name name, Address address, Email email, Password password) {
-        super(UID, name, address, email, password);
+    public Customer(UID UID, Username username, Name name, Address address, Email email, Password password) {
+        super(UID, username, name, address, email, password);
         this.accounts = new ArrayList<Account>();
     }
 
-    public Customer(UID UID, Name name, Address address, Email email, Password password, ArrayList<Account> accounts) {
-        super(UID, name, address, email, password);
+    public Customer(UID UID, Username username, Name name, Address address, Email email, Password password, ArrayList<Account> accounts) {
+        super(UID, username, name, address, email, password);
         this.accounts = accounts;
     }
 
-    public Customer(int uid, String firstName, String middleName, String lastName, String street, String city, String state, String zip, String country, String email, String password) {
-        super(uid, firstName, middleName, lastName, street, city, state, zip, country, email, password);
+    public Customer(int uid, String username, String firstName, String middleName, String lastName, String street, String city, String state, String zip, String country, String email, String password) {
+        super(uid, username, firstName, middleName, lastName, street, city, state, zip, country, email, password);
         this.accounts = new ArrayList<Account>();
     }
 
@@ -50,7 +50,7 @@ public class Customer extends User {
     }
 
     public String toString() {
-        return "Customer [UID=" + getUID() + ", name=" + getName() + ", address=" + getAddress() + ", email=" + getEmail() + "]";
+        return "Customer [UID=" + getUID() + "username=" + getUsername() + ", name=" + getName() + ", address=" + getAddress() + ", email=" + getEmail() + "]";
     }
 
     public ArrayList<CheckAccount> getCheckAccount() {
