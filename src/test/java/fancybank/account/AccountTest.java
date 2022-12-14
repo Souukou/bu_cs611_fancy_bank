@@ -91,6 +91,7 @@ public class AccountTest {
     public void TestBuySellStock() {
         CheckAccount checkAccount1 = new CheckAccount(10001, 10000, "USD");
         SecurityAccount securityAccount = new SecurityAccount(10001, 10000);
+        Assertions.assertTrue(securityAccount instanceof Tradable);
         StockMarket stockMarket = StockMarket.getInstance();
         stockMarket.addStock(new Stock("AAPL", "Apple", 100));
         stockMarket.getStock("AAPL").setPrice(100); // in case if alrady existed
