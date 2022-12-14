@@ -206,7 +206,7 @@ public class Customer extends User {
         Balance exchangeBalance = new Balance(amount, from.getBalance().getCurrency());
         from.getBalance().subtract(exchangeBalance);
         to.getBalance().add(exchangeBalance);
-        Data.getInstance().AddTransaction(from, to, amount, memo);
+        Data.getInstance().AddTransaction(from, to, exchangeBalance, memo);
         return true;
     }
 

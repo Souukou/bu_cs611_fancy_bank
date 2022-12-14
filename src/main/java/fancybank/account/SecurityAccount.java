@@ -3,7 +3,13 @@
  */
 package fancybank.account;
 
-public class SecurityAccount extends Account implements Transferable {
+import java.util.ArrayList;
+
+import fancybank.stock.Stock;
+import fancybank.stock.StockHolding;
+import fancybank.stock.StockMarket;
+
+public class SecurityAccount extends Account implements Transferable, Tradable {
     private StockHoldingList stockHoldingList = new StockHoldingList();
 
     public SecurityAccount() {
@@ -37,5 +43,74 @@ public class SecurityAccount extends Account implements Transferable {
         }
         getBalance().subtract(amount);
         target.getBalance().add(amount);
+    }
+
+    @Override
+    public boolean buyStock(Stock stock, int quantity) {
+        // query the latest market information
+        stock = StockMarket.getInstance().getStock(stock.getSymbol());
+        if (stock == null) {
+            return false;
+        }
+        if (quantity <= 0) {
+            return false;
+        }
+        double totalCost = stock.getPrice() * quantity;
+        if (!getBalance().isSufficient(totalCost)) {
+            return false;
+        }
+        getBalance().subtract(totalCost);
+        StockHolding stockHolding = new StockHolding(stock, quantity);
+        stockHoldingList.add(stockHolding);
+        return true;
+    }
+
+    @Override
+    public boolean buyStock(String symbol, int quantity) {
+        Stock stock = StockMarket.getInstance().getStock(symbol);
+        return buyStock(stock, quantity);
+    }
+
+    @Override
+    public boolean sellStock(Stock stock, int quantity) {
+        if (stock == null) {
+            return false;
+        }
+        if (quantity <= 0) {
+            return false;
+        }
+        ArrayList<StockHolding> stockHoldingList = this.stockHoldingList.getStockHoldingList(stock);
+        if (stockHoldingList.size() == 0) {
+            return false;
+        }
+        int totalQuantity = 0;
+        for (StockHolding stockHolding : stockHoldingList) {
+            totalQuantity += stockHolding.getQuantity();
+        }
+        if (totalQuantity < quantity) {
+            return false;
+        }
+        double totalValue = stock.getPrice() * quantity;
+        getBalance().add(totalValue);
+        int remainingQuantity = quantity;
+        for (StockHolding stockHolding : stockHoldingList) {
+            if (stockHolding.getQuantity() <= remainingQuantity) {
+                this.stockHoldingList.remove(stockHolding);
+                remainingQuantity -= stockHolding.getQuantity();
+            } else {
+                stockHolding.setQuantity(stockHolding.getQuantity() - remainingQuantity);
+                remainingQuantity = 0;
+            }
+            if (remainingQuantity == 0) {
+                break;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean sellStock(String symbol, int quantity) {
+        Stock stock = StockMarket.getInstance().getStock(symbol);
+        return sellStock(stock, quantity);
     }
 }
