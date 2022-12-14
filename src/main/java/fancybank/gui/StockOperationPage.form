@@ -86,7 +86,7 @@
           <Font name="Helvetica Neue" size="22" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Stock Number :"/>
+        <Property name="text" type="java.lang.String" value="Stock Name :"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>

@@ -1,4 +1,12 @@
 package fancybank.gui;
+
+import java.util.ArrayList;
+
+import fancybank.account.CheckAccount;
+import fancybank.account.SavingAccount;
+import fancybank.account.SecurityAccount;
+import fancybank.user.Customer;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -13,9 +21,17 @@ public class CustomerMainPage extends javax.swing.JFrame {
     /**
      * Creates new form CustomerMainPage
      */
-    public CustomerMainPage() {
+	Customer c;
+    public CustomerMainPage(Customer customer) {
         initComponents();
-
+        this.c = customer;
+        this.nickname_text.setText(c.getName().toString());
+        ArrayList<CheckAccount> checks = c.getCheckAccount();
+        for(int i=0;i<checks.size();i++) {
+        	CheckAccount acc = checks.get(i);
+        	this.checking_acc_selector.addItem(acc.getAccountNumber()+": "+acc.getBalance().getCurrency().getName());
+        }
+        
     }
 
     /**
@@ -25,7 +41,7 @@ public class CustomerMainPage extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -39,6 +55,7 @@ public class CustomerMainPage extends javax.swing.JFrame {
         Request_loan_button = new javax.swing.JButton();
         transfer_button = new javax.swing.JButton();
         checking_acc_selector = new javax.swing.JComboBox<>();
+        checking_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Customer Main Menu");
@@ -106,104 +123,114 @@ public class CustomerMainPage extends javax.swing.JFrame {
             }
         });
 
+        checking_acc_selector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checking_acc_selectorActionPerformed(evt);
+            }
+        });
+
+        checking_button.setText("Checking Account");
+        checking_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checking_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(110, 110, 110)
-                                                .addComponent(nickname_noti, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(26, 26, 26)
-                                                .addComponent(nickname_text, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(254, 254, 254)
-                                                .addComponent(logoff_button, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 122, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
-                                                .createSequentialGroup()
-                                                .addComponent(info_button, javax.swing.GroupLayout.PREFERRED_SIZE, 60,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(30, 30, 30))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
-                                                .createSequentialGroup()
-                                                .addGroup(layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                false)
-                                                        .addComponent(saving_button,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 250,
-                                                                Short.MAX_VALUE)
-                                                        .addComponent(security_button,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(Request_loan_button,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(transfer_button,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(transaction_button,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(checking_acc_selector, 0,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addGap(199, 199, 199)))));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(nickname_noti, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(nickname_text, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(254, 254, 254)
+                        .addComponent(logoff_button, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 122, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(info_button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(saving_button, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(security_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Request_loan_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(transfer_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(transaction_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(checking_acc_selector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checking_button, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))))
+        );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
-                new java.awt.Component[] { checking_acc_selector, saving_button });
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {checking_acc_selector, saving_button});
 
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(info_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(nickname_text, javax.swing.GroupLayout.PREFERRED_SIZE, 35,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(nickname_noti))
-                                .addGap(42, 42, 42)
-                                .addComponent(checking_acc_selector, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22)
-                                .addComponent(saving_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22)
-                                .addComponent(security_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22)
-                                .addComponent(transfer_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22)
-                                .addComponent(transaction_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22)
-                                .addComponent(Request_loan_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addComponent(logoff_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(17, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(info_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nickname_text, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nickname_noti))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(checking_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(checking_acc_selector))
+                .addGap(22, 22, 22)
+                .addComponent(saving_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(security_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(transfer_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(transaction_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(Request_loan_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(logoff_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL,
-                new java.awt.Component[] { checking_acc_selector, saving_button });
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {checking_acc_selector, saving_button});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void saving_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_saving_buttonActionPerformed
+    private void checking_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checking_buttonActionPerformed
         // TODO add your handling code here:
+        int ind = this.checking_acc_selector.getSelectedIndex();
+        Customer c = this.c;
+        this.setVisible(false);
+        dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SavingAccountPage().setVisible(true);
+                new CheckingAccountPage(c,ind).setVisible(true);
+            }
+        });
+        //aa
+    }//GEN-LAST:event_checking_buttonActionPerformed
+
+    private void checking_acc_selectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checking_acc_selectorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checking_acc_selectorActionPerformed
+
+    private void saving_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_saving_buttonActionPerformed
+        // TODO add your handling code here:
+    	Customer c = this.c;
+    	this.setVisible(false);
+        dispose();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new SavingAccountPage(c).setVisible(true);
             }
         });
     }// GEN-LAST:event_saving_buttonActionPerformed
@@ -219,11 +246,15 @@ public class CustomerMainPage extends javax.swing.JFrame {
 
     private void security_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_security_buttonActionPerformed
         // TODO add your handling code here:
+    	Customer c = this.c;
+    	this.setVisible(false);
+        dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SecurityAccountPage().setVisible(true);
+                new SecurityAccountPage(c).setVisible(true);
             }
         });
+        
     }// GEN-LAST:event_security_buttonActionPerformed
 
     private void logoff_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_logoff_buttonActionPerformed
@@ -239,27 +270,34 @@ public class CustomerMainPage extends javax.swing.JFrame {
 
     private void info_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_info_buttonActionPerformed
         // TODO add your handling code here:
+    	Customer c = this.c;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerInfoPage().setVisible(true);
+                new CustomerInfoPage(c).setVisible(true);
             }
         });
     }// GEN-LAST:event_info_buttonActionPerformed
 
     private void Request_loan_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_Request_loan_buttonActionPerformed
         // TODO add your handling code here:
+    	Customer c = this.c;
+    	this.setVisible(false);
+        dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoanRequestPage().setVisible(true);
+                new LoanRequestPage(c,1).setVisible(true);
             }
         });
     }// GEN-LAST:event_Request_loan_buttonActionPerformed
 
     private void transfer_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_transfer_buttonActionPerformed
         // TODO add your handling code here:
+    	Customer c = this.c;
+    	this.setVisible(false);
+        dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TransferPage().setVisible(true);
+                new TransferPage(c).setVisible(true);
             }
         });
     }// GEN-LAST:event_transfer_buttonActionPerformed
@@ -298,19 +336,21 @@ public class CustomerMainPage extends javax.swing.JFrame {
                     null, ex);
         }
         // </editor-fold>
-
-        /* Create and display the form */
+        
+        /* Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CustomerMainPage().setVisible(true);
             }
         });
+        */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Request_loan_button;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> checking_acc_selector;
+    private javax.swing.JButton checking_button;
     private javax.swing.JButton info_button;
     private javax.swing.JButton logoff_button;
     private javax.swing.JTextField nickname_text;

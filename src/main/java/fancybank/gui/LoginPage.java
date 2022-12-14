@@ -1,6 +1,14 @@
 package fancybank.gui;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
+
+import fancybank.account.Account;
+import fancybank.stock.Stock;
+import fancybank.stock.StockHolding;
+import fancybank.stock.StockMarket;
+import fancybank.user.Customer;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,8 +24,21 @@ public class LoginPage extends javax.swing.JFrame {
     /**
      * Creates new form LoginPage
      */
+	Customer customer;
     public LoginPage() {
         initComponents();
+        Customer customer = new Customer(1,"username","firstname","middle","lastname","888 Commonwealth","boston","MA","02446","US","gmail.com","123456");
+        customer.createCheckAccount(0, "USD");
+        customer.createCheckAccount(0, "EUR");
+        customer.createSavingAccount(0, "USD");
+        customer.createSecurityAccount(100000);
+        Stock apple = StockMarket.getInstance().getStock("AAPL");
+        Stock google = StockMarket.getInstance().getStock("GOOG");
+        customer.getOneSecurityAccount().buyStock(apple, 100);
+        customer.getOneSecurityAccount().buyStock(apple, 100);
+        customer.getOneSecurityAccount().buyStock(google, 100);
+        customer.getOneSecurityAccount().buyStock(google, 100);
+        this.customer = customer;
         // connect the database
     }
 
@@ -154,12 +175,13 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_login_buttonActionPerformed
         // TODO add your handling code here:
+    	Customer c = this.customer;
         String acc = this.account_text.getText();
         String password = this.password_text.getText();
         System.out.print(acc + password);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerMainPage().setVisible(true);
+                new CustomerMainPage(c).setVisible(true);
                 // new ManagerMainPage().setVisible(true);
             }
         });
@@ -234,7 +256,6 @@ public class LoginPage extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         // </editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

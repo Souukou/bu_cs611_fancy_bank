@@ -1,4 +1,8 @@
 package fancybank.gui;
+
+import fancybank.account.CheckAccount;
+import fancybank.user.Customer;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -13,8 +17,16 @@ public class CheckingAccountPage extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public CheckingAccountPage() {
+	private CheckAccount account;
+	private Customer c;
+	private int checkInd;
+    public CheckingAccountPage(Customer c,int checkingInd) {
         initComponents();
+        this.c = c;
+        this.checkInd = checkingInd;
+        this.account = this.c.getCheckAccount().get(checkingInd);
+        this.acc_number_text.setText(String.valueOf(this.account.getAccountNumber()));
+        this.acc_balance_text.setText(String.valueOf(this.account.getBalance().get()));
     }
 
     /**
@@ -197,9 +209,14 @@ public class CheckingAccountPage extends javax.swing.JFrame {
 
     private void deposit_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_deposit_buttonActionPerformed
         // TODO add your handling code here:
+    	CheckAccount acc = this.account;
+    	Customer c = this.c;
+    	int ind = this.checkInd;
+    	this.setVisible(false);
+    	dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MoneyOperationPage(0, 0).setVisible(true);
+                new MoneyOperationPage(c,acc,0, 0,ind).setVisible(true);
             }
         });
     }// GEN-LAST:event_deposit_buttonActionPerformed
@@ -215,27 +232,47 @@ public class CheckingAccountPage extends javax.swing.JFrame {
     private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_back_buttonActionPerformed
         // TODO add your handling code here:
         setVisible(false);
+        Customer c = this.c;
         dispose();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CustomerMainPage(c).setVisible(true);
+            }
+        });
+        
     }// GEN-LAST:event_back_buttonActionPerformed
 
     private void withdraw_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_withdraw_buttonActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        CheckAccount acc = this.account;
+        Customer c = this.c;
+        int ind = this.checkInd;
+        this.setVisible(false);
+    	dispose();
+    	java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MoneyOperationPage(0, 1).setVisible(true);
+                new MoneyOperationPage(c,acc,0, 1,ind).setVisible(true);
             }
         });
     }// GEN-LAST:event_withdraw_buttonActionPerformed
 
     private void loan_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_loan_buttonActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    	CheckAccount acc = this.account;
+    	Customer c = this.c;
+    	int ind = this.checkInd;
+    	this.setVisible(false);
+    	dispose();
+    	java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MoneyOperationPage(0, 2).setVisible(true);
+                new MoneyOperationPage(c,acc,0, 2,ind).setVisible(true);
             }
         });
     }// GEN-LAST:event_loan_buttonActionPerformed
 
     private void currency_exchange_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_currency_exchange_buttonActionPerformed
         // TODO add your handling code here:
+    	int ind = this.checkInd;
+    	this.setVisible(false);
+    	dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ExchangePage().setVisible(true);
@@ -278,13 +315,14 @@ public class CheckingAccountPage extends javax.swing.JFrame {
         }
         // </editor-fold>
         // </editor-fold>
-
-        /* Create and display the form */
+        
+        /* Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CheckingAccountPage().setVisible(true);
             }
         });
+        */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
