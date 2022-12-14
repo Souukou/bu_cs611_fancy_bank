@@ -6,10 +6,12 @@ import fancybank.account.Account;
 import fancybank.account.Balance;
 import fancybank.currency.Currency;
 import fancybank.user.Address;
+import fancybank.stock.Stock;
 import fancybank.user.Customer;
 import fancybank.user.Name;
 import fancybank.user.Password;
 import fancybank.user.UID;
+import fancybank.user.Username;
 import fancybank.user.Email;
 
 public class Data {
@@ -89,6 +91,7 @@ public class Data {
 //@formatter:off
         Customer customer1 = new Customer(
             new UID(100001),
+            new Username("albertwilliams"),
             new Name("Albert", "J", "Williams"),
             new Address("123 Commonwealth St", "Anytown", "MA", "02215", "USA"),
             new Email("albertwilliams@gmail.com"),
@@ -96,6 +99,44 @@ public class Data {
         );
 //@formatter:on
         return customer1;
+    }
+
+    public ArrayList<Stock> getStockMarket() {
+        // test only, need to retrive from db
+        ArrayList<Stock> stockList = new ArrayList<Stock>();
+        stockList.add(new Stock("AAPL", "Apple", 10.99));
+        stockList.add(new Stock("GOOG", "Google", 18.88));
+        stockList.add(new Stock("MSFT", "Microsoft", 20.05));
+        stockList.add(new Stock("AMZN", "Amazon", 8.99));
+        stockList.add(new Stock("FB", "Facebook", 400));
+        stockList.add(new Stock("TSLA", "Tesla", 500));
+        stockList.add(new Stock("NFLX", "Netflix", 600));
+        stockList.add(new Stock("NVDA", "Nvidia", 700));
+        stockList.add(new Stock("PYPL", "PayPal", 800));
+        stockList.add(new Stock("INTC", "Intel", 900));
+        stockList.add(new Stock("CSCO", "Cisco", 1000));
+        stockList.add(new Stock("QCOM", "Qualcomm", 1100));
+        stockList.add(new Stock("TXN", "Texas Instruments", 1200));
+        stockList.add(new Stock("ADBE", "Adobe", 1300));
+        stockList.add(new Stock("CRM", "Salesforce", 1400));
+        stockList.add(new Stock("AVGO", "Broadcom", 1500));
+        stockList.add(new Stock("COST", "Costco", 1600));
+        stockList.add(new Stock("SBUX", "Starbucks", 1700));
+        stockList.add(new Stock("CMCSA", "Comcast", 1800));
+        stockList.add(new Stock("AMGN", "Amgen", 1900));
+        stockList.add(new Stock("CHTR", "Charter", 2000));
+        stockList.add(new Stock("GILD", "Gilead", 2100));
+        stockList.add(new Stock("MDLZ", "Mondelez", 2200));
+        stockList.add(new Stock("ISRG", "Intuitive Surgical", 2300));
+        stockList.add(new Stock("TMUS", "T-Mobile", 2400));
+        stockList.add(new Stock("AMAT", "Applied Materials", 2500));
+        stockList.add(new Stock("AMD", "AMD", 2600));
+        stockList.add(new Stock("MU", "Micron", 2700));
+        return stockList;
+    }
+
+    public void saveStockMarket(ArrayList<Stock> stockList) {
+        // test only, need to save to db
     }
 
 

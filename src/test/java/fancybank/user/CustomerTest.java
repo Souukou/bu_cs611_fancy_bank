@@ -16,6 +16,7 @@ public class CustomerTest {
 //@formatter:off
         Customer customer1 = new Customer(
             new UID(100001),
+            new Username("albertwilliams"),
             new Name("Albert", "J", "Williams"),
             new Address("123 Commonwealth St", "Anytown", "MA", "02215", "USA"),
             new Email("albertwilliams@gmail.com"),
@@ -23,6 +24,7 @@ public class CustomerTest {
         );
 //@formatter:on
         Assertions.assertEquals(customer1.getUID().get(), 100001);
+        Assertions.assertEquals(customer1.getUsername().get(), "albertwilliams");
         Assertions.assertEquals(customer1.getName().getFirstName(), "Albert");
         Assertions.assertEquals(customer1.getName().getMiddleName(), "J");
         Assertions.assertEquals(customer1.getName().getLastName(), "Williams");
@@ -79,7 +81,7 @@ public class CustomerTest {
     @Test
     public void TestCustomerExchangeCurrency() {
         Customer customer1 = new Customer(
-                100001, "Albert", "J", "Williams", "123 Commonwealth St", "Anytown", "MA", "02215", "USA", "a@b.com", "xxxxxxxx");
+                100001, "albertwilliams", "Albert", "J", "Williams", "123 Commonwealth St", "Anytown", "MA", "02215", "USA", "a@b.com", "xxxxxxxx");
 
         customer1.createAccount("checking", 0, "USD");
         customer1.createAccount("checking", 0, "CNY");

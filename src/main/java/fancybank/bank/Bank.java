@@ -15,9 +15,9 @@ public class Bank {
         return customer;
     }
 
-    public static Customer Register(String firstName, String middleName, String lastName, String street, String city, String state, String zip, String country, String email, String password) {
+    public static Customer Register(String firstName, String username, String middleName, String lastName, String street, String city, String state, String zip, String country, String email, String password) {
         int UID = Data.getInstance().getMaxUID() + 1;
-        Customer customer = new Customer(UID, firstName, middleName, lastName, street, city, state, zip, country, email, password);
+        Customer customer = new Customer(UID, username, firstName, middleName, lastName, street, city, state, zip, country, email, password);
         Data.getInstance().saveCustomer(customer);
         return customer;
     }

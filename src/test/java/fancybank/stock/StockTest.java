@@ -196,5 +196,29 @@ public class StockTest {
         StockMarket.getInstance().getStock("AAPL").setPrice(10.99);
     }
 
+    @Test
+    public void TestStockMarketInfoPersist() {
+        // init
+        StockMarket.getInstance().addStock(new Stock("AAPL", "Apple", 10.99));
+        StockMarket.getInstance().getStock("AAPL").setPrice(10.99);
+        StockMarket.getInstance().addStock(new Stock("GOOG", "Google", 18.88));
+        StockMarket.getInstance().getStock("GOOG").setPrice(18.88);
+        StockMarket.getInstance().addStock(new Stock("MSFT", "Microsoft", 20.88));
+        StockMarket.getInstance().getStock("MSFT").setPrice(20.88);
+        StockMarket.getInstance().addStock(new Stock("AMZN", "Amazon", 30.88));
+        StockMarket.getInstance().getStock("AMZN").setPrice(30.88);
+
+        // pull out the stock
+        Stock appleStock = StockMarket.getInstance().getStock("AAPL");
+        Stock googleStock = StockMarket.getInstance().getStock("GOOG");
+
+        // change price
+        appleStock.setPrice(20);
+        googleStock.setPrice(28);
+
+        // test persist
+        // TODO - need DB to test
+    }
+
 
 }

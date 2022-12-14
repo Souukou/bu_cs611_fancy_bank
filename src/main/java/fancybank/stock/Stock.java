@@ -27,6 +27,7 @@ public class Stock {
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+        StockMarket.getInstance().save();
     }
 
     public String getName() {
@@ -35,6 +36,7 @@ public class Stock {
 
     public void setName(String name) {
         this.name = name;
+        StockMarket.getInstance().save();
     }
 
     public double getPrice() {
@@ -43,6 +45,7 @@ public class Stock {
 
     public void setPrice(double price) {
         this.price = price;
+        StockMarket.getInstance().save();
     }
 
     @Override
