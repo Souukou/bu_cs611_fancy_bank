@@ -9,7 +9,7 @@ import fancybank.stock.Stock;
 import fancybank.stock.StockHolding;
 import fancybank.stock.StockMarket;
 
-public class SecurityAccount extends Account implements Transferable {
+public class SecurityAccount extends Account implements Transferable, Tradable {
     private StockHoldingList stockHoldingList = new StockHoldingList();
 
     public SecurityAccount() {
@@ -45,6 +45,7 @@ public class SecurityAccount extends Account implements Transferable {
         target.getBalance().add(amount);
     }
 
+    @Override
     public boolean buyStock(Stock stock, int quantity) {
         // query the latest market information
         stock = StockMarket.getInstance().getStock(stock.getSymbol());
@@ -64,11 +65,13 @@ public class SecurityAccount extends Account implements Transferable {
         return true;
     }
 
+    @Override
     public boolean buyStock(String symbol, int quantity) {
         Stock stock = StockMarket.getInstance().getStock(symbol);
         return buyStock(stock, quantity);
     }
 
+    @Override
     public boolean sellStock(Stock stock, int quantity) {
         if (stock == null) {
             return false;
@@ -105,6 +108,7 @@ public class SecurityAccount extends Account implements Transferable {
         return true;
     }
 
+    @Override
     public boolean sellStock(String symbol, int quantity) {
         Stock stock = StockMarket.getInstance().getStock(symbol);
         return sellStock(stock, quantity);
