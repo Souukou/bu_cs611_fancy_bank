@@ -229,11 +229,10 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         for (Customer e : this.customers.getCustomers()) {
             if (e.getUID().get() == c.getUID().get()) {
                 e = c;
-                return true;
             }
         }
         WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
-        return false;
+        return true;
     }
 
     public Customer addCustomer(Username username, Name name, Address address, Email email, Password password) {
@@ -252,11 +251,10 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         for (Manager e : this.managers.getManagers()) {
             if (e.getUID().get() == m.getUID().get()) {
                 e = m;
-                return true;
             }
         }
         WriteJsonFile.writeFile(DataFile.MANAGER.getPath(), gson.toJson(managers));
-        return false;
+        return true;
     }
 
     public Manager addManager(Username username, Name name, Address address, Email email, Password password) {
