@@ -93,7 +93,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
     public Customer getCustomerByUsername(Username username, String pw) {
         for (Customer c : this.customers.getCustomers()) {
-            if (c.getUsername().get().equals(username.get()))
+            if (c.getUsername().get().equals(username.get()) && c.getPassword().validate(pw))
                 return c;
         }
         return null;
@@ -119,6 +119,14 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     public Manager getManagerByUid(UID id, String pw) {
         for (Manager m : this.managers.getManagers()) {
             if (m.getUID().get() == id.get() && m.getPassword().validate(pw))
+                return m;
+        }
+        return null;
+    }
+
+    public Manager getManagerByUsername(Username username, String pw) {
+        for (Manager m : this.managers.getManagers()) {
+            if (m.getUsername().get().equals(username.get()) && m.getPassword().validate(pw))
                 return m;
         }
         return null;

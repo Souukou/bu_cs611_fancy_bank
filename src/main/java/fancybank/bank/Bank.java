@@ -58,10 +58,9 @@ public class Bank {
         return customer;
     }
 
-    // TODO
     public static Manager ManagerLogin(String username, String password) {
-        // return null if username or password is wrong
-        return new Manager();
+        Manager manager = Data.getInstance().getManagerByUsername(new Username(username), password);
+        return manager;
 
     }
 
@@ -69,7 +68,9 @@ public class Bank {
     public static Manager ManagerRegister(String username, String firstName, String middleName,
             String lastName, String street, String city, String state, String zip, String country, String email,
             String password) {
-        // do something
-        return new Manager();
+        Manager manager = Data.getInstance().addManager(new Username(username),
+                new Name(firstName, middleName, lastName), new Address(street, city, state, zip, country),
+                new Email(email), new Password(password));
+        return manager;
     }
 }
