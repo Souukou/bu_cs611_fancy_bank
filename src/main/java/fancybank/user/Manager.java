@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import fancybank.data.Data;
 import fancybank.data.Handlers.SimulateTime;
+import fancybank.loan.Loan;
 import fancybank.stock.StockMarket;
 
 /**
@@ -32,5 +33,6 @@ public class Manager extends User {
 
     public void approveLoan(Loan e) {
         e.approve();
+    }
 
 }

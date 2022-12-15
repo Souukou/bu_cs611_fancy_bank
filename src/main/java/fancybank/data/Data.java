@@ -5,8 +5,6 @@ import java.util.Arrays;
 
 import com.google.gson.Gson;
 
-import com.google.gson.Gson;
-
 import fancybank.account.Account;
 import fancybank.bank.Bank;
 import fancybank.currency.Currency;
@@ -66,7 +64,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
         jsonStr = ReadJsonFile.readFile(DataFile.STOCKMARKET.getPath());
         if(jsonStr == null) this.market = new StockMarket();
-        else this.stocks = gson.fromJson(jsonStr, StockMarket.class);
+        else this.market = gson.fromJson(jsonStr, StockMarket.class);
         if (jsonStr == null) {
             this.market = new StockMarket();
             market.getStockList().add(new Stock("AAPL", "Apple", 10.99));
@@ -167,73 +165,6 @@ public class Data implements ReadJsonFile, WriteJsonFile {
                 return m;
         }
         return null;
-    }
-
-    public StockMarket getStockMarket() {
-        return this.stocks;
-    }
-
-    public SimulateTime getTime() {
-        return this.time;
-    }
-
-    /**
-     * Update info of a single customer in the database.
-     * @param c The customer to be updated.
-     * @return Whether the customer has been found in the database.
-     */
-    public boolean updateCustomer(Customer c) {
-        for (Customer e : this.customers.getCustomers()) {
-            if (e.getUID().get() == c.getUID().get()) {
-                e = c;
-                return true;
-            }
-        }
-        WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
-        return false;
-    }
-
-    public Customer addCustomer(Username username, Name name, Address address, Email email, Password password) {
-        Customer customerNew = this.customers.addCustomer(username, name, address, email, password);
-        WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
-        return customerNew;
-    }
-
-    /**
-     * Update info of a single manager in the database.
-     * @param m The manager to be updated.
-     * @return Whether the manager has been found in the database.
-     */
-    public boolean updateManager(Manager m) {
-        for(Manager e : this.managers.getManagers()) {
-            if (e.getUID().get() == m.getUID().get()) {
-                e = m;
-                return true;
-            }
-        }
-        WriteJsonFile.writeFile(DataFile.MANAGER.getPath(), gson.toJson(managers));
-        return false;
-    }
-
-    public Manager addManager(Username username, Name name, Address address, Email email, Password password) {
-        Manager managerNew = this.managers.addManager(username, name, address, email, password);
-        WriteJsonFile.writeFile(DataFile.MANAGER.getPath(), gson.toJson(managers));
-        return managerNew;
-    }
-
-    public void addTransaction(Transaction e) {
-        this.trans.addTransaction(e);
-        WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
-    }
-
-    public void updateStockMarket(StockMarket market) {
-        this.stocks = market;
-        WriteJsonFile.writeFile(DataFile.STOCKMARKET.getPath(), gson.toJson(stocks));
-    }
-
-    public void addDays(int days) {
-        this.time.addDay(days);
-        WriteJsonFile.writeFile(DataFile.SIMULATETIME.getPath(), gson.toJson(time));
     }
 
     public ArrayList<Manager> getManagers() {
