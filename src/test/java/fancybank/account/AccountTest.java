@@ -3,6 +3,8 @@ package fancybank.account;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import fancybank.account.CheckAccount;
+
 import fancybank.stock.Stock;
 import fancybank.stock.StockMarket;
 

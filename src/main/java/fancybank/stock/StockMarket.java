@@ -4,16 +4,14 @@ import java.util.ArrayList;
 
 import fancybank.data.Data;
 
-
 public class StockMarket {
 
     public static StockMarket market;
 
     public static StockMarket getInstance() {
         if (market == null) {
-            market = new StockMarket();
             // load all the stock data from DB
-            market.setStockList(Data.getInstance().getStockMarket());
+            market = Data.getInstance().getStockMarket();
         }
         return market;
     }
@@ -21,7 +19,7 @@ public class StockMarket {
     private ArrayList<Stock> stockList;
 
     public void save() {
-        Data.getInstance().saveStockMarket(stockList);
+        Data.getInstance().updateStockMarket(market);
     }
 
     public StockMarket() {
@@ -90,6 +88,5 @@ public class StockMarket {
         }
         return false;
     }
-
 
 }

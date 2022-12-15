@@ -9,6 +9,7 @@ import fancybank.account.SavingAccount;
 import fancybank.account.SecurityAccount;
 import fancybank.account.Transferable;
 import fancybank.data.Data;
+import fancybank.transaction.Transaction;
 
 public class Customer extends User {
     ArrayList<Account> accounts;
@@ -23,14 +24,20 @@ public class Customer extends User {
         this.accounts = new ArrayList<Account>();
     }
 
-    public Customer(UID UID, Username username, Name name, Address address, Email email, Password password, ArrayList<Account> accounts) {
+    public Customer(UID UID, Username username, Name name, Address address, Email email, Password password,
+            ArrayList<Account> accounts) {
         super(UID, username, name, address, email, password);
         this.accounts = accounts;
     }
 
-    public Customer(int uid, String username, String firstName, String middleName, String lastName, String street, String city, String state, String zip, String country, String email, String password) {
+    public Customer(int uid, String username, String firstName, String middleName, String lastName, String street,
+            String city, String state, String zip, String country, String email, String password) {
         super(uid, username, firstName, middleName, lastName, street, city, state, zip, country, email, password);
         this.accounts = new ArrayList<Account>();
+    }
+
+    public void save() {
+        Data.getInstance().updateCustomer(this);
     }
 
     public ArrayList<Account> getAccounts() {
@@ -50,7 +57,8 @@ public class Customer extends User {
     }
 
     public String toString() {
-        return "Customer [UID=" + getUID() + "username=" + getUsername() + ", name=" + getName() + ", address=" + getAddress() + ", email=" + getEmail() + "]";
+        return "Customer [UID=" + getUID() + "username=" + getUsername() + ", name=" + getName() + ", address="
+                + getAddress() + ", email=" + getEmail() + "]";
     }
 
     public ArrayList<CheckAccount> getCheckAccount() {
@@ -131,7 +139,7 @@ public class Customer extends User {
 
     public void createAccount(String type, double balance, String currency) {
         Account account = null;
-        int nextAccountNumber = Data.getInstance().getMaxAccountNumber() + 1;
+        int nextAccountNumber = Data.getInstance().getNextAccountNumber();
 
         if (type.equals("checking")) {
             account = new CheckAccount(nextAccountNumber, balance, currency);
@@ -143,7 +151,7 @@ public class Customer extends User {
         if (account != null) {
             this.accounts.add(account);
         }
-        Data.getInstance().saveAccount(this, account);
+        this.save();
     }
 
     public ArrayList<Account> getCurrancyAccountList(String currency) {
@@ -206,7 +214,8 @@ public class Customer extends User {
         Balance exchangeBalance = new Balance(amount, from.getBalance().getCurrency());
         from.getBalance().subtract(exchangeBalance);
         to.getBalance().add(exchangeBalance);
-        Data.getInstance().AddTransaction(from, to, exchangeBalance, memo);
+        // TODO: need transaction class
+        // Data.getInstance().AddTransaction(from, to, exchangeBalance, memo);
         return true;
     }
 
@@ -237,7 +246,9 @@ public class Customer extends User {
         }
         from.getBalance().subtract(exchangeBalance);
         to.getBalance().add(exchangeBalance);
-        Data.getInstance().AddTransaction(from, to, exchangeBalance, "");
+        // TODO: need transaction class
+        // Data.getInstance().AddTransaction(new Transaction(from, to, exchangeBalance,
+        // ""));
         return true;
     }
 }

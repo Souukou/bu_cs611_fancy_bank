@@ -1,11 +1,10 @@
 package fancybank;
 
-/**
- * Hello world!
- *
- */
+import fancybank.gui.LoginPage;
+
+// Bank start from here
 public class App {
     public void start() {
-        System.out.println("Hello World!");
+        LoginPage.main(null);
     }
 }
