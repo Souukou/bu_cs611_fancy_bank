@@ -213,7 +213,7 @@ public class ManagerMainPage extends javax.swing.JFrame {
 
     private void logoff_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoff_buttonActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        this.setVisible(false);
         dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

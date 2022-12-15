@@ -19,6 +19,10 @@ public class CustomerEditPage extends javax.swing.JFrame {
     public CustomerEditPage(Customer c) {
     	this.c = c;
         initComponents();
+        this.address_text.setText(this.c.getAddress().getStreet()+" "+this.c.getAddress().getCity());
+        this.email_text.setText(this.c.getEmail().get());
+        this.name_text.setText(this.c.getName().getFirstName()+" "+this.c.getName().getLastName());
+        
     }
 
     /**
@@ -220,6 +224,7 @@ public class CustomerEditPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address_text;
+    private javax.swing.JTextField name_text;
     private javax.swing.JButton confirm_button;
     private javax.swing.JLabel customer_info_noti;
     private javax.swing.JButton delete_button;

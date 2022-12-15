@@ -30,7 +30,11 @@ public class DailyTransactionsPage extends javax.swing.JFrame {
                 DefaultTableModel model = (DefaultTableModel) this.stack_market_table.getModel();
                 for(int i =0;i<ts.length;i++) {
                 	Transaction t = ts[i];
-                	model.addRow(new Object[]{t.getFrom(), t.getTo(), t.getMoney().getAmount()});
+                	String from = new Integer(t.getFrom()).toString();
+                	String to = new Integer(t.getTo()).toString();
+                	if(from.equals("-1")) from="cash";
+                	if(to.equals("-1")) to="cash";
+                	model.addRow(new Object[]{from, to, t.getMoney().getAmount()});
                 }
         }
 
