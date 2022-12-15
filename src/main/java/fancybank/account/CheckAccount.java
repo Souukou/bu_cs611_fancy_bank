@@ -55,6 +55,9 @@ public class CheckAccount extends Account implements CashOperable, Transferable,
         if (!getBalance().isSufficient(exBalance)) {
             return false;
         }
+        System.out.println( exBalance.get());
+        System.out.println( this.getAccountType()+this.getAccountNumber());
+        System.out.println( targetAccount.getAccountType()+targetAccount.getAccountNumber());
         this.getBalance().subtract(exBalance);
         targetAccount.getBalance().add(exBalance);
         return true;

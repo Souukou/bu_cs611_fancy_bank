@@ -23,15 +23,24 @@ public class TransferPage extends javax.swing.JFrame {
          * Creates new form NewJFrame
          */
 		private Customer c;
+		private ArrayList<Account> display_account;
         public TransferPage(Customer c) {
         		this.c = c;
                 initComponents();
                 ArrayList<Account> all_account = this.c.getAccounts();
+                ArrayList<Account> display_account = new ArrayList<Account>();
                 for(int i=0;i<all_account.size();i++) {
                 	Account acc = all_account.get(i);
+                	if(acc instanceof CheckAccount) {
+                		if (!acc.getBalance().getCurrency().getName().equals("USD")) {
+                			continue;
+                		}
+                	}
+                	display_account.add(acc);
                 	this.from_acc_box.addItem(acc.getAccountType()+" Account("+acc.getBalance().getCurrency().getName()+"):"+acc.getAccountNumber()+",Balance: "+acc.getBalance().get());
                 	this.to_acc_box.addItem(acc.getAccountType()+" Account("+acc.getBalance().getCurrency().getName()+"):"+acc.getAccountNumber()+",Balance: "+acc.getBalance().get());
                 }
+                this.display_account = display_account;
         }
 
         /**
@@ -41,7 +50,7 @@ public class TransferPage extends javax.swing.JFrame {
          */
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
         private void initComponents() {
 
             javax.swing.JLabel from_niti = new javax.swing.JLabel();
@@ -86,7 +95,7 @@ public class TransferPage extends javax.swing.JFrame {
             amount_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
             amount_noti.setText("Amount :");
 
-            amount_text.setEditable(false);
+            amount_text.setEditable(true);
             amount_text.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
             amount_text.setHorizontalAlignment(javax.swing.JTextField.CENTER);
             amount_text.addActionListener(new java.awt.event.ActionListener() {
@@ -173,8 +182,8 @@ public class TransferPage extends javax.swing.JFrame {
         		return;
         	}
             Customer c = this.c;
-            Transferable from_acc = (Transferable)c.getAccounts().get(from_ind);
-            Account to_acc = c.getAccounts().get(to_ind);
+            Transferable from_acc = (Transferable)this.display_account.get(from_ind);
+            Account to_acc = this.display_account.get(to_ind);
             from_acc.transferTo(to_acc, transfer_amount);
         	java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {

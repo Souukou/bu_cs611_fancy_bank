@@ -237,11 +237,12 @@ public class MoneyOperationPage extends javax.swing.JFrame {
         }
         this.setVisible(false);
         dispose();
+        int checkingind = this.checkingInd;
         if (this.account_type == 0 && this.operation_type == 2) {
             // do request a loan,need to submit a file as proof
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new LoanRequestPage(c,operation_amount).setVisible(true);
+                    new RequestLoanPage(c,operation_amount,checkingind).setVisible(true);
                 }
             });
         }
@@ -256,7 +257,7 @@ public class MoneyOperationPage extends javax.swing.JFrame {
         		this.acc.withdraw(operation_amount);
         		System.out.println("withdraw");
         	}
-        	int checkingind = this.checkingInd;
+        	
         	if(this.account_type==0) {
         		java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {

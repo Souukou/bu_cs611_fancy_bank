@@ -248,7 +248,7 @@ public class CheckingAccountPage extends javax.swing.JFrame {
     	dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ExchangePage().setVisible(true);
+                new ExchangePage(c,account,checkInd).setVisible(true);
             }
         });
     }// GEN-LAST:event_currency_exchange_buttonActionPerformed
