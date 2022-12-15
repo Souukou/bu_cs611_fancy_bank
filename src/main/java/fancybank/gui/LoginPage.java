@@ -190,14 +190,14 @@ public class LoginPage extends javax.swing.JFrame {
     	Customer c = this.customer;
         String acc = this.account_text.getText();
         String password = this.password_text.toString();
-        /**
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CustomerMainPage(c).setVisible(true);
-                // new ManagerMainPage().setVisible(true);
+               
             }
         });
-        **/
+        
         /**
         Customer c = this.bank.Login(acc, password);
         if(c==null) {
@@ -220,7 +220,7 @@ public class LoginPage extends javax.swing.JFrame {
             });
         }
         **/
-        Manager m  = new Manager(new UID(1),new Username("managerUsername"),new Name("f","m","l"),new Address("888","boston","MA","02446","US"),new Email("gmail"),new Password("123456"));     
+        //Manager m  = new Manager(new UID(1),new Username("managerUsername"),new Name("f","m","l"),new Address("888","boston","MA","02446","US"),new Email("gmail"),new Password("123456"));     
     	/***
         Customer customer = new Customer(1,"username","firstname","middle","lastname","888 Commonwealth","boston","MA","02446","US","gmail.com","123456");
         customer.createCheckAccount(0, "USD");
@@ -229,11 +229,13 @@ public class LoginPage extends javax.swing.JFrame {
         customer.createSecurityAccount(100000);
         m.getAllCustomers().add(customer);
         **/
+        /**
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
             	new ManagerMainPage(m).setVisible(true);
             }
         });
+        **/
     }// GEN-LAST:event_login_buttonActionPerformed
 
     private void new_user_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_new_user_buttonActionPerformed

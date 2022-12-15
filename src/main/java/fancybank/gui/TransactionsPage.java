@@ -1,7 +1,13 @@
 package fancybank.gui;
 
+import java.util.ArrayList;
+
 import javax.swing.table.DefaultTableModel;
 
+import fancybank.account.Account;
+import fancybank.account.CheckAccount;
+import fancybank.data.Data;
+import fancybank.transaction.Transaction;
 import fancybank.user.Customer;
 
 /*
@@ -22,20 +28,24 @@ public class TransactionsPage extends javax.swing.JFrame {
     public TransactionsPage(Customer c) {// Arraylist<Transaction>l) {
         initComponents();
         this.c = c;
-        javax.swing.JTable table = transaction_table;
+        javax.swing.JTable table = this.transaction_table;
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        /**
-         * for(int i=0;i<l.size();i++){
-         * String from = l[i].get_from();
-         * String to = l[i].get_to();
-         * Date d = l[i].getDate();
-         * double amount = l[i].get_amount();
-         * model.addRow(new Object[]{from,to,d,amount});
-         * 
-         * 
-         * }
-         **/
-        model.addRow(new Object[] { "1", "2", "3", "4" });
+        ArrayList<CheckAccount> acc = c.getCheckAccount();
+        ArrayList<Transaction> trans= new ArrayList<Transaction>();
+        for(int i=0;i<acc.size();i++) {
+        	CheckAccount check = acc.get(i);
+        	Transaction[] transactions = Data.getInstance().getTransactionByAccount(check.getAccountNumber());
+        	for(int j=0;j<transactions.length;j++){
+            	String from = Integer.toString(  transactions[j].getFrom());
+            	String to = Integer.toString(  transactions[j].getTo());
+            	int d = transactions[j].getDate();
+            	if(from.equals("-1")) from = "Cash";
+            	if(to.equals("-1")) to = "Cash";
+            	double amount = transactions[j].getMoney().getAmount();
+            	model.addRow(new Object[]{from,to,d,amount});
+            }
+        }
+      
     }
 
     /**
@@ -120,6 +130,11 @@ public class TransactionsPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         dispose();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CustomerMainPage(c).setVisible(true);
+            }
+        }); 
     }// GEN-LAST:event_back_buttonActionPerformed
 
     /**

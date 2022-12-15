@@ -1,1 +1,1 @@
-{"transactions":[]}
+{"transactions":[{"from":-1,"to":200001,"type":"CASH","money":{"currency":{"name":"USD","symbol":"$","rate":1.0},"amount":1000.0},"date":1},{"from":200001,"to":-1,"type":"CASH","money":{"currency":{"name":"USD","symbol":"$","rate":1.0},"amount":500.0},"date":1},{"from":200001,"to":200001,"type":"CASH","money":{"currency":{"name":"USD","symbol":"$","rate":1.0},"amount":200.0},"date":1}]}
