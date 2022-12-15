@@ -177,6 +177,8 @@ public class SavingAccountPage extends javax.swing.JFrame {
                 new MoneyOperationPage(c,a, 1, 0,0).setVisible(true);
             }
         });
+        this.setVisible(false);
+        dispose();
     }// GEN-LAST:event_deposit_buttonActionPerformed
 
     private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_back_buttonActionPerformed
@@ -201,6 +203,8 @@ public class SavingAccountPage extends javax.swing.JFrame {
                 new MoneyOperationPage(c,a, 1, 1,0).setVisible(true);
             }
         });
+        this.setVisible(false);
+        dispose();
     }// GEN-LAST:event_withdraw_buttonActionPerformed
 
     /**

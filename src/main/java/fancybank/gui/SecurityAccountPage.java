@@ -187,6 +187,8 @@ public class SecurityAccountPage extends javax.swing.JFrame {
                 new MoneyOperationPage(c,acc,2, 0,0).setVisible(true);
             }
         });
+    	setVisible(false);
+        dispose();
     }//GEN-LAST:event_deposit_buttonActionPerformed
 
     private void withdraw_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdraw_buttonActionPerformed
@@ -197,6 +199,8 @@ public class SecurityAccountPage extends javax.swing.JFrame {
                 new MoneyOperationPage(c,acc,2, 1,0).setVisible(true);
             }
         });
+    	setVisible(false);
+        dispose();
     }//GEN-LAST:event_withdraw_buttonActionPerformed
 
     private void owned_stock_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_owned_stock_buttonActionPerformed
@@ -208,6 +212,8 @@ public class SecurityAccountPage extends javax.swing.JFrame {
                 new OwnStockPage(c,acc).setVisible(true);
             }
         });
+        this.setVisible(false);
+        dispose();
     }// GEN-LAST:event_owned_stock_buttonActionPerformed
 
     private void stock_market_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_stock_market_buttonActionPerformed

@@ -163,6 +163,12 @@ public class OwnStockPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         dispose();
+        Customer c = this.c;
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new SecurityAccountPage(c).setVisible(true);
+            }
+        });
     }// GEN-LAST:event_back_buttonActionPerformed
 
     private void trade_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_trade_buttonActionPerformed

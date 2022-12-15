@@ -177,7 +177,7 @@ public class LoginPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     	Customer c = this.customer;
         String acc = this.account_text.getText();
-        String password = this.password_text.getText();
+        String password = this.password_text.toString();
         System.out.print(acc + password);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

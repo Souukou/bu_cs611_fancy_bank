@@ -52,7 +52,6 @@ public class CustomerMainPage extends javax.swing.JFrame {
         transaction_button = new javax.swing.JButton();
         logoff_button = new javax.swing.JButton();
         info_button = new javax.swing.JButton();
-        request_loan_button = new javax.swing.JButton();
         transfer_button = new javax.swing.JButton();
         checking_acc_selector = new javax.swing.JComboBox<>();
         submit = new javax.swing.JButton();
@@ -106,13 +105,6 @@ public class CustomerMainPage extends javax.swing.JFrame {
             }
         });
 
-        request_loan_button.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        request_loan_button.setText("Request loan");
-        request_loan_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                request_loan_buttonActionPerformed(evt);
-            }
-        });
 
         transfer_button.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         transfer_button.setText("Make Transfer");
@@ -159,7 +151,6 @@ public class CustomerMainPage extends javax.swing.JFrame {
                                                                 .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addComponent(saving_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(security_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(request_loan_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(transfer_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(transaction_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addGap(199, 199, 199))))
@@ -186,8 +177,6 @@ public class CustomerMainPage extends javax.swing.JFrame {
                                 .addGap(22, 22, 22)
                                 .addComponent(transaction_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(22, 22, 22)
-                                .addComponent(request_loan_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
                                 .addComponent(logoff_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -263,24 +252,14 @@ public class CustomerMainPage extends javax.swing.JFrame {
     private void info_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_info_buttonActionPerformed
         // TODO add your handling code here:
     	Customer c = this.c;
+    	System.out.println("info pressed!!!");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerInfoPage(c).setVisible(true);
+                new CustomerInformationPage(c).setVisible(true);
             }
         });
     }// GEN-LAST:event_info_buttonActionPerformed
 
-    private void request_loan_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_Request_loan_buttonActionPerformed
-        // TODO add your handling code here:
-    	Customer c = this.c;
-    	this.setVisible(false);
-        dispose();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoanRequestPage(c,1).setVisible(true);
-            }
-        });
-    }// GEN-LAST:event_Request_loan_buttonActionPerformed
 
     private void transfer_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_transfer_buttonActionPerformed
         // TODO add your handling code here:
@@ -344,7 +323,6 @@ public class CustomerMainPage extends javax.swing.JFrame {
     private javax.swing.JButton info_button;
     private javax.swing.JButton logoff_button;
     private javax.swing.JTextField nickname_text;
-    private javax.swing.JButton request_loan_button;
     private javax.swing.JButton saving_button;
     private javax.swing.JButton security_button;
     private javax.swing.JButton submit;
