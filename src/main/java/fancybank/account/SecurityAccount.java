@@ -49,17 +49,23 @@ public class SecurityAccount extends Account implements Transferable, Tradable, 
     public boolean buyStock(Stock stock, int quantity) {
         // query the latest market information
         stock = StockMarket.getInstance().getStock(stock.getSymbol());
+        System.out.println("here");
         if (stock == null) {
             return false;
         }
         if (quantity <= 0) {
             return false;
         }
+        System.out.println("here");
         double totalCost = stock.getPrice() * quantity;
         if (!getBalance().isSufficient(totalCost)) {
             return false;
         }
+        System.out.println("here");
+
         getBalance().subtract(totalCost);
+        System.out.println("here");
+
         StockHolding stockHolding = new StockHolding(stock, quantity);
         stockHoldingList.add(stockHolding);
         return true;

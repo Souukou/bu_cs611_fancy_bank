@@ -2,6 +2,8 @@ package fancybank.gui;
 
 import javax.swing.table.DefaultTableModel;
 
+import fancybank.user.Customer;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -16,8 +18,10 @@ public class TransactionsPage extends javax.swing.JFrame {
     /**
      * Creates new form TransactionsPage
      */
-    public TransactionsPage() {// Arraylist<Transaction>l) {
+	private Customer c;
+    public TransactionsPage(Customer c) {// Arraylist<Transaction>l) {
         initComponents();
+        this.c = c;
         javax.swing.JTable table = transaction_table;
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         /**
@@ -153,12 +157,12 @@ public class TransactionsPage extends javax.swing.JFrame {
         }
         // </editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TransactionsPage().setVisible(true);
             }
-        });
+        }); */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
