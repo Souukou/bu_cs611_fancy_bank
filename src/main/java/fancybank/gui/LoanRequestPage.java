@@ -4,6 +4,8 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
+import fancybank.user.Customer;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -18,10 +20,12 @@ public class LoanRequestPage extends javax.swing.JFrame {
         /**
          * Creates new form LoanRequestPage
          */
-        public LoanRequestPage() {
-                initComponents();
+		Customer c;
+        public LoanRequestPage(Customer c,double request_amount) {
+        		this.c = c;
+        		initComponents();
         }
-
+        
         /**
          * This method is called from within the constructor to initialize the form.
          * WARNING: Do NOT modify this code. The content of this method is always
@@ -244,12 +248,13 @@ public class LoanRequestPage extends javax.swing.JFrame {
                 }
                 // </editor-fold>
 
-                /* Create and display the form */
+                /* Create and display the form 
                 java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
                                 new LoanRequestPage().setVisible(true);
                         }
                 });
+                */
         }
 
         // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -35,7 +35,7 @@ public class NewCustomerPage extends javax.swing.JFrame {
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel title_noti = new javax.swing.JLabel();
         javax.swing.JLabel email_noti = new javax.swing.JLabel();
         javax.swing.JLabel first_name_noti = new javax.swing.JLabel();
         javax.swing.JLabel password = new javax.swing.JLabel();
@@ -66,9 +66,9 @@ public class NewCustomerPage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Customer Signup");
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 28)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Create Customer Account");
+        title_noti.setFont(new java.awt.Font("Helvetica Neue", 1, 28)); // NOI18N
+        title_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title_noti.setText("Create Customer Account");
 
         email_noti.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         email_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -199,15 +199,12 @@ public class NewCustomerPage extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(184, 184, 184)
-                                                .addComponent(create_button, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(create_button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(86, 86, 86)
-                                                .addComponent(cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(120, 120, 120)
-                                                .addGroup(layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                                                         .addComponent(street_noti)
                                                         .addComponent(DOB)
                                                         .addComponent(password)
@@ -219,81 +216,56 @@ public class NewCustomerPage extends javax.swing.JFrame {
                                                         .addComponent(first_name_noti)
                                                         .addComponent(last_name_noti)
                                                         .addComponent(email_noti)
-                                                        .addComponent(nickname_noti,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 101,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(nickname_noti, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(45, 45, 45)
-                                                .addGroup(layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(email_text,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 222,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(DOB_text, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(nickname_text,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 222,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(email_text, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(DOB_text, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(nickname_text, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(firstname_text)
                                                         .addComponent(middlename_text)
-                                                        .addComponent(lastname_text,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 222,
-                                                                Short.MAX_VALUE)
-                                                        .addComponent(password_text,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 222,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(street_text, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                220, Short.MAX_VALUE)
+                                                        .addComponent(lastname_text, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                                                        .addComponent(password_text, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(street_text, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                                                         .addComponent(city_text)
                                                         .addComponent(zip_text)
                                                         .addComponent(state_text)
                                                         .addComponent(country_text)))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(134, 134, 134)
-                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 380,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 120, Short.MAX_VALUE)));
+                                                .addComponent(title_noti, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 120, Short.MAX_VALUE))
+        );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
-                new java.awt.Component[] { DOB, city_noti, country_noti, email_noti, first_name_noti, last_name_noti,
-                        middle_name_noti, nickname_noti, password, state_noit, street_noti, zip_noti });
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {DOB, city_noti, country_noti, email_noti, first_name_noti, last_name_noti, middle_name_noti, nickname_noti, password, state_noit, street_noti, zip_noti});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
-                new java.awt.Component[] { DOB_text, city_text, country_text, email_text, firstname_text, lastname_text,
-                        middlename_text, nickname_text, password_text, state_text, street_text, zip_text });
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {DOB_text, city_text, country_text, email_text, firstname_text, lastname_text, middlename_text, nickname_text, password_text, state_text, street_text, zip_text});
 
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(title_noti, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(25, 25, 25)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(nickname_noti)
-                                        .addComponent(nickname_text, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(nickname_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(email_text, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(email_text, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(email_noti))
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(first_name_noti)
-                                        .addComponent(firstname_text, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(firstname_text, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(20, 20, 20)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(middle_name_noti)
-                                        .addComponent(middlename_text, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(middlename_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(middle_name_noti))
                                 .addGap(0, 20, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(last_name_noti)
-                                        .addComponent(lastname_text, javax.swing.GroupLayout.PREFERRED_SIZE, 23,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lastname_text, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(password)
@@ -301,54 +273,40 @@ public class NewCustomerPage extends javax.swing.JFrame {
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(DOB)
-                                        .addComponent(DOB_text, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(DOB_text, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(street_noti)
-                                        .addComponent(street_text, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(street_text, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(city_noti)
-                                        .addComponent(city_text, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(city_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(zip_noti)
-                                        .addComponent(zip_text, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(zip_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(state_noit)
-                                        .addComponent(state_text, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(state_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(20, 20, 20)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(country_noti)
                                         .addComponent(country_text))
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(create_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(25, 25, 25)));
+                                        .addComponent(create_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(25, 25, 25))
+        );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL,
-                new java.awt.Component[] { DOB, city_noti, country_noti, email_noti, first_name_noti, last_name_noti,
-                        middle_name_noti, nickname_noti, password, state_noit, street_noti, zip_noti });
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {DOB, city_noti, country_noti, email_noti, first_name_noti, last_name_noti, middle_name_noti, nickname_noti, password, state_noit, street_noti, zip_noti});
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL,
-                new java.awt.Component[] { DOB_text, city_text, country_text, email_text, firstname_text, lastname_text,
-                        middlename_text, nickname_text, password_text, state_text, street_text, zip_text });
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {DOB_text, city_text, country_text, email_text, firstname_text, lastname_text, middlename_text, nickname_text, password_text, state_text, street_text, zip_text});
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
-
+    }// </editor-fold>
     private void email_textActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_email_textActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_email_textActionPerformed
