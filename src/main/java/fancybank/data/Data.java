@@ -1,6 +1,7 @@
 package fancybank.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.google.gson.Gson;
 
@@ -122,6 +123,10 @@ public class Data implements ReadJsonFile, WriteJsonFile {
                 return m;
         }
         return null;
+    }
+
+    public ArrayList<Manager> getManagers() {
+        return new ArrayList<Manager>(Arrays.asList(this.managers.getManagers()));
     }
 
     public Manager getManagerByUsername(Username username, String pw) {

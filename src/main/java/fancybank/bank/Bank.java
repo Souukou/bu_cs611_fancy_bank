@@ -43,13 +43,13 @@ public class Bank {
         this.save();
     }
 
-    public static Customer Login(String username, String password) {
+    public Customer Login(String username, String password) {
         Customer customer = Data.getInstance().getCustomerByUsername(new Username(username), password);
         // return null if username or password is wrong
         return customer;
     }
 
-    public static Customer Register(String username, String firstName, String middleName,
+    public Customer Register(String username, String firstName, String middleName,
             String lastName, String street, String city, String state, String zip, String country, String email,
             String password) {
         Customer customer = Data.getInstance().addCustomer(new Username(username),
@@ -58,14 +58,14 @@ public class Bank {
         return customer;
     }
 
-    public static Manager ManagerLogin(String username, String password) {
+    public Manager ManagerLogin(String username, String password) {
         Manager manager = Data.getInstance().getManagerByUsername(new Username(username), password);
         return manager;
 
     }
 
     // TODO
-    public static Manager ManagerRegister(String username, String firstName, String middleName,
+    public Manager ManagerRegister(String username, String firstName, String middleName,
             String lastName, String street, String city, String state, String zip, String country, String email,
             String password) {
         Manager manager = Data.getInstance().addManager(new Username(username),

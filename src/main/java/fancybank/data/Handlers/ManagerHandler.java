@@ -20,6 +20,10 @@ public class ManagerHandler implements ArrayAppend<Manager> {
         return managers;
     }
 
+    public ManagerHandler() {
+        managers = new Manager[0];
+    }
+
     public void setManagers(Manager[] managers) {
         this.managers = managers;
     }
