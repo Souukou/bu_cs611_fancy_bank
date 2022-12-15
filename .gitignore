@@ -43,3 +43,5 @@ buildNumber.properties
 # IDE Config Files
 .vscode
 .idea
+
+!gson.jar

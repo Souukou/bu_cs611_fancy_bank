@@ -2,114 +2,144 @@ package fancybank.data;
 
 import java.util.ArrayList;
 
-import fancybank.account.Account;
-import fancybank.account.Balance;
-import fancybank.currency.Currency;
-import fancybank.stock.Stock;
+import com.google.gson.Gson;
+
+import fancybank.data.Handlers.CustomerHandler;
+import fancybank.data.Handlers.ManagerHandler;
+import fancybank.data.Handlers.SimulateTime;
+import fancybank.data.Handlers.TransactionHandler;
+import fancybank.stock.StockMarket;
+import fancybank.transaction.Transaction;
+import fancybank.user.Address;
 import fancybank.user.Customer;
+import fancybank.user.Email;
+import fancybank.user.Manager;
+import fancybank.user.Name;
+import fancybank.user.Password;
+import fancybank.user.UID;
 
-public class Data {
-    public static Data instance = new Data();
+/**
+ * @author Haodong Chen hjc5283@bu.edu
+ * Class for store and read data. 
+ */
+public class Data implements ReadJsonFile, WriteJsonFile {
 
-    private Data() {
+    private static Gson gson = new Gson();
+    private static CustomerHandler customers;
+    private static ManagerHandler managers;
+    private static TransactionHandler trans;
+    private static StockMarket stocks;
+    private static SimulateTime time;
+
+    static {
+        String jsonStr;
+        jsonStr = ReadJsonFile.readFile(DataFile.CUSTOMER.getPath());
+        if(jsonStr == null) customers = new CustomerHandler();
+        else customers = gson.fromJson(jsonStr, CustomerHandler.class);
+
+        jsonStr = ReadJsonFile.readFile(DataFile.MANAGER.getPath());
+        if(jsonStr == null) managers = new ManagerHandler();
+        else managers = gson.fromJson(jsonStr, ManagerHandler.class);
+
+        jsonStr = ReadJsonFile.readFile(DataFile.TRANSACTION.getPath());
+        if(jsonStr == null) trans = new TransactionHandler();
+        else trans = gson.fromJson(jsonStr, TransactionHandler.class);
+
+        jsonStr = ReadJsonFile.readFile(DataFile.STOCKMARKET.getPath());
+        if(jsonStr == null) stocks = StockMarket.getInstance();
+        else stocks = gson.fromJson(jsonStr, StockMarket.class);
+
+        jsonStr = ReadJsonFile.readFile(DataFile.SIMULATETIME.getPath());
+        if(jsonStr == null) time = new SimulateTime();
+        else time = gson.fromJson(jsonStr, SimulateTime.class);
+
     }
 
-    public static Data getInstance() {
-        return instance;
+    public static Customer getCustomerByUid(UID id, String pw) {
+        for(Customer c: customers.getCustomers()) {
+            if(c.getUID().get() == id.get() && c.getPassword().validate(pw)) return c;
+        }
+        return null;
     }
 
-    private int TEMP_accountNumber = 10001; /// test only. should be read from db
-
-    public int getMaxAccountNumber() {
-        TEMP_accountNumber += 15; /// test only
-        return TEMP_accountNumber;
+    public static Transaction[] geTransactionByAccount(int id) {
+        ArrayList<Transaction> accountTransactions = new ArrayList<Transaction>();
+        for(Transaction tran: trans.getTransactions()) {
+            if(tran.getFrom() == id || tran.getTo() == id) accountTransactions.add(tran);
+        }
+        return accountTransactions.toArray(new Transaction[0]);
     }
 
-    public void saveAccount(Customer cos, Account accont) {
+    public static Manager getManagerByUid(UID id, String pw) {
+        for(Manager m: managers.getManagers()) {
+            if(m.getUID().get() == id.get() && m.getPassword().validate(pw)) return m;
+        }
+        return null;
     }
 
-    public void AddTransaction(Account from, Account to, double amount, String memo) {
-
+    public static StockMarket getStockMarket() {
+        return stocks;
     }
 
-    public void AddTransaction(Account from, Account to, Balance amount, String memo) {
-
+    public static SimulateTime getTime() {
+        return time;
     }
 
-    public ArrayList<Currency> getCurrencyList() {
-        // read currency from db
-        ArrayList<Currency> currencyList = new ArrayList<Currency>();
-        currencyList.add(new Currency("USD", "$", 1.0));
-        currencyList.add(new Currency("EUR", "€", 0.9));
-        currencyList.add(new Currency("JPY", "¥", 110.0));
-        currencyList.add(new Currency("GBP", "£", 0.8));
-        currencyList.add(new Currency("AUD", "$", 1.4));
-        currencyList.add(new Currency("CAD", "$", 1.3));
-        currencyList.add(new Currency("CHF", "Fr", 1.0));
-        currencyList.add(new Currency("CNY", "¥", 7.0));
-        currencyList.add(new Currency("HKD", "$", 7.8));
-        currencyList.add(new Currency("NZD", "$", 1.5));
-        currencyList.add(new Currency("SEK", "kr", 9.0));
-        currencyList.add(new Currency("SGD", "$", 1.4));
-        currencyList.add(new Currency("KRW", "₩", 1200.0));
-        currencyList.add(new Currency("MXN", "$", 20.0));
-        currencyList.add(new Currency("NOK", "kr", 9.0));
-        currencyList.add(new Currency("RUB", "₽", 70.0));
-        currencyList.add(new Currency("INR", "₹", 70.0));
-        currencyList.add(new Currency("ZAR", "R", 14.0));
-        currencyList.add(new Currency("TRY", "₺", 6.0));
-        currencyList.add(new Currency("BRL", "R$", 4.0));
-        currencyList.add(new Currency("TWD", "NT$", 30.0));
-        currencyList.add(new Currency("MYR", "RM", 4.0));
-        currencyList.add(new Currency("PHP", "₱", 50.0));
-        currencyList.add(new Currency("IDR", "Rp", 14000.0));
-        currencyList.add(new Currency("THB", "฿", 30.0));
-        currencyList.add(new Currency("VND", "₫", 23000.0));
-        currencyList.add(new Currency("CZK", "Kč", 23.0));
-        currencyList.add(new Currency("DKK", "kr", 6.5));
-        currencyList.add(new Currency("HUF", "Ft", 300.0));
-        currencyList.add(new Currency("PLN", "zł", 3.8));
-        currencyList.add(new Currency("ILS", "₪", 3.5));
-        return currencyList;
+    /**
+     * Update info of a single customer in the database.
+     * @param c The customer to be updated.
+     * @return Whether the customer has been found in the database.
+     */
+    public static boolean updateCustomer(Customer c) {
+        for(Customer e: customers.getCustomers()) {
+            if(e.getUID().get() == c.getUID().get()) {
+                e = c;
+                return true;
+            }
+        }
+        return false;
     }
 
-    public ArrayList<Stock> getStockMarket() {
-        // test only, need to retrive from db
-        ArrayList<Stock> stockList = new ArrayList<Stock>();
-        stockList.add(new Stock("AAPL", "Apple", 10.99));
-        stockList.add(new Stock("GOOG", "Google", 18.88));
-        stockList.add(new Stock("MSFT", "Microsoft", 20.05));
-        stockList.add(new Stock("AMZN", "Amazon", 8.99));
-        stockList.add(new Stock("FB", "Facebook", 400));
-        stockList.add(new Stock("TSLA", "Tesla", 500));
-        stockList.add(new Stock("NFLX", "Netflix", 600));
-        stockList.add(new Stock("NVDA", "Nvidia", 700));
-        stockList.add(new Stock("PYPL", "PayPal", 800));
-        stockList.add(new Stock("INTC", "Intel", 900));
-        stockList.add(new Stock("CSCO", "Cisco", 1000));
-        stockList.add(new Stock("QCOM", "Qualcomm", 1100));
-        stockList.add(new Stock("TXN", "Texas Instruments", 1200));
-        stockList.add(new Stock("ADBE", "Adobe", 1300));
-        stockList.add(new Stock("CRM", "Salesforce", 1400));
-        stockList.add(new Stock("AVGO", "Broadcom", 1500));
-        stockList.add(new Stock("COST", "Costco", 1600));
-        stockList.add(new Stock("SBUX", "Starbucks", 1700));
-        stockList.add(new Stock("CMCSA", "Comcast", 1800));
-        stockList.add(new Stock("AMGN", "Amgen", 1900));
-        stockList.add(new Stock("CHTR", "Charter", 2000));
-        stockList.add(new Stock("GILD", "Gilead", 2100));
-        stockList.add(new Stock("MDLZ", "Mondelez", 2200));
-        stockList.add(new Stock("ISRG", "Intuitive Surgical", 2300));
-        stockList.add(new Stock("TMUS", "T-Mobile", 2400));
-        stockList.add(new Stock("AMAT", "Applied Materials", 2500));
-        stockList.add(new Stock("AMD", "AMD", 2600));
-        stockList.add(new Stock("MU", "Micron", 2700));
-        return stockList;
+    public static Customer addCustomer(Name name, Address address, Email email, Password password) {
+        Customer customerNew = customers.addCustomer(name, address, email, password);
+        WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
+        return customerNew;
     }
 
-    public void saveStockMarket(ArrayList<Stock> stockList) {
-        // test only, need to save to db
+    /**
+     * Update info of a single manager in the database.
+     * @param m The manager to be updated.
+     * @return Whether the manager has been found in the database.
+     */
+    public static boolean updateManager(Manager m) {
+        for(Manager e: managers.getManagers()) {
+            if(e.getUID().get() == m.getUID().get()) {
+                e = m;
+                return true;
+            }
+        }
+        return false;
     }
 
+    public static Manager addManager(Name name, Address address, Email email, Password password) {
+        Manager managerNew = managers.addManager(name, address, email, password);
+        WriteJsonFile.writeFile(DataFile.MANAGER.getPath(), gson.toJson(managers));
+        return managerNew;
+    }
+
+    public static void AddTransaction(Transaction e) {
+        trans.addTransaction(e);
+        WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
+    }
+
+    public static void updateStocks(StockMarket market) {
+        stocks = market;
+        WriteJsonFile.writeFile(DataFile.STOCKMARKET.getPath(), gson.toJson(stocks));
+    }
+
+    public static void addDays(int days) {
+        time.addDay(days);
+        WriteJsonFile.writeFile(DataFile.SIMULATETIME.getPath(), gson.toJson(time));
+    }
 
 }
