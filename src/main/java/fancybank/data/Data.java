@@ -34,7 +34,8 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     private static Data instance;
 
     public static Data getInstance() {
-        if (instance == null) instance = new Data();
+        if (instance == null)
+            instance = new Data();
         return instance;
     }
 
@@ -51,20 +52,30 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         String jsonStr;
 
         jsonStr = ReadJsonFile.readFile(DataFile.CUSTOMER.getPath());
-        if(jsonStr == null) this.customers = new CustomerHandler();
-        else this.customers = gson.fromJson(jsonStr, CustomerHandler.class);
+        if (jsonStr == null) {
+            this.customers = new CustomerHandler();
+            WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
+        } else {
+            this.customers = gson.fromJson(jsonStr, CustomerHandler.class);
+        }
 
         jsonStr = ReadJsonFile.readFile(DataFile.MANAGER.getPath());
-        if(jsonStr == null) this.managers = new ManagerHandler();
-        else this.managers = gson.fromJson(jsonStr, ManagerHandler.class);
+        if (jsonStr == null) {
+            this.managers = new ManagerHandler();
+            WriteJsonFile.writeFile(DataFile.MANAGER.getPath(), gson.toJson(managers));
+        } else {
+            this.managers = gson.fromJson(jsonStr, ManagerHandler.class);
+        }
 
         jsonStr = ReadJsonFile.readFile(DataFile.TRANSACTION.getPath());
-        if(jsonStr == null) this.trans = new TransactionHandler();
-        else this.trans = gson.fromJson(jsonStr, TransactionHandler.class);
+        if (jsonStr == null) {
+            this.trans = new TransactionHandler();
+            WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
+        } else {
+            this.trans = gson.fromJson(jsonStr, TransactionHandler.class);
+        }
 
         jsonStr = ReadJsonFile.readFile(DataFile.STOCKMARKET.getPath());
-        if(jsonStr == null) this.market = new StockMarket();
-        else this.market = gson.fromJson(jsonStr, StockMarket.class);
         if (jsonStr == null) {
             this.market = new StockMarket();
             market.getStockList().add(new Stock("AAPL", "Apple", 10.99));
@@ -95,23 +106,34 @@ public class Data implements ReadJsonFile, WriteJsonFile {
             market.getStockList().add(new Stock("AMAT", "Applied Materials", 2500));
             market.getStockList().add(new Stock("AMD", "AMD", 2600));
             market.getStockList().add(new Stock("MU", "Micron", 2700));
-        }
-        else
+            WriteJsonFile.writeFile(DataFile.STOCKMARKET.getPath(), gson.toJson(market));
+        } else {
             this.market = gson.fromJson(jsonStr, StockMarket.class);
+        }
 
         jsonStr = ReadJsonFile.readFile(DataFile.CURRENCY.getPath());
-        if(jsonStr == null) this.currencies = new CurrencyHandler();
-        else this.currencies = gson.fromJson(jsonStr, CurrencyHandler.class);
+        if (jsonStr == null) {
+            this.currencies = new CurrencyHandler();
+            WriteJsonFile.writeFile(DataFile.CURRENCY.getPath(), gson.toJson(currencies));
+        } else {
+            this.currencies = gson.fromJson(jsonStr, CurrencyHandler.class);
+        }
 
         jsonStr = ReadJsonFile.readFile(DataFile.SIMULATETIME.getPath());
-        if(jsonStr == null) this.time = new SimulateTime();
-        else this.time = gson.fromJson(jsonStr, SimulateTime.class);
+        if (jsonStr == null) {
+            this.time = new SimulateTime();
+            WriteJsonFile.writeFile(DataFile.SIMULATETIME.getPath(), gson.toJson(time));
+        } else
+            this.time = gson.fromJson(jsonStr, SimulateTime.class);
 
         jsonStr = ReadJsonFile.readFile(DataFile.BANK.getPath());
-        if (jsonStr == null)
+        if (jsonStr == null) {
             this.bank = new Bank();
-        else
+            WriteJsonFile.writeFile(DataFile.BANK.getPath(), gson.toJson(bank));
+
+        } else {
             this.bank = gson.fromJson(jsonStr, Bank.class);
+        }
     }
 
     public Bank getBank() {
@@ -131,9 +153,17 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         return null;
     }
 
+    public Customer getCustomerByUid(UID id) {
+        for (Customer c : this.customers.getCustomers()) {
+            if (c.getUID().get() == id.get())
+                return c;
+        }
+        return null;
+    }
+
     public Customer getCustomerByUid(UID id, String pw) {
-        for(Customer c : this.customers.getCustomers()) {
-            if(c.getUID().get() == id.get() && c.getPassword().validate(pw))
+        for (Customer c : this.customers.getCustomers()) {
+            if (c.getUID().get() == id.get() && c.getPassword().validate(pw))
                 return c;
         }
         return null;
@@ -145,23 +175,25 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
     public Transaction[] getTransactionByAccount(int id) {
         ArrayList<Transaction> accountTransactions = new ArrayList<Transaction>();
-        for(Transaction tran : this.trans.getTransactions()) {
-            if (tran.getFrom() == id || tran.getTo() == id) accountTransactions.add(tran);
+        for (Transaction tran : this.trans.getTransactions()) {
+            if (tran.getFrom() == id || tran.getTo() == id)
+                accountTransactions.add(tran);
         }
         return accountTransactions.toArray(new Transaction[0]);
     }
 
     public Transaction[] getTransactionByDay(SimulateTime date) {
         ArrayList<Transaction> accountTransactions = new ArrayList<Transaction>();
-        for(Transaction tran : this.trans.getTransactions()) {
-            if(tran.getDate() == date.getDay()) accountTransactions.add(tran);
+        for (Transaction tran : this.trans.getTransactions()) {
+            if (tran.getDate() == date.getDay())
+                accountTransactions.add(tran);
         }
         return accountTransactions.toArray(new Transaction[0]);
     }
 
     public Manager getManagerByUid(UID id, String pw) {
-        for(Manager m : this.managers.getManagers()) {
-            if(m.getUID().get() == id.get() && m.getPassword().validate(pw))
+        for (Manager m : this.managers.getManagers()) {
+            if (m.getUID().get() == id.get() && m.getPassword().validate(pw))
                 return m;
         }
         return null;
@@ -189,6 +221,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
     /**
      * Update info of a single customer in the database.
+     * 
      * @param c The customer to be updated.
      * @return Whether the customer has been found in the database.
      */
@@ -196,11 +229,10 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         for (Customer e : this.customers.getCustomers()) {
             if (e.getUID().get() == c.getUID().get()) {
                 e = c;
-                return true;
             }
         }
         WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
-        return false;
+        return true;
     }
 
     public Customer addCustomer(Username username, Name name, Address address, Email email, Password password) {
@@ -211,18 +243,18 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
     /**
      * Update info of a single manager in the database.
+     * 
      * @param m The manager to be updated.
      * @return Whether the manager has been found in the database.
      */
     public boolean updateManager(Manager m) {
-        for(Manager e : this.managers.getManagers()) {
+        for (Manager e : this.managers.getManagers()) {
             if (e.getUID().get() == m.getUID().get()) {
                 e = m;
-                return true;
             }
         }
         WriteJsonFile.writeFile(DataFile.MANAGER.getPath(), gson.toJson(managers));
-        return false;
+        return true;
     }
 
     public Manager addManager(Username username, Name name, Address address, Email email, Password password) {
@@ -248,9 +280,10 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
     public int getNextAccountNumber() {
         int maxAccountNumber = 200000; // accouunt number start from 200000
-        for(Customer c: customers.getCustomers()) {
-            for(Account acct: c.getAccounts()) {
-                maxAccountNumber = (maxAccountNumber > acct.getAccountNumber() ? maxAccountNumber : acct.getAccountNumber());
+        for (Customer c : customers.getCustomers()) {
+            for (Account acct : c.getAccounts()) {
+                maxAccountNumber = (maxAccountNumber > acct.getAccountNumber() ? maxAccountNumber
+                        : acct.getAccountNumber());
             }
         }
         return maxAccountNumber + 1;
