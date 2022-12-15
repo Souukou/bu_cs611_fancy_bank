@@ -153,6 +153,14 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         return null;
     }
 
+    public Customer getCustomerByUid(UID id) {
+        for (Customer c : this.customers.getCustomers()) {
+            if (c.getUID().get() == id.get())
+                return c;
+        }
+        return null;
+    }
+
     public Customer getCustomerByUid(UID id, String pw) {
         for (Customer c : this.customers.getCustomers()) {
             if (c.getUID().get() == id.get() && c.getPassword().validate(pw))
