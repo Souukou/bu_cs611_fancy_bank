@@ -34,10 +34,10 @@ public class LoginPage extends javax.swing.JFrame {
         customer.createSecurityAccount(100000);
         Stock apple = StockMarket.getInstance().getStock("AAPL");
         Stock google = StockMarket.getInstance().getStock("GOOG");
-        customer.getOneSecurityAccount().buyStock(apple, 100);
-        customer.getOneSecurityAccount().buyStock(apple, 100);
-        customer.getOneSecurityAccount().buyStock(google, 100);
-        customer.getOneSecurityAccount().buyStock(google, 100);
+        //customer.getOneSecurityAccount().buyStock(apple, 100);
+        //customer.getOneSecurityAccount().buyStock(apple, 100);
+        //customer.getOneSecurityAccount().buyStock(google, 100);
+        //customer.getOneSecurityAccount().buyStock(google, 100);
         this.customer = customer;
         // connect the database
     }

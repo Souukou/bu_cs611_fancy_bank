@@ -242,7 +242,7 @@ public class MoneyOperationPage extends javax.swing.JFrame {
             // do request a loan,need to submit a file as proof
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new RequestLoanPage(c,operation_amount,checkingind).setVisible(true);
+                    new LoanRequestPage(c,operation_amount,checkingind).setVisible(true);
                 }
             });
         }
