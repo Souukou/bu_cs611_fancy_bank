@@ -59,7 +59,9 @@
                           <Component id="transaction_button" alignment="1" max="32767" attributes="0"/>
                           <Component id="checking_acc_selector" linkSize="1" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="199" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="checking_button" min="-2" pref="149" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -76,7 +78,10 @@
                   <Component id="nickname_noti" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Component id="checking_acc_selector" linkSize="2" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="checking_button" max="32767" attributes="0"/>
+                  <Component id="checking_acc_selector" linkSize="2" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Component id="saving_button" linkSize="2" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
@@ -192,9 +197,20 @@
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="checking_acc_selector">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checking_acc_selectorActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="checking_button">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Checking Account"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checking_buttonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

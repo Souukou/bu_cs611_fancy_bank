@@ -45,3 +45,5 @@ buildNumber.properties
 .idea
 
 !gson.jar
+
+.DS_Store

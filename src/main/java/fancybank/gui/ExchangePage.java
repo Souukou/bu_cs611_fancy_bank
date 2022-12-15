@@ -1,8 +1,14 @@
 package fancybank.gui;
 
 import java.io.File;
+import java.util.ArrayList;
+
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
+
+import fancybank.account.Balance;
+import fancybank.account.CheckAccount;
+import fancybank.user.Customer;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,8 +24,27 @@ public class ExchangePage extends javax.swing.JFrame {
         /**
          * Creates new form NewJFrame
          */
-        public ExchangePage() {
+		private Customer c;
+		private CheckAccount acc;
+		private int check_ind;
+		private ArrayList<CheckAccount> selection;
+        public ExchangePage(Customer c, CheckAccount acc, int checking_index) {
                 initComponents();
+                this.c = c;
+                this.acc = acc;
+                this.check_ind = checking_index;
+                this.from_acc_box.addItem(acc.getAccountNumber()+": "+acc.getBalance().getCurrency().getName());
+                ArrayList<CheckAccount> checks = c.getCheckAccount();
+                ArrayList<CheckAccount> selection = new ArrayList<CheckAccount>();
+                for(int i=0;i<checks.size();i++) {
+                	CheckAccount curr = checks.get(i);
+                	if(this.acc.getBalance().getCurrency().getSymbol().equals(curr.getBalance().getCurrency().getSymbol())) {
+                		continue;
+                	} 
+                	selection.add(curr);
+                	this.to_acc_box.addItem(curr.getAccountNumber()+": "+curr.getBalance().getCurrency().getName());
+                }
+                this.selection=selection;
         }
 
         /**
@@ -74,7 +99,7 @@ public class ExchangePage extends javax.swing.JFrame {
                 amount_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
                 amount_noti.setText("Amount :");
 
-                amount_text.setEditable(false);
+                amount_text.setEditable(true);
                 amount_text.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
                 amount_text.setHorizontalAlignment(javax.swing.JTextField.CENTER);
                 amount_text.addActionListener(new java.awt.event.ActionListener() {
@@ -191,10 +216,27 @@ public class ExchangePage extends javax.swing.JFrame {
         private void exchange_cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_exchange_cancel_buttonActionPerformed
                 setVisible(false);
                 dispose();
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                            new CheckingAccountPage(c,check_ind).setVisible(true);
+                    }
+                });
         }// GEN-LAST:event_exchange_cancel_buttonActionPerformed
 
         private void exchange_submit_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_exchange_submit_buttonActionPerformed
                 // TODO add your handling code here:
+        		setVisible(false);
+        		dispose();
+        		double am = Double.parseDouble(amount_text.getText());
+        		int ind = this.to_acc_box.getSelectedIndex();
+        		CheckAccount to = this.selection.get(ind);
+        		Balance ex_bal = new Balance(am,this.acc.getBalance().getCurrency());
+        		this.acc.exchangeTo(to, ex_bal);
+        		java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                            new CheckingAccountPage(c,check_ind).setVisible(true);
+                    }
+                });
         }// GEN-LAST:event_exchange_submit_buttonActionPerformed
 
         private void amount_textActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_amount_textActionPerformed
@@ -242,12 +284,13 @@ public class ExchangePage extends javax.swing.JFrame {
                 // </editor-fold>
                 // </editor-fold>
 
-                /* Create and display the form */
+                /* Create and display the form 
                 java.awt.EventQueue.invokeLater(new Runnable() {
                         public void run() {
                                 new CheckingAccountPage().setVisible(true);
                         }
                 });
+                */
         }
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
