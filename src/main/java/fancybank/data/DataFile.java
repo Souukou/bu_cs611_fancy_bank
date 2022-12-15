@@ -5,6 +5,7 @@ public enum DataFile {
     MANAGER("./Manager.data"),
     TRANSACTION("./Transaction.data"),
     STOCKMARKET("./Stock.data"),
+    CURRENCY("./Currency.data"),
     SIMULATETIME("./Time.data"),
     ;
 

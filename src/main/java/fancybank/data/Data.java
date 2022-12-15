@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
+import fancybank.account.Account;
+import fancybank.currency.Currency;
+import fancybank.data.Handlers.CurrencyHandler;
 import fancybank.data.Handlers.CustomerHandler;
 import fancybank.data.Handlers.ManagerHandler;
 import fancybank.data.Handlers.SimulateTime;
@@ -17,72 +20,100 @@ import fancybank.user.Manager;
 import fancybank.user.Name;
 import fancybank.user.Password;
 import fancybank.user.UID;
+import fancybank.user.Username;
 
 /**
  * @author Haodong Chen hjc5283@bu.edu
- * Class for store and read data. 
+ *         Class for store and read data.
  */
 public class Data implements ReadJsonFile, WriteJsonFile {
 
-    private static Gson gson = new Gson();
-    private static CustomerHandler customers;
-    private static ManagerHandler managers;
-    private static TransactionHandler trans;
-    private static StockMarket stocks;
-    private static SimulateTime time;
+    private static Data instance;
 
-    static {
+    public static Data getInstance() {
+        if (instance == null) instance = new Data();
+        return instance;
+    }
+
+    private Gson gson = new Gson();
+    private CustomerHandler customers;
+    private ManagerHandler managers;
+    private TransactionHandler trans;
+    private StockMarket stocks;
+    private CurrencyHandler currencies;
+    private SimulateTime time;
+
+    public Data() {
         String jsonStr;
+
         jsonStr = ReadJsonFile.readFile(DataFile.CUSTOMER.getPath());
-        if(jsonStr == null) customers = new CustomerHandler();
-        else customers = gson.fromJson(jsonStr, CustomerHandler.class);
+        if(jsonStr == null) this.customers = new CustomerHandler();
+        else this.customers = gson.fromJson(jsonStr, CustomerHandler.class);
 
         jsonStr = ReadJsonFile.readFile(DataFile.MANAGER.getPath());
-        if(jsonStr == null) managers = new ManagerHandler();
-        else managers = gson.fromJson(jsonStr, ManagerHandler.class);
+        if(jsonStr == null) this.managers = new ManagerHandler();
+        else this.managers = gson.fromJson(jsonStr, ManagerHandler.class);
 
         jsonStr = ReadJsonFile.readFile(DataFile.TRANSACTION.getPath());
-        if(jsonStr == null) trans = new TransactionHandler();
-        else trans = gson.fromJson(jsonStr, TransactionHandler.class);
+        if(jsonStr == null) this.trans = new TransactionHandler();
+        else this.trans = gson.fromJson(jsonStr, TransactionHandler.class);
 
         jsonStr = ReadJsonFile.readFile(DataFile.STOCKMARKET.getPath());
-        if(jsonStr == null) stocks = StockMarket.getInstance();
-        else stocks = gson.fromJson(jsonStr, StockMarket.class);
+        if(jsonStr == null) this.stocks = new StockMarket();
+        else this.stocks = gson.fromJson(jsonStr, StockMarket.class);
+
+        jsonStr = ReadJsonFile.readFile(DataFile.CURRENCY.getPath());
+        if(jsonStr == null) this.currencies = new CurrencyHandler();
+        else this.currencies = gson.fromJson(jsonStr, CurrencyHandler.class);
 
         jsonStr = ReadJsonFile.readFile(DataFile.SIMULATETIME.getPath());
-        if(jsonStr == null) time = new SimulateTime();
-        else time = gson.fromJson(jsonStr, SimulateTime.class);
+        if(jsonStr == null) this.time = new SimulateTime();
+        else this.time = gson.fromJson(jsonStr, SimulateTime.class);
 
     }
 
-    public static Customer getCustomerByUid(UID id, String pw) {
-        for(Customer c: customers.getCustomers()) {
-            if(c.getUID().get() == id.get() && c.getPassword().validate(pw)) return c;
+    public Customer getCustomerByUid(UID id, String pw) {
+        for(Customer c : this.customers.getCustomers()) {
+            if(c.getUID().get() == id.get() && c.getPassword().validate(pw))
+                return c;
         }
         return null;
     }
 
-    public static Transaction[] geTransactionByAccount(int id) {
+    public Customer[] getCustomerAll() {
+        return customers.getCustomers();
+    }
+
+    public Transaction[] getTransactionByAccount(int id) {
         ArrayList<Transaction> accountTransactions = new ArrayList<Transaction>();
-        for(Transaction tran: trans.getTransactions()) {
-            if(tran.getFrom() == id || tran.getTo() == id) accountTransactions.add(tran);
+        for(Transaction tran : this.trans.getTransactions()) {
+            if (tran.getFrom() == id || tran.getTo() == id) accountTransactions.add(tran);
         }
         return accountTransactions.toArray(new Transaction[0]);
     }
 
-    public static Manager getManagerByUid(UID id, String pw) {
-        for(Manager m: managers.getManagers()) {
-            if(m.getUID().get() == id.get() && m.getPassword().validate(pw)) return m;
+    public Transaction[] getTransactionByDay(SimulateTime date) {
+        ArrayList<Transaction> accountTransactions = new ArrayList<Transaction>();
+        for(Transaction tran : this.trans.getTransactions()) {
+            if(tran.getDate() == date.getDay()) accountTransactions.add(tran);
+        }
+        return accountTransactions.toArray(new Transaction[0]);
+    }
+
+    public Manager getManagerByUid(UID id, String pw) {
+        for(Manager m : this.managers.getManagers()) {
+            if(m.getUID().get() == id.get() && m.getPassword().validate(pw))
+                return m;
         }
         return null;
     }
 
-    public static StockMarket getStockMarket() {
-        return stocks;
+    public StockMarket getStockMarket() {
+        return this.stocks;
     }
 
-    public static SimulateTime getTime() {
-        return time;
+    public SimulateTime getTime() {
+        return this.time;
     }
 
     /**
@@ -90,18 +121,19 @@ public class Data implements ReadJsonFile, WriteJsonFile {
      * @param c The customer to be updated.
      * @return Whether the customer has been found in the database.
      */
-    public static boolean updateCustomer(Customer c) {
-        for(Customer e: customers.getCustomers()) {
-            if(e.getUID().get() == c.getUID().get()) {
+    public boolean updateCustomer(Customer c) {
+        for (Customer e : this.customers.getCustomers()) {
+            if (e.getUID().get() == c.getUID().get()) {
                 e = c;
                 return true;
             }
         }
+        WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
         return false;
     }
 
-    public static Customer addCustomer(Name name, Address address, Email email, Password password) {
-        Customer customerNew = customers.addCustomer(name, address, email, password);
+    public Customer addCustomer(Username username, Name name, Address address, Email email, Password password) {
+        Customer customerNew = this.customers.addCustomer(username, name, address, email, password);
         WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
         return customerNew;
     }
@@ -111,35 +143,55 @@ public class Data implements ReadJsonFile, WriteJsonFile {
      * @param m The manager to be updated.
      * @return Whether the manager has been found in the database.
      */
-    public static boolean updateManager(Manager m) {
-        for(Manager e: managers.getManagers()) {
-            if(e.getUID().get() == m.getUID().get()) {
+    public boolean updateManager(Manager m) {
+        for(Manager e : this.managers.getManagers()) {
+            if (e.getUID().get() == m.getUID().get()) {
                 e = m;
                 return true;
             }
         }
+        WriteJsonFile.writeFile(DataFile.MANAGER.getPath(), gson.toJson(managers));
         return false;
     }
 
-    public static Manager addManager(Name name, Address address, Email email, Password password) {
-        Manager managerNew = managers.addManager(name, address, email, password);
+    public Manager addManager(Username username, Name name, Address address, Email email, Password password) {
+        Manager managerNew = this.managers.addManager(username, name, address, email, password);
         WriteJsonFile.writeFile(DataFile.MANAGER.getPath(), gson.toJson(managers));
         return managerNew;
     }
 
-    public static void AddTransaction(Transaction e) {
-        trans.addTransaction(e);
+    public void addTransaction(Transaction e) {
+        this.trans.addTransaction(e);
         WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
     }
 
-    public static void updateStocks(StockMarket market) {
-        stocks = market;
+    public void updateStockMarket(StockMarket market) {
+        this.stocks = market;
         WriteJsonFile.writeFile(DataFile.STOCKMARKET.getPath(), gson.toJson(stocks));
     }
 
-    public static void addDays(int days) {
-        time.addDay(days);
+    public void addDays(int days) {
+        this.time.addDay(days);
         WriteJsonFile.writeFile(DataFile.SIMULATETIME.getPath(), gson.toJson(time));
+    }
+
+    public int getNextAccountNumber() {
+        int maxAccountNumber = 200000; // accouunt number start from 200000
+        for(Customer c: customers.getCustomers()) {
+            for(Account acct: c.getAccounts()) {
+                maxAccountNumber = (maxAccountNumber > acct.getAccountNumber() ? maxAccountNumber : acct.getAccountNumber());
+            }
+        }
+        return maxAccountNumber + 1;
+    }
+
+    public ArrayList<Currency> getCurrencyList() {
+        return currencies.getCurrencies();
+    }
+
+    public void updateCurrencyList(ArrayList<Currency> currencyList) {
+        currencies.setCurrencies(currencyList);
+        WriteJsonFile.writeFile(DataFile.CURRENCY.getPath(), gson.toJson(currencies));
     }
 
 }

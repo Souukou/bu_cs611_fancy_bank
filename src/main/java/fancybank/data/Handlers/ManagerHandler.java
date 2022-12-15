@@ -6,10 +6,11 @@ import fancybank.user.Manager;
 import fancybank.user.Name;
 import fancybank.user.Password;
 import fancybank.user.UID;
+import fancybank.user.Username;
 
 /**
  * @author Haodong Chen hjc5283@bu.edu
- * Class for maintaining the managers' list. 
+ *         Class for maintaining the managers' list.
  */
 public class ManagerHandler implements ArrayAppend<Manager> {
 
@@ -23,14 +24,14 @@ public class ManagerHandler implements ArrayAppend<Manager> {
         this.managers = managers;
     }
 
-    public Manager addManager(Name name, Address address, Email email, Password password) {
+    public Manager addManager(Username username, Name name, Address address, Email email, Password password) {
         int maxId = -1;
-        for(Manager c: managers) {
+        for (Manager c : managers) {
             maxId = (c.getUID().get() > maxId ? c.getUID().get() : maxId);
         }
-        Manager managerNew = new Manager(new UID(maxId + 1), name, address, email, password);
+        Manager managerNew = new Manager(new UID(maxId + 1), username, name, address, email, password);
         managers = addElement(managers, managerNew);
         return managerNew;
     }
-    
+
 }
