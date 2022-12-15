@@ -26,6 +26,7 @@ public class Customer extends User {
         double interestRate = Bank.getInstance().getLoanInterestRate();
         Loan loan = new Loan(getUID(), account, amount, interestRate, collateral);
         loans.add(loan);
+        this.save();
     }
 
     public Customer() {
