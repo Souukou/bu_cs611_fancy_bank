@@ -196,7 +196,7 @@ public class ManagerMainPage extends javax.swing.JFrame {
     private void stock_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stock_buttonActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StockEditPage().setVisible(true);
+                new StockEditPage(m).setVisible(true);
             }
         });
     }//GEN-LAST:event_stock_buttonActionPerformed

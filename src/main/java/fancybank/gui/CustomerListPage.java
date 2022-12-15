@@ -150,18 +150,19 @@ public class CustomerListPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     	int row = this.customer_list_table.getSelectedRow();
     	ArrayList<Customer> all_cus =  this.m.getAllCustomers();
-    	Customer selected_c = new Customer();
+
     	String selected_name = customer_list_table.getModel().getValueAt(row, 0).toString();
     	for(int i=0;i<all_cus.size();i++) {
     		if(all_cus.get(i).getName().toString().equals(selected_name)) {
-    			selected_c = all_cus.get(i);
+    			Customer selected_c = all_cus.get(i);
+    			java.awt.EventQueue.invokeLater(new Runnable() {
+    	            public void run() {
+    	                new CustomerEditPage(selected_c).setVisible(true);
+    	            }
+    	        });
     		}
     	}
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CustomerEditPage(selected_c).setVisible(true);
-            }
-        });
+        
     }
 
     /**
