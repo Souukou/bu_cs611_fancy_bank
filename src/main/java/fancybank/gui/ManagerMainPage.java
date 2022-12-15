@@ -4,6 +4,15 @@ package fancybank.gui;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import fancybank.user.Address;
+import fancybank.user.Customer;
+import fancybank.user.Email;
+import fancybank.user.Manager;
+import fancybank.user.Name;
+import fancybank.user.Password;
+import fancybank.user.UID;
+import fancybank.user.Username;
+
 /**
  *
  * @author xiekangxian Di Wang
@@ -13,7 +22,9 @@ public class ManagerMainPage extends javax.swing.JFrame {
     /**
      * Creates new form ManagerMainPage
      */
-    public ManagerMainPage() {
+	private Manager m;
+    public ManagerMainPage(Manager m) {
+    	this.m=m;
         initComponents();
     }
 
@@ -185,23 +196,24 @@ public class ManagerMainPage extends javax.swing.JFrame {
     private void stock_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stock_buttonActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StockEditPage().setVisible(true);
+                new StockEditPage(m).setVisible(true);
             }
         });
     }//GEN-LAST:event_stock_buttonActionPerformed
 
     private void customer_info_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customer_info_buttonActionPerformed
         // TODO add your handling code here:
+    	Manager m = this.m;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerListPage().setVisible(true);
+                new CustomerListPage(m).setVisible(true);
             }
         });
     }//GEN-LAST:event_customer_info_buttonActionPerformed
 
     private void logoff_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoff_buttonActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        this.setVisible(false);
         dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -219,7 +231,7 @@ public class ManagerMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DailyTransactionsPage().setVisible(true);
+                new DailyTransactionsPage(m).setVisible(true);
             }
         });
     }//GEN-LAST:event_transaction_buttonActionPerformed
@@ -278,12 +290,12 @@ public class ManagerMainPage extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ManagerMainPage().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

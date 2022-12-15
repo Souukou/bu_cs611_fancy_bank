@@ -17,10 +17,10 @@ public class CustomerInformationPage extends javax.swing.JFrame {
      */
     public CustomerInformationPage(Customer c) {
         initComponents();
-        this.email_text.setText(c.getEmail().toString());
-        this.address_text.setText(c.getEmail().toString());
-        this.password_text.setText(c.getPassword().toString());
-        this.name_text.setText(c.getName().toString());
+        this.email_text.setText(c.getEmail().get());
+        this.address_text.setText(c.getAddress().getStreet()+" "+c.getAddress().getCity()+" "+c.getAddress().getZip()+" "+c.getAddress().getState()+" "+c.getAddress().getCountry());
+        this.password_text.setText(c.getPassword().getEncryptedPassword(getName()));
+        this.name_text.setText(c.getName().getFirstName()+" "+c.getName().getMiddleName()+" "+c.getName().getLastName());
     }
 
     /**

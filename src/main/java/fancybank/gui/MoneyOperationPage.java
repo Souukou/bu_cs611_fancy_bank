@@ -2,6 +2,11 @@ package fancybank.gui;
 
 import fancybank.account.Account;
 import fancybank.account.CashOperable;
+import fancybank.account.Money;
+import fancybank.currency.Currency;
+import fancybank.data.Data;
+import fancybank.transaction.CashTransaction;
+import fancybank.transaction.Transaction;
 import fancybank.user.Customer;
 
 /*
@@ -250,12 +255,19 @@ public class MoneyOperationPage extends javax.swing.JFrame {
         	//deposit
         	if(this.operation_type==0) {
         		this.acc.deposit(operation_amount);
+        		Currency cur = ((Account)this.acc).getBalance().getCurrency();
+            	Transaction t = new CashTransaction( -1, ((Account)acc).getAccountNumber(),  new Money(cur,operation_amount));
+            	Data.getInstance().addTransaction(t);
+            	
         		this.c.save();
         		System.out.println("deposit");
         	}
         	//withdraw
         	else if(this.operation_type==1) {
         		this.acc.withdraw(operation_amount);
+        		Currency cur = ((Account)this.acc).getBalance().getCurrency();
+            	Transaction t = new CashTransaction(((Account)acc).getAccountNumber(), -1, new Money(cur,operation_amount));
+            	Data.getInstance().addTransaction(t);
         		this.c.save();
         		System.out.println("withdraw");
         	}

@@ -237,6 +237,9 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
     public Customer addCustomer(Username username, Name name, Address address, Email email, Password password) {
         Customer customerNew = this.customers.addCustomer(username, name, address, email, password);
+        //customerNew.createSavingAccount(0, "USD");
+        //customerNew.createSecurityAccount(0);
+        //customerNew.createCheckAccount(0, "USD");
         WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
         return customerNew;
     }

@@ -10,7 +10,13 @@ import javax.swing.JOptionPane;
 
 import fancybank.account.Account;
 import fancybank.account.CheckAccount;
+import fancybank.account.Money;
+import fancybank.account.SecurityAccount;
 import fancybank.account.Transferable;
+import fancybank.currency.Currency;
+import fancybank.data.Data;
+import fancybank.transaction.CashTransaction;
+import fancybank.transaction.Transaction;
 import fancybank.user.Customer;
 
 /**
@@ -184,7 +190,19 @@ public class TransferPage extends javax.swing.JFrame {
             Customer c = this.c;
             Transferable from_acc = (Transferable)this.display_account.get(from_ind);
             Account to_acc = this.display_account.get(to_ind);
+            if(to_acc instanceof SecurityAccount) {
+            	Double from_bal = ((Account)from_acc).getBalance().get();
+            	if( from_bal<5000  ||transfer_amount<1000||from_bal<transfer_amount||from_bal-transfer_amount<2500) {
+            		JOptionPane.showMessageDialog(this, "Transfer amount doesn't satisfy security transfer requirement!","Swing Tester",  JOptionPane.WARNING_MESSAGE);
+            		return;
+            	}
+            }
             from_acc.transferTo(to_acc, transfer_amount);
+            
+            Currency cur = ((Account)from_acc).getBalance().getCurrency();
+        	Transaction t = new CashTransaction( ((Account)from_acc).getAccountNumber(), ((Account)to_acc).getAccountNumber(),  new Money(cur,transfer_amount));
+        	Data.getInstance().addTransaction(t);
+            
             c.save();
         	java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {

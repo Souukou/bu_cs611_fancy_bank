@@ -1,6 +1,11 @@
 package fancybank.gui;
 
 import fancybank.account.CheckAccount;
+import fancybank.account.Money;
+import fancybank.currency.Currency;
+import fancybank.data.Data;
+import fancybank.transaction.CashTransaction;
+import fancybank.transaction.Transaction;
 import fancybank.user.Customer;
 
 /*
@@ -187,6 +192,7 @@ public class CheckingAccountPage extends javax.swing.JFrame {
     	int ind = this.checkInd;
     	this.setVisible(false);
     	dispose();
+    	
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MoneyOperationPage(c,acc,0, 0,ind).setVisible(true);

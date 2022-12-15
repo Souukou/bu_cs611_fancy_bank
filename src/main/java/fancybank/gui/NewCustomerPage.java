@@ -25,7 +25,7 @@ public class NewCustomerPage extends javax.swing.JFrame {
      * Creates new form NewCustomerPage
      */
     private String[] info;
-
+    
     public NewCustomerPage() {
 
         initComponents();
@@ -333,9 +333,10 @@ public class NewCustomerPage extends javax.swing.JFrame {
         	Address ad = new Address(street,city,state,zip,country);
         	Email em = new Email(email);
         	Password pw = new Password(password);
-        	Data.getInstance().addCustomer(un, n, ad, em, pw) ;
+        	Data.getInstance().getBank().Register(nickname, firstname, middlename, lastname, street, city, state, zip, country, email, password);
             setVisible(false); // you can't see me!
             dispose(); // Destroy the JFrame object
+            System.out.println(nickname+"  "+password);
         }
 
     }// GEN-LAST:event_create_buttonActionPerformed

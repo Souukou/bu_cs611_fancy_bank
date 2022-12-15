@@ -44,6 +44,7 @@ buildNumber.properties
 .vscode
 .idea
 
-!gson.jar
-
 .DS_Store
+
+!lib/*
+/src/
