@@ -7,6 +7,8 @@ import fancybank.account.Balance;
 import fancybank.account.CheckAccount;
 import fancybank.account.SavingAccount;
 import fancybank.account.SecurityAccount;
+import fancybank.loan.Collateral;
+import fancybank.loan.Loan;
 
 import org.junit.jupiter.api.Assertions;
 
@@ -74,14 +76,13 @@ public class CustomerTest {
         Assertions.assertEquals(0, curSavingAccount.getBalance().get());
         Assertions.assertEquals(150, securityAccount.getBalance().get());
 
-
     }
-
 
     @Test
     public void TestCustomerExchangeCurrency() {
         Customer customer1 = new Customer(
-                100001, "albertwilliams", "Albert", "J", "Williams", "123 Commonwealth St", "Anytown", "MA", "02215", "USA", "a@b.com", "xxxxxxxx");
+                100001, "albertwilliams", "Albert", "J", "Williams", "123 Commonwealth St", "Anytown", "MA", "02215",
+                "USA", "a@b.com", "xxxxxxxx");
 
         customer1.createAccount("checking", 0, "USD");
         customer1.createAccount("checking", 0, "CNY");
@@ -116,5 +117,24 @@ public class CustomerTest {
         customer1.ExchangeCurrency(curCNYAccount, curEURAccount, new Balance(50, "USD"));
         Assertions.assertEquals(0, curCNYAccount.getBalance().get());
         Assertions.assertEquals(180, curEURAccount.getBalance().get());
+    }
+
+    @Test
+    public void TestLoan() {
+        Customer customer = new Customer(
+                100001, "albertwilliams", "Albert", "J", "Williams", "123 Commonwealth St", "Anytown", "MA", "02215",
+                "USA", "a@b.com", "xxxxxxxx");
+        Assertions.assertEquals(0, customer.getLoans().size());
+        customer.borrowLoan(10000, new Collateral("Car", 20000, "/path/to/car"));
+        Assertions.assertEquals(1, customer.getLoans().size());
+        Loan loan = customer.getLoans().get(0);
+        loan.approve();
+        Assertions.assertTrue(loan.isApproved());
+        Assertions.assertEquals(10000, loan.getUnpaidAmount());
+        loan.pay(5000);
+        Assertions.assertEquals(5000, loan.getUnpaidAmount());
+        loan.pay(5000);
+        Assertions.assertEquals(0, loan.getUnpaidAmount());
+        Assertions.assertTrue(loan.isPaidFully());
     }
 }
