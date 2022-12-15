@@ -23,6 +23,18 @@ public class Currency {
         return rate;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
     public boolean equals(Object obj) {
         if (obj instanceof Currency) {
             Currency currency = (Currency) obj;
