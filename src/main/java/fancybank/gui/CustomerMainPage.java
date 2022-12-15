@@ -271,11 +271,12 @@ public class CustomerMainPage extends javax.swing.JFrame {
 
     private void logoff_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_logoff_buttonActionPerformed
         // TODO add your handling code here:
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    	setVisible(false);
+        dispose();
+    	java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginPage().setVisible(true);
-                setVisible(false);
-                dispose();
+                
             }
         });
     }// GEN-LAST:event_logoff_buttonActionPerformed

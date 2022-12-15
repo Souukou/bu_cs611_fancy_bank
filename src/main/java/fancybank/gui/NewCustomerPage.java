@@ -334,9 +334,9 @@ public class NewCustomerPage extends javax.swing.JFrame {
         	Email em = new Email(email);
         	Password pw = new Password(password);
         	Data.getInstance().getBank().Register(nickname, firstname, middlename, lastname, street, city, state, zip, country, email, password);
-        	//Data.getInstance().addCustomer(un, n, ad, em, pw);
             setVisible(false); // you can't see me!
             dispose(); // Destroy the JFrame object
+            System.out.println(nickname+"  "+password);
         }
 
     }// GEN-LAST:event_create_buttonActionPerformed

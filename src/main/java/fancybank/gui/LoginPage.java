@@ -39,6 +39,7 @@ public class LoginPage extends javax.swing.JFrame {
         initComponents();
         Bank bank = Data.getInstance().getBank();
         this.bank = bank;
+        /**
         Customer customer = new Customer(1,"username","firstname","middle","lastname","888 Commonwealth","boston","MA","02446","US","gmail.com","123456");
         customer.createCheckAccount(0, "USD");
         customer.createCheckAccount(0, "EUR");
@@ -51,6 +52,7 @@ public class LoginPage extends javax.swing.JFrame {
         //customer.getOneSecurityAccount().buyStock(google, 100);
         //customer.getOneSecurityAccount().buyStock(google, 100);
         this.customer = customer;
+        **/
         // connect the database
     }
 
@@ -187,15 +189,20 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_login_buttonActionPerformed
         // TODO add your handling code here:
-    	
+    	Bank.getInstance().ManagerRegister("admin", "Michael", "", "Jackson", "1601 Queens Road, Hollywood Hills",
+                "Los Olivos", "California", "93441", "US", "mike@gmail.com", "12345678");
+    	//admin 12345678 
         String acc = this.account_text.getText();
-        String password = this.password_text.toString();
-        Customer customer = new Customer(1,"username","firstname","middle","lastname","888 Commonwealth","boston","MA","02446","US","gmail.com","123456");
-        this.customer = customer;
-        customer.createCheckAccount(0, "USD");
-        customer.createCheckAccount(0, "EUR");
-        customer.createSavingAccount(0, "USD");
-        customer.createSecurityAccount(100000);
+        //String password = this.password_text.toString();
+        String password = String.valueOf(this.password_text.getPassword());
+        System.out.println(acc+"  "+password);
+        //Customer customer = new Customer(1,"username","firstname","middle","lastname","888 Commonwealth","boston","MA","02446","US","gmail.com","123456");
+        //this.customer = customer;
+        
+        //customer.createCheckAccount(0, "USD");
+        //customer.createCheckAccount(0, "EUR");
+        //customer.createSavingAccount(0, "USD");
+        //customer.createSecurityAccount(100000);
         
         /**
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -207,9 +214,9 @@ public class LoginPage extends javax.swing.JFrame {
         **/
         
         Manager m = this.bank.ManagerLogin(acc, password);
-        System.out.println(m.getEmail().get());
+        //System.out.println(m.getEmail().get());
         if(m==null) {
-        	//customer = this.bank.Login(acc, password);
+        	Customer customer = this.bank.Login(acc, password);
         	if(customer==null) {
         		JOptionPane.showMessageDialog(this, "No user credential matches your account/password.");
         		return;
