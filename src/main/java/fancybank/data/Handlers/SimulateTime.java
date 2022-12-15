@@ -25,4 +25,13 @@ public class SimulateTime {
         return this.day;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj != null && obj.getClass() == this.getClass()) {
+            final SimulateTime toCompare = (SimulateTime) obj;
+            return this.day == toCompare.getDay();
+        }
+        return false;
+    }
+
 }

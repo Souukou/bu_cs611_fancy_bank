@@ -1,25 +1,23 @@
 package fancybank.data.Handlers;
 
+import java.util.ArrayList;
+
 import fancybank.currency.Currency;
 
-public class CurrencyHandler implements ArrayAppend<Currency> {
+public class CurrencyHandler {
 
-    Currency[] currencies;
+    ArrayList<Currency> currencies;
 
     public CurrencyHandler() {
-        currencies = new Currency[0];
+        currencies = new ArrayList<Currency>();
     }
 
-    public Currency[] getCurrencies() {
+    public ArrayList<Currency> getCurrencies() {
         return currencies;
     }
 
-    public void setCurrencies(Currency[] currencies) {
+    public void setCurrencies(ArrayList<Currency> currencies) {
         this.currencies = currencies;
-    }
-
-    public void addCurrency(Currency currency) {
-        currencies = addElement(currencies, currency);
     }
 
 }

@@ -5,4 +5,5 @@ public enum TransactionType {
     TRANSFER,
     STOCK,
     ACCOUNT,
+    INTEREST,
 }

@@ -58,6 +58,10 @@ public class Customer extends User {
         Data.getInstance().updateCustomer(this);
     }
 
+    public void save() {
+        Data.getInstance().updateCustomer(this);
+    }
+
     public ArrayList<Account> getAccounts() {
         return accounts;
     }

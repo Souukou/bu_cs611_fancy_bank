@@ -44,4 +44,6 @@ buildNumber.properties
 .vscode
 .idea
 
+.DS_Store
+
 !lib/*
