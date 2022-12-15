@@ -8,32 +8,54 @@ import fancybank.account.CheckAccount;
 import fancybank.account.SavingAccount;
 import fancybank.account.SecurityAccount;
 import fancybank.account.Transferable;
+import fancybank.bank.Bank;
 import fancybank.data.Data;
+import fancybank.loan.Collateral;
+import fancybank.loan.Loan;
 import fancybank.transaction.Transaction;
 
 public class Customer extends User {
     ArrayList<Account> accounts;
+    ArrayList<Loan> loans;
+
+    public ArrayList<Loan> getLoans() {
+        return loans;
+    }
+
+    public void borrowLoan(double amount, Collateral collateral) {
+        double interestRate = Bank.getInstance().getLoanInterestRate();
+        Loan loan = new Loan(getUID(), amount, interestRate, collateral);
+        loans.add(loan);
+    }
 
     public Customer() {
         super();
         this.accounts = new ArrayList<Account>();
+        this.loans = new ArrayList<Loan>();
     }
 
     public Customer(UID UID, Username username, Name name, Address address, Email email, Password password) {
         super(UID, username, name, address, email, password);
         this.accounts = new ArrayList<Account>();
+        this.loans = new ArrayList<Loan>();
     }
 
     public Customer(UID UID, Username username, Name name, Address address, Email email, Password password,
             ArrayList<Account> accounts) {
         super(UID, username, name, address, email, password);
         this.accounts = accounts;
+        this.loans = new ArrayList<Loan>();
     }
 
     public Customer(int uid, String username, String firstName, String middleName, String lastName, String street,
             String city, String state, String zip, String country, String email, String password) {
         super(uid, username, firstName, middleName, lastName, street, city, state, zip, country, email, password);
         this.accounts = new ArrayList<Account>();
+        this.loans = new ArrayList<Loan>();
+    }
+
+    public void save() {
+        Data.getInstance().updateCustomer(this);
     }
 
     public void save() {

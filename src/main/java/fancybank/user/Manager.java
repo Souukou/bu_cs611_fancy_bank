@@ -32,6 +32,5 @@ public class Manager extends User {
 
     public void approveLoan(Loan e) {
         e.approve();
-    }
 
 }

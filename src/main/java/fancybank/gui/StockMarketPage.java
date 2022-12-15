@@ -4,6 +4,14 @@ package fancybank.gui;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
+
+import fancybank.data.Data;
+import fancybank.stock.Stock;
+import fancybank.stock.StockMarket;
+
 /**
  *
  * @author xiekangxian
@@ -15,7 +23,17 @@ public class StockMarketPage extends javax.swing.JFrame {
      */
     public StockMarketPage() {
         initComponents();
-
+        
+        StockMarket m = Data.getInstance().getStockMarket();
+        ArrayList<Stock> stocks = m.getStockList();
+        
+        DefaultTableModel model = (DefaultTableModel) this.stack_market_table.getModel();
+    	
+        for(int i =0;i<stocks.size();i++) {
+        	Stock s = stocks.get(i);
+        	model.addRow(new Object[]{s.getSymbol(),s.getName(),s.getPrice()});
+            
+        }
     }
 
     /**
@@ -25,101 +43,57 @@ public class StockMarketPage extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         javax.swing.JScrollPane stock_market_table = new javax.swing.JScrollPane();
         stack_market_table = new javax.swing.JTable();
-        trade_button = new javax.swing.JButton();
-        back_button = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Stock Market");
 
         stack_market_table.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         stack_market_table.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Stock Name", "Stock Number", "Current Price"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false
+            },
+            new String [] {
+                "Stock Symbol", "Stock Name", "Current Price"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         stack_market_table.setRowSelectionAllowed(false);
         stack_market_table.setShowGrid(true);
         stock_market_table.setViewportView(stack_market_table);
 
-        trade_button.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        trade_button.setText("Trade");
-        trade_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                trade_buttonActionPerformed(evt);
-            }
-        });
-
-        back_button.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        back_button.setText("Back");
-        back_button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                back_buttonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(back_button)
-                                .addGap(45, 45, 45))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(stock_market_table, javax.swing.GroupLayout.PREFERRED_SIZE, 750,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(311, Short.MAX_VALUE)
-                                .addComponent(trade_button, javax.swing.GroupLayout.PREFERRED_SIZE, 228,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(311, 311, 311)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(stock_market_table, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(stock_market_table, javax.swing.GroupLayout.PREFERRED_SIZE, 600,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45)
-                                .addComponent(trade_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
-                                .addComponent(back_button)
-                                .addContainerGap(35, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(stock_market_table, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_back_buttonActionPerformed
-        // TODO add your handling code here:
-        setVisible(false);
-        dispose();
-    }// GEN-LAST:event_back_buttonActionPerformed
 
-    private void trade_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_trade_buttonActionPerformed
-        // TODO add your handling code here:
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StockOperationPage().setVisible(true);
-            }
-        });
-    }// GEN-LAST:event_trade_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,8 +139,6 @@ public class StockMarketPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton back_button;
     private javax.swing.JTable stack_market_table;
-    private javax.swing.JButton trade_button;
     // End of variables declaration//GEN-END:variables
 }

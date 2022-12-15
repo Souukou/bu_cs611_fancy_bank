@@ -1,4 +1,8 @@
 package fancybank.gui;
+
+import fancybank.account.SavingAccount;
+import fancybank.user.Customer;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -13,8 +17,14 @@ public class SavingAccountPage extends javax.swing.JFrame {
     /**
      * Creates new form SavingAccountPage
      */
-    public SavingAccountPage() {
+	Customer c;
+	SavingAccount account;
+    public SavingAccountPage(Customer c) {
         initComponents();
+        this.c = c;
+        this.account = this.c.getOneSavingAccount();
+        this.acc_num_text.setText(String.valueOf(this.account.getAccountNumber()));
+        this.balance_text.setText(String.valueOf(this.account.getBalance().get()));
     }
 
     /**
@@ -160,26 +170,41 @@ public class SavingAccountPage extends javax.swing.JFrame {
 
     private void deposit_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_deposit_buttonActionPerformed
         // TODO add your handling code here:
+    	SavingAccount a = this.account;
+    	Customer c = this.c;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MoneyOperationPage(1, 0).setVisible(true);
+                new MoneyOperationPage(c,a, 1, 0,0).setVisible(true);
             }
         });
+        this.setVisible(false);
+        dispose();
     }// GEN-LAST:event_deposit_buttonActionPerformed
 
     private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_back_buttonActionPerformed
         // TODO add your handling code here:
         setVisible(false);
+        Customer c = this.c;
         dispose();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CustomerMainPage(c).setVisible(true);
+            }
+        });
+        
     }// GEN-LAST:event_back_buttonActionPerformed
 
     private void withdraw_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_withdraw_buttonActionPerformed
         // TODO add your handling code here:
+    	SavingAccount a = this.account;
+    	Customer c = this.c;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MoneyOperationPage(1, 1).setVisible(true);
+                new MoneyOperationPage(c,a, 1, 1,0).setVisible(true);
             }
         });
+        this.setVisible(false);
+        dispose();
     }// GEN-LAST:event_withdraw_buttonActionPerformed
 
     /**
@@ -217,12 +242,13 @@ public class SavingAccountPage extends javax.swing.JFrame {
         }
         // </editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SavingAccountPage().setVisible(true);
             }
         });
+        */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
