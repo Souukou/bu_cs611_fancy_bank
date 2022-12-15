@@ -6,7 +6,9 @@ import java.util.Arrays;
 import com.google.gson.Gson;
 
 import fancybank.bank.Bank;
+import fancybank.account.Account;
 import fancybank.currency.Currency;
+import fancybank.data.Handlers.CurrencyHandler;
 import fancybank.data.Handlers.CustomerHandler;
 import fancybank.data.Handlers.ManagerHandler;
 import fancybank.data.Handlers.SimulateTime;
@@ -42,11 +44,13 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     private ManagerHandler managers;
     private TransactionHandler trans;
     private StockMarket market;
+    private CurrencyHandler currencies;
     private SimulateTime time;
     private Bank bank;
 
-    Data() {
+    public Data() {
         String jsonStr;
+
         jsonStr = ReadJsonFile.readFile(DataFile.CUSTOMER.getPath());
         if (jsonStr == null)
             this.customers = new CustomerHandler();
@@ -139,7 +143,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         return null;
     }
 
-    public Transaction[] geTransactionByAccount(int id) {
+    public Transaction[] getTransactionByAccount(int id) {
         ArrayList<Transaction> accountTransactions = new ArrayList<Transaction>();
         for (Transaction tran : this.trans.getTransactions()) {
             if (tran.getFrom() == id || tran.getTo() == id)
@@ -189,6 +193,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
                 return true;
             }
         }
+        WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
         return false;
     }
 
@@ -211,6 +216,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
                 return true;
             }
         }
+        WriteJsonFile.writeFile(DataFile.MANAGER.getPath(), gson.toJson(managers));
         return false;
     }
 
@@ -220,7 +226,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         return managerNew;
     }
 
-    public void AddTransaction(Transaction e) {
+    public void addTransaction(Transaction e) {
         this.trans.addTransaction(e);
         WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
     }
@@ -237,52 +243,22 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
     public int getNextAccountNumber() {
         int maxAccountNumber = 200000; // accouunt number start from 200000
-        for (Customer c : this.customers.getCustomers()) {
-            maxAccountNumber = Math.max(maxAccountNumber, c.getAccounts().get(0).getAccountNumber());
+        for (Customer c : customers.getCustomers()) {
+            for (Account acct : c.getAccounts()) {
+                maxAccountNumber = (maxAccountNumber > acct.getAccountNumber() ? maxAccountNumber
+                        : acct.getAccountNumber());
+            }
         }
         return maxAccountNumber + 1;
     }
 
-    // TODO @davidchd
     public ArrayList<Currency> getCurrencyList() {
-        // read currency from db
-        ArrayList<Currency> currencyList = new ArrayList<Currency>();
-        currencyList.add(new Currency("USD", "$", 1.0));
-        currencyList.add(new Currency("EUR", "€", 0.9));
-        currencyList.add(new Currency("JPY", "¥", 110.0));
-        currencyList.add(new Currency("GBP", "£", 0.8));
-        currencyList.add(new Currency("AUD", "$", 1.4));
-        currencyList.add(new Currency("CAD", "$", 1.3));
-        currencyList.add(new Currency("CHF", "Fr", 1.0));
-        currencyList.add(new Currency("CNY", "¥", 7.0));
-        currencyList.add(new Currency("HKD", "$", 7.8));
-        currencyList.add(new Currency("NZD", "$", 1.5));
-        currencyList.add(new Currency("SEK", "kr", 9.0));
-        currencyList.add(new Currency("SGD", "$", 1.4));
-        currencyList.add(new Currency("KRW", "₩", 1200.0));
-        currencyList.add(new Currency("MXN", "$", 20.0));
-        currencyList.add(new Currency("NOK", "kr", 9.0));
-        currencyList.add(new Currency("RUB", "₽", 70.0));
-        currencyList.add(new Currency("INR", "₹", 70.0));
-        currencyList.add(new Currency("ZAR", "R", 14.0));
-        currencyList.add(new Currency("TRY", "₺", 6.0));
-        currencyList.add(new Currency("BRL", "R$", 4.0));
-        currencyList.add(new Currency("TWD", "NT$", 30.0));
-        currencyList.add(new Currency("MYR", "RM", 4.0));
-        currencyList.add(new Currency("PHP", "₱", 50.0));
-        currencyList.add(new Currency("IDR", "Rp", 14000.0));
-        currencyList.add(new Currency("THB", "฿", 30.0));
-        currencyList.add(new Currency("VND", "₫", 23000.0));
-        currencyList.add(new Currency("CZK", "Kč", 23.0));
-        currencyList.add(new Currency("DKK", "kr", 6.5));
-        currencyList.add(new Currency("HUF", "Ft", 300.0));
-        currencyList.add(new Currency("PLN", "zł", 3.8));
-        currencyList.add(new Currency("ILS", "₪", 3.5));
-        return currencyList;
+        return new ArrayList<Currency>(Arrays.asList(currencies.getCurrencies()));
     }
 
-    public void saveCurrencyList(ArrayList<Currency> currencyList) {
-        // TODO @davidchd
+    public void updateCurrencyList(Currency[] currencyList) {
+        currencies.setCurrencies(currencyList);
+        WriteJsonFile.writeFile(DataFile.CURRENCY.getPath(), gson.toJson(currencies));
     }
 
 }

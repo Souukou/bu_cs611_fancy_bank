@@ -44,6 +44,10 @@ buildNumber.properties
 .vscode
 .idea
 
+<<<<<<< HEAD
 !gson.jar
 
 .DS_Store
+=======
+!lib/*
+>>>>>>> a1eb897 (add transaction)

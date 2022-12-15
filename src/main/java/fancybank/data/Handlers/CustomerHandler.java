@@ -10,7 +10,7 @@ import fancybank.user.Username;
 
 /**
  * @author Haodong Chen hjc5283@bu.edu
- *         Class for maintaining the customers' list.
+ * Class for maintaining the customers' list.
  */
 public class CustomerHandler implements ArrayAppend<Customer> {
 
