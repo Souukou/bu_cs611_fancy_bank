@@ -4,6 +4,14 @@ package fancybank.gui;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import javax.swing.table.DefaultTableModel;
+
+import fancybank.data.Data;
+import fancybank.data.Handlers.SimulateTime;
+import fancybank.stock.Stock;
+import fancybank.transaction.Transaction;
+import fancybank.user.Manager;
+
 /**
  *
  * @author Di Wang
@@ -13,9 +21,17 @@ public class DailyTransactionsPage extends javax.swing.JFrame {
         /**
          * Creates new form StockMarketPage
          */
-        public DailyTransactionsPage() {
+		private Manager m;
+        public DailyTransactionsPage(Manager m) {
                 initComponents();
-
+                this.m = m;
+                Transaction[] ts = Data.getInstance().getTransactionByDay(new SimulateTime());
+                
+                DefaultTableModel model = (DefaultTableModel) this.stack_market_table.getModel();
+                for(int i =0;i<ts.length;i++) {
+                	Transaction t = ts[i];
+                	model.addRow(new Object[]{t.getFrom(), t.getTo(), t.getMoney().getAmount()});
+                }
         }
 
         /**
@@ -112,6 +128,11 @@ public class DailyTransactionsPage extends javax.swing.JFrame {
                 // TODO add your handling code here:
                 setVisible(false);
                 dispose();
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                            new ManagerMainPage(m).setVisible(true);
+                    }
+            });
         }// GEN-LAST:event_back_buttonActionPerformed
 
         /**

@@ -231,7 +231,7 @@ public class ManagerMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DailyTransactionsPage().setVisible(true);
+                new DailyTransactionsPage(m).setVisible(true);
             }
         });
     }//GEN-LAST:event_transaction_buttonActionPerformed
