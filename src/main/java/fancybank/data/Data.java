@@ -1,16 +1,19 @@
 package fancybank.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.google.gson.Gson;
 
 import fancybank.account.Account;
+import fancybank.bank.Bank;
 import fancybank.currency.Currency;
 import fancybank.data.Handlers.CurrencyHandler;
 import fancybank.data.Handlers.CustomerHandler;
 import fancybank.data.Handlers.ManagerHandler;
 import fancybank.data.Handlers.SimulateTime;
 import fancybank.data.Handlers.TransactionHandler;
+import fancybank.stock.Stock;
 import fancybank.stock.StockMarket;
 import fancybank.transaction.Transaction;
 import fancybank.user.Address;
@@ -39,9 +42,10 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     private CustomerHandler customers;
     private ManagerHandler managers;
     private TransactionHandler trans;
-    private StockMarket stocks;
+    private StockMarket market;
     private CurrencyHandler currencies;
     private SimulateTime time;
+    private Bank bank;
 
     public Data() {
         String jsonStr;
@@ -59,17 +63,68 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         else this.trans = gson.fromJson(jsonStr, TransactionHandler.class);
 
         jsonStr = ReadJsonFile.readFile(DataFile.STOCKMARKET.getPath());
-        if(jsonStr == null) this.stocks = new StockMarket();
-        else this.stocks = gson.fromJson(jsonStr, StockMarket.class);
+        if (jsonStr == null) {
+            this.market = new StockMarket();
+            market.getStockList().add(new Stock("AAPL", "Apple", 10.99));
+            market.getStockList().add(new Stock("GOOG", "Google", 18.88));
+            market.getStockList().add(new Stock("MSFT", "Microsoft", 20.05));
+            market.getStockList().add(new Stock("AMZN", "Amazon", 8.99));
+            market.getStockList().add(new Stock("FB", "Facebook", 400));
+            market.getStockList().add(new Stock("TSLA", "Tesla", 500));
+            market.getStockList().add(new Stock("NFLX", "Netflix", 600));
+            market.getStockList().add(new Stock("NVDA", "Nvidia", 700));
+            market.getStockList().add(new Stock("PYPL", "PayPal", 800));
+            market.getStockList().add(new Stock("INTC", "Intel", 900));
+            market.getStockList().add(new Stock("CSCO", "Cisco", 1000));
+            market.getStockList().add(new Stock("QCOM", "Qualcomm", 1100));
+            market.getStockList().add(new Stock("TXN", "Texas Instruments", 1200));
+            market.getStockList().add(new Stock("ADBE", "Adobe", 1300));
+            market.getStockList().add(new Stock("CRM", "Salesforce", 1400));
+            market.getStockList().add(new Stock("AVGO", "Broadcom", 1500));
+            market.getStockList().add(new Stock("COST", "Costco", 1600));
+            market.getStockList().add(new Stock("SBUX", "Starbucks", 1700));
+            market.getStockList().add(new Stock("CMCSA", "Comcast", 1800));
+            market.getStockList().add(new Stock("AMGN", "Amgen", 1900));
+            market.getStockList().add(new Stock("CHTR", "Charter", 2000));
+            market.getStockList().add(new Stock("GILD", "Gilead", 2100));
+            market.getStockList().add(new Stock("MDLZ", "Mondelez", 2200));
+            market.getStockList().add(new Stock("ISRG", "Intuitive Surgical", 2300));
+            market.getStockList().add(new Stock("TMUS", "T-Mobile", 2400));
+            market.getStockList().add(new Stock("AMAT", "Applied Materials", 2500));
+            market.getStockList().add(new Stock("AMD", "AMD", 2600));
+            market.getStockList().add(new Stock("MU", "Micron", 2700));
+        }
 
-        jsonStr = ReadJsonFile.readFile(DataFile.CURRENCY.getPath());
-        if(jsonStr == null) this.currencies = new CurrencyHandler();
-        else this.currencies = gson.fromJson(jsonStr, CurrencyHandler.class);
+        else
+            this.market = gson.fromJson(jsonStr, StockMarket.class);
 
         jsonStr = ReadJsonFile.readFile(DataFile.SIMULATETIME.getPath());
         if(jsonStr == null) this.time = new SimulateTime();
         else this.time = gson.fromJson(jsonStr, SimulateTime.class);
 
+
+        jsonStr = ReadJsonFile.readFile(DataFile.BANK.getPath());
+        if (jsonStr == null)
+            this.bank = new Bank();
+        else
+            this.bank = gson.fromJson(jsonStr, Bank.class);
+    }
+
+    public Bank getBank() {
+        return this.bank;
+    }
+
+    public void updateBank(Bank bank) {
+        this.bank = bank;
+        WriteJsonFile.writeFile(DataFile.BANK.getPath(), gson.toJson(bank));
+    }
+
+    public Customer getCustomerByUsername(Username username, String pw) {
+        for (Customer c : this.customers.getCustomers()) {
+            if (c.getUsername().get().equals(username.get()) && c.getPassword().validate(pw))
+                return c;
+        }
+        return null;
     }
 
     public Customer getCustomerByUid(UID id, String pw) {
@@ -96,8 +151,20 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         return null;
     }
 
+    public ArrayList<Manager> getManagers() {
+        return new ArrayList<Manager>(Arrays.asList(this.managers.getManagers()));
+    }
+
+    public Manager getManagerByUsername(Username username, String pw) {
+        for (Manager m : this.managers.getManagers()) {
+            if (m.getUsername().get().equals(username.get()) && m.getPassword().validate(pw))
+                return m;
+        }
+        return null;
+    }
+
     public StockMarket getStockMarket() {
-        return this.stocks;
+        return this.market;
     }
 
     public SimulateTime getTime() {
@@ -154,8 +221,8 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     }
 
     public void updateStockMarket(StockMarket market) {
-        this.stocks = market;
-        WriteJsonFile.writeFile(DataFile.STOCKMARKET.getPath(), gson.toJson(stocks));
+        this.market = market;
+        WriteJsonFile.writeFile(DataFile.STOCKMARKET.getPath(), gson.toJson(market));
     }
 
     public void addDays(int days) {
@@ -173,11 +240,11 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         return maxAccountNumber + 1;
     }
 
-    public Currency[] getCurrencyList() {
+    public ArrayList<Currency> getCurrencyList() {
         return currencies.getCurrencies();
     }
 
-    public void updateCurrencyList(Currency[] currencyList) {
+    public void updateCurrencyList(ArrayList<Currency> currencyList) {
         currencies.setCurrencies(currencyList);
         WriteJsonFile.writeFile(DataFile.CURRENCY.getPath(), gson.toJson(currencies));
     }

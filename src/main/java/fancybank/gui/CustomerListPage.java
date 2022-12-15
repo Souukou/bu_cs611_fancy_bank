@@ -31,31 +31,33 @@ public class CustomerListPage extends javax.swing.JFrame {
         javax.swing.JScrollPane customer_list = new javax.swing.JScrollPane();
         customer_list_table = new javax.swing.JTable();
         back_button = new javax.swing.JButton();
+        Edit_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Customer information list");
 
         customer_list_table.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         customer_list_table.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+                new Object [][] {
 
                 },
-                new String[] {
-                        "Name", "Account", "Arrears"
-                }) {
-            Class[] types = new Class[] {
+                new String [] {
+                        "Name", "Account", "Loan"
+                }
+        ) {
+            Class[] types = new Class [] {
                     java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
-            boolean[] canEdit = new boolean[] {
+            boolean[] canEdit = new boolean [] {
                     false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
+                return types [columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         customer_list_table.setRowSelectionAllowed(false);
@@ -75,39 +77,58 @@ public class CustomerListPage extends javax.swing.JFrame {
             }
         });
 
+        Edit_button.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        Edit_button.setText("Edit");
+        Edit_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Edit_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(50, 50, 50)
-                                .addComponent(customer_list, javax.swing.GroupLayout.PREFERRED_SIZE, 750,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(customer_list, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(50, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(311, Short.MAX_VALUE)
-                                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 228,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(311, 311, 311)));
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Edit_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(114, 114, 114)
+                                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(248, 248, 248))
+        );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(60, 60, 60)
-                                .addComponent(customer_list, javax.swing.GroupLayout.PREFERRED_SIZE, 600,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65)
-                                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(73, Short.MAX_VALUE)));
+                                .addComponent(customer_list, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Edit_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(66, Short.MAX_VALUE))
+        );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>
 
     private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_back_buttonActionPerformed
         // TODO add your handling code here:
         setVisible(false);
         dispose();
     }// GEN-LAST:event_back_buttonActionPerformed
+
+    private void Edit_buttonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new CustomerEditPage().setVisible(true);
+            }
+        });
+    }
 
     /**
      * @param args the command line arguments
@@ -153,6 +174,7 @@ public class CustomerListPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Edit_button;
     private javax.swing.JButton back_button;
     private javax.swing.JTable customer_list_table;
     // End of variables declaration//GEN-END:variables

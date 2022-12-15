@@ -7,7 +7,11 @@ public interface Tradable {
 
     public boolean buyStock(String symbol, int quantity);
 
-    public boolean sellStock(Stock stock, int quantity);
+    public int hasStock(String symbol);
 
-    public boolean sellStock(String symbol, int quantity);
+    public int hasStock(Stock symbol);
+
+    public double sellStock(Stock stock, int quantity);
+
+    public double sellStock(String symbol, int quantity);
 }
