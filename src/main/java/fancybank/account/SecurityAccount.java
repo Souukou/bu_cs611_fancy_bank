@@ -9,7 +9,7 @@ import fancybank.stock.Stock;
 import fancybank.stock.StockHolding;
 import fancybank.stock.StockMarket;
 
-public class SecurityAccount extends Account implements Transferable, Tradable {
+public class SecurityAccount extends Account implements Transferable, Tradable, CashOperable {
     private StockHoldingList stockHoldingList = new StockHoldingList();
 
     public SecurityAccount() {
@@ -113,4 +113,16 @@ public class SecurityAccount extends Account implements Transferable, Tradable {
         Stock stock = StockMarket.getInstance().getStock(symbol);
         return sellStock(stock, quantity);
     }
+
+	@Override
+	public void deposit(double amount) {
+		// TODO Auto-generated method stub
+		getBalance().add(amount);
+	}
+
+	@Override
+	public void withdraw(double amount) {
+		// TODO Auto-generated method stub
+		getBalance().subtract(amount);
+	}
 }
