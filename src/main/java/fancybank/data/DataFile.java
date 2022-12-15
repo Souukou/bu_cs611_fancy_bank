@@ -6,6 +6,7 @@ public enum DataFile {
     TRANSACTION("./Transaction.data"),
     STOCKMARKET("./Stock.data"),
     SIMULATETIME("./Time.data"),
+    BANK("./Bank.data"),
     ;
 
     private String path;

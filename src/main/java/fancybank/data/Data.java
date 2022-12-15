@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
+import fancybank.bank.Bank;
 import fancybank.currency.Currency;
 import fancybank.data.Handlers.CustomerHandler;
 import fancybank.data.Handlers.ManagerHandler;
@@ -40,6 +41,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     private TransactionHandler trans;
     private StockMarket stocks;
     private SimulateTime time;
+    private Bank bank;
 
     Data() {
         String jsonStr;
@@ -72,6 +74,29 @@ public class Data implements ReadJsonFile, WriteJsonFile {
             this.time = new SimulateTime();
         else
             this.time = gson.fromJson(jsonStr, SimulateTime.class);
+
+        jsonStr = ReadJsonFile.readFile(DataFile.BANK.getPath());
+        if (jsonStr == null)
+            this.bank = new Bank();
+        else
+            this.bank = gson.fromJson(jsonStr, Bank.class);
+    }
+
+    public Bank getBank() {
+        return this.bank;
+    }
+
+    public void updateBank(Bank bank) {
+        this.bank = bank;
+        WriteJsonFile.writeFile(DataFile.BANK.getPath(), gson.toJson(bank));
+    }
+
+    public Customer getCustomerByUsername(Username username, String pw) {
+        for (Customer c : this.customers.getCustomers()) {
+            if (c.getUsername().get().equals(username.get()))
+                return c;
+        }
+        return null;
     }
 
     public Customer getCustomerByUid(UID id, String pw) {
