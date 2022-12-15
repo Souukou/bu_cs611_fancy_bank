@@ -4,6 +4,7 @@ import fancybank.data.Data;
 import fancybank.user.Address;
 import fancybank.user.Customer;
 import fancybank.user.Email;
+import fancybank.user.Manager;
 import fancybank.user.Name;
 import fancybank.user.Password;
 import fancybank.user.Username;
@@ -55,5 +56,20 @@ public class Bank {
                 new Name(firstName, middleName, lastName), new Address(street, city, state, zip, country),
                 new Email(email), new Password(password));
         return customer;
+    }
+
+    // TODO
+    public static Manager ManagerLogin(String username, String password) {
+        // return null if username or password is wrong
+        return new Manager();
+
+    }
+
+    // TODO
+    public static Manager ManagerRegister(String username, String firstName, String middleName,
+            String lastName, String street, String city, String state, String zip, String country, String email,
+            String password) {
+        // do something
+        return new Manager();
     }
 }
