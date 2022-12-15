@@ -1,6 +1,5 @@
 package fancybank.stock;
 
-
 public class StockHolding {
     private String symbol;
     private double boughtPrice;
@@ -25,7 +24,8 @@ public class StockHolding {
 
     public Stock getStock() {
         Stock curStock = StockMarket.getInstance().getStock(symbol);
-        // if the stock is not in the market, it might be taken down so we assume it value goes to 0.
+        // if the stock is not in the market, it might be taken down so we assume it
+        // value goes to 0.
         if (curStock == null) {
             curStock = new Stock(symbol);
         }
@@ -62,6 +62,10 @@ public class StockHolding {
 
     public double getValue() {
         return getStock().getPrice() * quantity;
+    }
+
+    public double getUnrealizedProfit() {
+        return getValue() - boughtPrice * quantity;
     }
 
 }

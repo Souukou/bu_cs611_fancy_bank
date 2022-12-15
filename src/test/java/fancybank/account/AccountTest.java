@@ -86,7 +86,6 @@ public class AccountTest {
         Assertions.assertEquals(40, checkAccount1.getBalance().get());
         Assertions.assertEquals(770, checkAccount2.getBalance().get());
 
-
     }
 
     @Test
@@ -107,6 +106,10 @@ public class AccountTest {
         // buy stocks
         boolean result = securityAccount.buyStock("AAPL", 10);
         Assertions.assertTrue(result);
+        Assertions.assertEquals(100,
+                securityAccount.getStockHoldingList().getStockHoldingList("AAPL").get(0).getBoughtPrice());
+        Assertions.assertEquals(10,
+                securityAccount.getStockHoldingList().getStockHoldingList("AAPL").get(0).getQuantity());
         result = securityAccount.buyStock(new Stock("GOOG"), 10);
         Assertions.assertTrue(result);
         result = securityAccount.buyStock(new Stock("MSFT", "Microsoft"), 10);
@@ -119,31 +122,40 @@ public class AccountTest {
         Assertions.assertFalse(result);
         Assertions.assertEquals(5000, securityAccount.getBalance().get());
         Assertions.assertEquals(1, securityAccount.getStockHoldingList().getStockHoldingList("AAPL").size());
-        Assertions.assertEquals(10, securityAccount.getStockHoldingList().getStockHoldingList("AAPL").get(0).getQuantity());
+        Assertions.assertEquals(10,
+                securityAccount.getStockHoldingList().getStockHoldingList("AAPL").get(0).getQuantity());
         Assertions.assertEquals(2, securityAccount.getStockHoldingList().getStockHoldingList("GOOG").size());
-        Assertions.assertEquals(10, securityAccount.getStockHoldingList().getStockHoldingList("GOOG").get(0).getQuantity());
-        Assertions.assertEquals(20, securityAccount.getStockHoldingList().getStockHoldingList("GOOG").get(1).getQuantity());
+        Assertions.assertEquals(10,
+                securityAccount.getStockHoldingList().getStockHoldingList("GOOG").get(0).getQuantity());
+        Assertions.assertEquals(20,
+                securityAccount.getStockHoldingList().getStockHoldingList("GOOG").get(1).getQuantity());
         Assertions.assertEquals(1, securityAccount.getStockHoldingList().getStockHoldingList("MSFT").size());
-        Assertions.assertEquals(10, securityAccount.getStockHoldingList().getStockHoldingList("MSFT").get(0).getQuantity());
+        Assertions.assertEquals(10,
+                securityAccount.getStockHoldingList().getStockHoldingList("MSFT").get(0).getQuantity());
         Assertions.assertEquals(4, securityAccount.getStockHoldingList().getStockHoldingList().size());
 
+        // test getStock
+        Assertions.assertEquals(10, securityAccount.hasStock("AAPL"));
+
         // sell stocks
+        double sellResult;
         StockMarket.getInstance().getStock("AAPL").setPrice(200);
-        result = securityAccount.sellStock("AAPL", 5);
-        Assertions.assertTrue(result);
+        sellResult = securityAccount.sellStock("AAPL", 5);
+        Assertions.assertEquals(500, sellResult);
         Assertions.assertEquals(6000, securityAccount.getBalance().get());
-        result = securityAccount.sellStock("AAPL", 10);
-        Assertions.assertFalse(result);
+        sellResult = securityAccount.sellStock("AAPL", 10);
+        Assertions.assertEquals(5, securityAccount.hasStock("AAPL"));
+        Assertions.assertEquals(0, sellResult);
         Assertions.assertEquals(6000, securityAccount.getBalance().get());
 
         // simulate the price change
         StockMarket.getInstance().getStock("GOOG").setPrice(100);
-        result = securityAccount.sellStock("GOOG", 25);
-        Assertions.assertTrue(result);
+        sellResult = securityAccount.sellStock("GOOG", 25);
+        Assertions.assertEquals(-4000, sellResult);
         Assertions.assertEquals(8500, securityAccount.getBalance().get());
         StockMarket.getInstance().getStock("GOOG").setPrice(1000);
-        result = securityAccount.sellStock("GOOG", 5);
-        Assertions.assertTrue(result);
+        sellResult = securityAccount.sellStock("GOOG", 5);
+
         Assertions.assertEquals(13500, securityAccount.getBalance().get());
 
         StockMarket.getInstance().getStock("MSFT").setPrice(100);
