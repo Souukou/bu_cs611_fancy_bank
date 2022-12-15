@@ -25,6 +25,7 @@ public class LoginPage extends javax.swing.JFrame {
      * Creates new form LoginPage
      */
 	Customer customer;
+	
     public LoginPage() {
         initComponents();
         Customer customer = new Customer(1,"username","firstname","middle","lastname","888 Commonwealth","boston","MA","02446","US","gmail.com","123456");

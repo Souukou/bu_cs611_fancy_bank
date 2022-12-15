@@ -250,11 +250,13 @@ public class MoneyOperationPage extends javax.swing.JFrame {
         	//deposit
         	if(this.operation_type==0) {
         		this.acc.deposit(operation_amount);
+        		this.c.save();
         		System.out.println("deposit");
         	}
         	//withdraw
         	else if(this.operation_type==1) {
         		this.acc.withdraw(operation_amount);
+        		this.c.save();
         		System.out.println("withdraw");
         	}
         	

@@ -153,6 +153,7 @@ public class StockOperationPage extends javax.swing.JFrame {
         dispose();
         this.account.sellStock(stock_number, Integer.parseInt(share));
         Customer c = this.c;
+        c.save();
         SecurityAccount account = this.account;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -189,6 +190,7 @@ public class StockOperationPage extends javax.swing.JFrame {
         setVisible(false);
         dispose();
         this.account.buyStock(stock_number, Integer.parseInt(share));
+        this.c.save();
         Customer c = this.c;
         SecurityAccount acc = this.account;
         java.awt.EventQueue.invokeLater(new Runnable() {
