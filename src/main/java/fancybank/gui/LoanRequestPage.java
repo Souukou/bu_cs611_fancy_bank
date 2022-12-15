@@ -4,6 +4,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
+import fancybank.account.Account;
 import fancybank.loan.Collateral;
 import fancybank.user.Customer;
 
@@ -197,8 +198,8 @@ public class LoanRequestPage extends javax.swing.JFrame {
         String path = this.filepath;
         double amount = this.amount;
         // TODO@kaxie
-        // this.c.borrowLoan( amount, new Collateral(collateral,value,path));
-        // this.c.makeLoan();
+        Collateral cl = new Collateral(collateral,value,path);
+        this.c.makeLoan(this.c.getCheckAccount().get(this.checkind),  amount,  cl) ;
         this.c.save();
         this.setVisible(false);
         dispose();
