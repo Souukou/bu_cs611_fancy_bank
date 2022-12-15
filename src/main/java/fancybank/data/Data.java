@@ -63,7 +63,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
         jsonStr = ReadJsonFile.readFile(DataFile.STOCKMARKET.getPath());
         if (jsonStr == null)
-            this.stocks = StockMarket.getInstance();
+            this.stocks = new StockMarket();
         else
             this.stocks = gson.fromJson(jsonStr, StockMarket.class);
 
