@@ -25,6 +25,7 @@ public class LoginPage extends javax.swing.JFrame {
      * Creates new form LoginPage
      */
 	Customer customer;
+	
     public LoginPage() {
         initComponents();
         Customer customer = new Customer(1,"username","firstname","middle","lastname","888 Commonwealth","boston","MA","02446","US","gmail.com","123456");
@@ -34,10 +35,10 @@ public class LoginPage extends javax.swing.JFrame {
         customer.createSecurityAccount(100000);
         Stock apple = StockMarket.getInstance().getStock("AAPL");
         Stock google = StockMarket.getInstance().getStock("GOOG");
-        customer.getOneSecurityAccount().buyStock(apple, 100);
-        customer.getOneSecurityAccount().buyStock(apple, 100);
-        customer.getOneSecurityAccount().buyStock(google, 100);
-        customer.getOneSecurityAccount().buyStock(google, 100);
+        //customer.getOneSecurityAccount().buyStock(apple, 100);
+        //customer.getOneSecurityAccount().buyStock(apple, 100);
+        //customer.getOneSecurityAccount().buyStock(google, 100);
+        //customer.getOneSecurityAccount().buyStock(google, 100);
         this.customer = customer;
         // connect the database
     }

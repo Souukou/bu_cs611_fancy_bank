@@ -232,6 +232,7 @@ public class ExchangePage extends javax.swing.JFrame {
         		CheckAccount to = this.selection.get(ind);
         		Balance ex_bal = new Balance(am,this.acc.getBalance().getCurrency());
         		this.acc.exchangeTo(to, ex_bal);
+        		this.c.save();
         		java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
                             new CheckingAccountPage(c,check_ind).setVisible(true);

@@ -220,7 +220,7 @@ public class CustomerMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TransactionsPage().setVisible(true);
+                new TransactionsPage(c).setVisible(true);
             }
         });
     }// GEN-LAST:event_transaction_buttonActionPerformed

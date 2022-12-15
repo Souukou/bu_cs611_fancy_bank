@@ -185,6 +185,7 @@ public class TransferPage extends javax.swing.JFrame {
             Transferable from_acc = (Transferable)this.display_account.get(from_ind);
             Account to_acc = this.display_account.get(to_ind);
             from_acc.transferTo(to_acc, transfer_amount);
+            c.save();
         	java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new CustomerMainPage(c).setVisible(true);

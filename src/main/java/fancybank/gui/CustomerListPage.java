@@ -42,7 +42,7 @@ public class CustomerListPage extends javax.swing.JFrame {
 
                 },
                 new String [] {
-                        "Name", "Account", "Arrears"
+                        "Name", "Account", "Loan"
                 }
         ) {
             Class[] types = new Class [] {

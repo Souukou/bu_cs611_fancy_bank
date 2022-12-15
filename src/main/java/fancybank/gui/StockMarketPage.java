@@ -4,6 +4,14 @@ package fancybank.gui;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
+
+import fancybank.data.Data;
+import fancybank.stock.Stock;
+import fancybank.stock.StockMarket;
+
 /**
  *
  * @author xiekangxian
@@ -15,7 +23,17 @@ public class StockMarketPage extends javax.swing.JFrame {
      */
     public StockMarketPage() {
         initComponents();
-
+        
+        StockMarket m = Data.getInstance().getStockMarket();
+        ArrayList<Stock> stocks = m.getStockList();
+        
+        DefaultTableModel model = (DefaultTableModel) this.stack_market_table.getModel();
+    	
+        for(int i =0;i<stocks.size();i++) {
+        	Stock s = stocks.get(i);
+        	model.addRow(new Object[]{s.getSymbol(),s.getName(),s.getPrice()});
+            
+        }
     }
 
     /**
@@ -40,7 +58,7 @@ public class StockMarketPage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Stock Name", "Stock Number", "Current Price"
+                "Stock Symbol", "Stock Name", "Current Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
