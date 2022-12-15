@@ -1,4 +1,14 @@
 package fancybank.gui;
+
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
+
+import fancybank.loan.Loan;
+import fancybank.stock.Stock;
+import fancybank.user.Customer;
+import fancybank.user.Manager;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -13,9 +23,24 @@ public class CustomerListPage extends javax.swing.JFrame {
     /**
      * Creates new form StockMarketPage
      */
-    public CustomerListPage() {
+	private Manager m;
+    public CustomerListPage(Manager m ) {
         initComponents();
-
+        this.m=m;
+        DefaultTableModel model = (DefaultTableModel) this.customer_list_table.getModel();
+    	ArrayList<Customer>all_cus = this.m.getAllCustomers();
+    	System.out.println(all_cus.get(0).getName().toString());
+        for(int i =0;i<all_cus.size();i++) {
+        	Customer c = all_cus.get(i);
+        	double total_loan = 0;
+        	ArrayList<Loan> loans = c.getLoans();
+        	for(int j =0;j<loans.size();j++) {
+        		total_loan+=loans.get(j).getUnpaidAmount();
+        	}
+        	String name = c.getName().toString();
+        	int d = c.getAccounts().size();
+        	model.addRow(new Object[]{name, d, total_loan});
+        }
     }
 
     /**
@@ -123,9 +148,18 @@ public class CustomerListPage extends javax.swing.JFrame {
 
     private void Edit_buttonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+    	int row = this.customer_list_table.getSelectedRow();
+    	ArrayList<Customer> all_cus =  this.m.getAllCustomers();
+    	Customer selected_c = new Customer();
+    	String selected_name = customer_list_table.getModel().getValueAt(row, 0).toString();
+    	for(int i=0;i<all_cus.size();i++) {
+    		if(all_cus.get(i).getName().toString().equals(selected_name)) {
+    			selected_c = all_cus.get(i);
+    		}
+    	}
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerEditPage().setVisible(true);
+                new CustomerEditPage(selected_c).setVisible(true);
             }
         });
     }

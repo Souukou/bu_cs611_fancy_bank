@@ -16,8 +16,8 @@ public class CustomerEditPage extends javax.swing.JFrame {
      * Creates new form CustomerInfoPage
      */
     Customer c;
-    public CustomerEditPage() {
-
+    public CustomerEditPage(Customer c) {
+    	this.c = c;
         initComponents();
     }
 

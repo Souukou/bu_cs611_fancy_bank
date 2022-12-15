@@ -4,6 +4,15 @@ package fancybank.gui;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import fancybank.user.Address;
+import fancybank.user.Customer;
+import fancybank.user.Email;
+import fancybank.user.Manager;
+import fancybank.user.Name;
+import fancybank.user.Password;
+import fancybank.user.UID;
+import fancybank.user.Username;
+
 /**
  *
  * @author xiekangxian Di Wang
@@ -13,7 +22,9 @@ public class ManagerMainPage extends javax.swing.JFrame {
     /**
      * Creates new form ManagerMainPage
      */
-    public ManagerMainPage() {
+	private Manager m;
+    public ManagerMainPage(Manager m) {
+    	this.m=m;
         initComponents();
     }
 
@@ -192,9 +203,10 @@ public class ManagerMainPage extends javax.swing.JFrame {
 
     private void customer_info_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customer_info_buttonActionPerformed
         // TODO add your handling code here:
+    	Manager m = this.m;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerListPage().setVisible(true);
+                new CustomerListPage(m).setVisible(true);
             }
         });
     }//GEN-LAST:event_customer_info_buttonActionPerformed
@@ -278,12 +290,12 @@ public class ManagerMainPage extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ManagerMainPage().setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

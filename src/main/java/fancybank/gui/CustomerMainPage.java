@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import fancybank.account.CheckAccount;
 import fancybank.account.SavingAccount;
 import fancybank.account.SecurityAccount;
+import fancybank.currency.Currency;
+import fancybank.data.Data;
 import fancybank.user.Customer;
 
 /*
@@ -27,11 +29,25 @@ public class CustomerMainPage extends javax.swing.JFrame {
         this.c = customer;
         this.nickname_text.setText(c.getName().toString());
         ArrayList<CheckAccount> checks = c.getCheckAccount();
+        ArrayList<Currency> all_uncreated = new ArrayList<Currency>();
+        ArrayList<Currency> all_currency = Data.getInstance().getCurrencyList();
         for(int i=0;i<checks.size();i++) {
         	CheckAccount acc = checks.get(i);
-        	this.checking_acc_selector.addItem(acc.getAccountNumber()+": "+acc.getBalance().getCurrency().getName());
+        	this.checking_acc_selector.addItem("CheckingAccount:"+acc.getAccountNumber()+": "+acc.getBalance().getCurrency().getName());
         }
+        //int number_currency_exist = ;
         
+        for(int i =0;i<all_currency.size();i++) {
+        	Currency c = all_currency.get(i);
+        	boolean exist = false;
+        	for(int j=0;j<checks.size();j++) {
+            	  if(checks.get(j).getBalance().getCurrency().getSymbol().equals(c.getSymbol())) {
+            		  exist = true;
+            	  } 
+        	}
+        	if(exist)continue;
+        	this.checking_acc_selector.addItem("Uncreated Currency:"+c.getName());
+        }
     }
 
     /**
@@ -189,14 +205,29 @@ public class CustomerMainPage extends javax.swing.JFrame {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checking_buttonActionPerformed
         // TODO add your handling code here:
         int ind = this.checking_acc_selector.getSelectedIndex();
+        String selected = String.valueOf(this.checking_acc_selector.getSelectedItem());
         Customer c = this.c;
         this.setVisible(false);
         dispose();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CheckingAccountPage(c,ind).setVisible(true);
-            }
-        });
+        if(ind>=this.c.getCheckAccount().size()) {
+        	//create one more checking account
+        	String cur = selected.substring(selected.length()-3,selected.length());
+        	this.c.createCheckAccount(0, cur);
+        	this.c.save();
+        	java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new CustomerMainPage(c).setVisible(true);
+                }
+            });
+        }
+        else {
+        	java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new CheckingAccountPage(c,ind).setVisible(true);
+                }
+            });
+        }
+        
         //aa
     }//GEN-LAST:event_checking_buttonActionPerformed
 

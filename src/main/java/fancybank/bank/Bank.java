@@ -55,6 +55,9 @@ public class Bank {
         Customer customer = Data.getInstance().addCustomer(new Username(username),
                 new Name(firstName, middleName, lastName), new Address(street, city, state, zip, country),
                 new Email(email), new Password(password));
+        ///customer.createSavingAccount(0, "USD");
+        //customer.createSecurityAccount(0);
+        //boolean res = customer.createCheckAccount(0, "USD");
         return customer;
     }
 
