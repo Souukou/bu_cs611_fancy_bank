@@ -27,5 +27,7 @@ public class CurrencyTest {
         Assertions.assertEquals("CNY", c1.getName());
         Assertions.assertEquals("¥", c1.getSymbol());
 
+        CurrencyFactory.getInstance().updateCurrencyRate("CNY", 6);
+        Assertions.assertEquals(6, CurrencyFactory.getInstance().getCurrency("CNY").getRate());
     }
 }
