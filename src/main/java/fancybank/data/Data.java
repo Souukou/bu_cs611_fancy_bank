@@ -11,6 +11,7 @@ import fancybank.data.Handlers.CustomerHandler;
 import fancybank.data.Handlers.ManagerHandler;
 import fancybank.data.Handlers.SimulateTime;
 import fancybank.data.Handlers.TransactionHandler;
+import fancybank.stock.Stock;
 import fancybank.stock.StockMarket;
 import fancybank.transaction.Transaction;
 import fancybank.user.Address;
@@ -40,7 +41,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     private CustomerHandler customers;
     private ManagerHandler managers;
     private TransactionHandler trans;
-    private StockMarket stocks;
+    private StockMarket market;
     private SimulateTime time;
     private Bank bank;
 
@@ -65,10 +66,40 @@ public class Data implements ReadJsonFile, WriteJsonFile {
             this.trans = gson.fromJson(jsonStr, TransactionHandler.class);
 
         jsonStr = ReadJsonFile.readFile(DataFile.STOCKMARKET.getPath());
-        if (jsonStr == null)
-            this.stocks = new StockMarket();
+        if (jsonStr == null) {
+            this.market = new StockMarket();
+            market.getStockList().add(new Stock("AAPL", "Apple", 10.99));
+            market.getStockList().add(new Stock("GOOG", "Google", 18.88));
+            market.getStockList().add(new Stock("MSFT", "Microsoft", 20.05));
+            market.getStockList().add(new Stock("AMZN", "Amazon", 8.99));
+            market.getStockList().add(new Stock("FB", "Facebook", 400));
+            market.getStockList().add(new Stock("TSLA", "Tesla", 500));
+            market.getStockList().add(new Stock("NFLX", "Netflix", 600));
+            market.getStockList().add(new Stock("NVDA", "Nvidia", 700));
+            market.getStockList().add(new Stock("PYPL", "PayPal", 800));
+            market.getStockList().add(new Stock("INTC", "Intel", 900));
+            market.getStockList().add(new Stock("CSCO", "Cisco", 1000));
+            market.getStockList().add(new Stock("QCOM", "Qualcomm", 1100));
+            market.getStockList().add(new Stock("TXN", "Texas Instruments", 1200));
+            market.getStockList().add(new Stock("ADBE", "Adobe", 1300));
+            market.getStockList().add(new Stock("CRM", "Salesforce", 1400));
+            market.getStockList().add(new Stock("AVGO", "Broadcom", 1500));
+            market.getStockList().add(new Stock("COST", "Costco", 1600));
+            market.getStockList().add(new Stock("SBUX", "Starbucks", 1700));
+            market.getStockList().add(new Stock("CMCSA", "Comcast", 1800));
+            market.getStockList().add(new Stock("AMGN", "Amgen", 1900));
+            market.getStockList().add(new Stock("CHTR", "Charter", 2000));
+            market.getStockList().add(new Stock("GILD", "Gilead", 2100));
+            market.getStockList().add(new Stock("MDLZ", "Mondelez", 2200));
+            market.getStockList().add(new Stock("ISRG", "Intuitive Surgical", 2300));
+            market.getStockList().add(new Stock("TMUS", "T-Mobile", 2400));
+            market.getStockList().add(new Stock("AMAT", "Applied Materials", 2500));
+            market.getStockList().add(new Stock("AMD", "AMD", 2600));
+            market.getStockList().add(new Stock("MU", "Micron", 2700));
+        }
+
         else
-            this.stocks = gson.fromJson(jsonStr, StockMarket.class);
+            this.market = gson.fromJson(jsonStr, StockMarket.class);
 
         jsonStr = ReadJsonFile.readFile(DataFile.SIMULATETIME.getPath());
         if (jsonStr == null)
@@ -138,7 +169,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     }
 
     public StockMarket getStockMarket() {
-        return this.stocks;
+        return this.market;
     }
 
     public SimulateTime getTime() {
@@ -195,8 +226,8 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     }
 
     public void updateStockMarket(StockMarket market) {
-        this.stocks = market;
-        WriteJsonFile.writeFile(DataFile.STOCKMARKET.getPath(), gson.toJson(stocks));
+        this.market = market;
+        WriteJsonFile.writeFile(DataFile.STOCKMARKET.getPath(), gson.toJson(market));
     }
 
     public void addDays(int days) {
