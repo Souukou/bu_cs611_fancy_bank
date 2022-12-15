@@ -22,7 +22,7 @@ public class Customer extends User {
         return loans;
     }
 
-    public void borrowLoan(Account account, double amount, Collateral collateral) {
+    public void makeLoan(Account account, double amount, Collateral collateral) {
         double interestRate = Bank.getInstance().getLoanInterestRate();
         Loan loan = new Loan(getUID(), account, amount, interestRate, collateral);
         loans.add(loan);

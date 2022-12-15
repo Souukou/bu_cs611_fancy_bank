@@ -128,7 +128,7 @@ public class CustomerTest {
         customer.createAccount("checking", 0, "USD");
         Account acc = customer.getCheckAccount().get(0);
         Assertions.assertEquals(0, customer.getLoans().size());
-        customer.borrowLoan(acc, 10000, new Collateral("Car", 20000, "/path/to/car"));
+        customer.makeLoan(acc, 10000, new Collateral("Car", 20000, "/path/to/car"));
         Assertions.assertEquals(1, customer.getLoans().size());
         Loan loan = customer.getLoans().get(0);
         loan.approve();
