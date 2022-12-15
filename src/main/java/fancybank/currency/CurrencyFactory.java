@@ -55,9 +55,9 @@ public class CurrencyFactory {
         }
     }
 
-    public void removeCurrency(String symbol) {
+    public void removeCurrency(String name) {
         for (Currency currency : currencyList) {
-            if (currency.getSymbol().equals(symbol)) {
+            if (currency.getName().equals(name)) {
                 currencyList.remove(currency);
                 save();
                 break;
@@ -65,9 +65,9 @@ public class CurrencyFactory {
         }
     }
 
-    public void updateCurrencyRate(String symbol, double rate) {
+    public void updateCurrencyRate(String name, double rate) {
         for (Currency currency : currencyList) {
-            if (currency.getSymbol().equals(symbol)) {
+            if (currency.getName().equals(name)) {
                 currency.setRate(rate);
                 save();
                 break;
