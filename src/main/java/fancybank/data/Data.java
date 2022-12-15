@@ -1,9 +1,11 @@
 package fancybank.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.google.gson.Gson;
 
+import fancybank.bank.Bank;
 import fancybank.currency.Currency;
 import fancybank.data.Handlers.CustomerHandler;
 import fancybank.data.Handlers.ManagerHandler;
@@ -40,6 +42,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     private TransactionHandler trans;
     private StockMarket stocks;
     private SimulateTime time;
+    private Bank bank;
 
     Data() {
         String jsonStr;
@@ -72,6 +75,29 @@ public class Data implements ReadJsonFile, WriteJsonFile {
             this.time = new SimulateTime();
         else
             this.time = gson.fromJson(jsonStr, SimulateTime.class);
+
+        jsonStr = ReadJsonFile.readFile(DataFile.BANK.getPath());
+        if (jsonStr == null)
+            this.bank = new Bank();
+        else
+            this.bank = gson.fromJson(jsonStr, Bank.class);
+    }
+
+    public Bank getBank() {
+        return this.bank;
+    }
+
+    public void updateBank(Bank bank) {
+        this.bank = bank;
+        WriteJsonFile.writeFile(DataFile.BANK.getPath(), gson.toJson(bank));
+    }
+
+    public Customer getCustomerByUsername(Username username, String pw) {
+        for (Customer c : this.customers.getCustomers()) {
+            if (c.getUsername().get().equals(username.get()) && c.getPassword().validate(pw))
+                return c;
+        }
+        return null;
     }
 
     public Customer getCustomerByUid(UID id, String pw) {
@@ -94,6 +120,18 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     public Manager getManagerByUid(UID id, String pw) {
         for (Manager m : this.managers.getManagers()) {
             if (m.getUID().get() == id.get() && m.getPassword().validate(pw))
+                return m;
+        }
+        return null;
+    }
+
+    public ArrayList<Manager> getManagers() {
+        return new ArrayList<Manager>(Arrays.asList(this.managers.getManagers()));
+    }
+
+    public Manager getManagerByUsername(Username username, String pw) {
+        for (Manager m : this.managers.getManagers()) {
+            if (m.getUsername().get().equals(username.get()) && m.getPassword().validate(pw))
                 return m;
         }
         return null;
