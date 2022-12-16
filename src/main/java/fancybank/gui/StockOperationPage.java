@@ -165,7 +165,10 @@ public class StockOperationPage extends javax.swing.JFrame {
         this.share_amount_text.setText("");
         setVisible(false);
         dispose();
-        this.account.sellStock(stock_number, Integer.parseInt(share));
+        Double profit = this.account.sellStock(stock_number, Integer.parseInt(share));
+        JOptionPane.showMessageDialog(this, "Your realized profit is: "+String.valueOf(profit),
+                "INFORMATION",
+                JOptionPane.INFORMATION_MESSAGE);
         Customer c = this.c;
         c.save();
         SecurityAccount account = this.account;

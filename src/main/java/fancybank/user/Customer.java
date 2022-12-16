@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import fancybank.account.Account;
 import fancybank.account.Balance;
 import fancybank.account.CheckAccount;
+import fancybank.account.Money;
 import fancybank.account.SavingAccount;
 import fancybank.account.SecurityAccount;
 import fancybank.account.Transferable;
@@ -12,6 +13,7 @@ import fancybank.bank.Bank;
 import fancybank.data.Data;
 import fancybank.loan.Collateral;
 import fancybank.loan.Loan;
+import fancybank.transaction.CashTransaction;
 import fancybank.transaction.Transaction;
 
 public class Customer extends User {
@@ -237,8 +239,8 @@ public class Customer extends User {
         Balance exchangeBalance = new Balance(amount, from.getBalance().getCurrency());
         from.getBalance().subtract(exchangeBalance);
         to.getBalance().add(exchangeBalance);
-        // TODO: need transaction class
-        // Data.getInstance().AddTransaction(from, to, exchangeBalance, memo);
+        Data.getInstance().addTransaction(new CashTransaction(from.getAccountNumber(), to.getAccountNumber(),
+                new Money(from.getBalance().getCurrency(), amount)));
         return true;
     }
 
