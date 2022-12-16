@@ -269,9 +269,7 @@ public class Customer extends User {
         }
         from.getBalance().subtract(exchangeBalance);
         to.getBalance().add(exchangeBalance);
-        // TODO: need transaction class
-        // Data.getInstance().AddTransaction(new Transaction(from, to, exchangeBalance,
-        // ""));
+
         return true;
     }
 }
