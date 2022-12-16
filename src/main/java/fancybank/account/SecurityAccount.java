@@ -13,7 +13,7 @@ public class SecurityAccount extends Account implements Transferable, Tradable, 
     private StockHoldingList stockHoldingList = new StockHoldingList();
 
     public SecurityAccount() {
-        super(0, "security", 0, "USD");
+        super();
     }
 
     public SecurityAccount(int accountNumber) {
@@ -138,15 +138,15 @@ public class SecurityAccount extends Account implements Transferable, Tradable, 
         return sellStock(stock, quantity);
     }
 
-	@Override
-	public void deposit(double amount) {
-		// TODO Auto-generated method stub
-		getBalance().add(amount);
-	}
+    @Override
+    public void deposit(double amount) {
+        // TODO Auto-generated method stub
+        getBalance().add(amount);
+    }
 
-	@Override
-	public void withdraw(double amount) {
-		// TODO Auto-generated method stub
-		getBalance().subtract(amount);
-	}
+    @Override
+    public void withdraw(double amount) {
+        // TODO Auto-generated method stub
+        getBalance().subtract(amount);
+    }
 }

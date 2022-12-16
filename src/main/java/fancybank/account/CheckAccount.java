@@ -3,7 +3,7 @@ package fancybank.account;
 public class CheckAccount extends Account implements CashOperable, Transferable, Exchangeable {
 
     public CheckAccount() {
-        super(0, "checking", 0, "USD");
+        super();
     }
 
     public CheckAccount(int accountNumber) {
@@ -13,6 +13,10 @@ public class CheckAccount extends Account implements CashOperable, Transferable,
     public CheckAccount(int accountNumber, double balance, String currency) {
         super(accountNumber, "checking", balance, currency);
 
+    }
+
+    public CheckAccount(int accountNumber, String accountType, double balance, String currency) {
+        super(accountNumber, accountType, balance, currency);
     }
 
     public void setBalance(double balance) {
@@ -55,9 +59,9 @@ public class CheckAccount extends Account implements CashOperable, Transferable,
         if (!getBalance().isSufficient(exBalance)) {
             return false;
         }
-        System.out.println( exBalance.get());
-        System.out.println( this.getAccountType()+this.getAccountNumber());
-        System.out.println( targetAccount.getAccountType()+targetAccount.getAccountNumber());
+        System.out.println(exBalance.get());
+        System.out.println(this.getAccountType() + this.getAccountNumber());
+        System.out.println(targetAccount.getAccountType() + targetAccount.getAccountNumber());
         this.getBalance().subtract(exBalance);
         targetAccount.getBalance().add(exBalance);
         return true;
