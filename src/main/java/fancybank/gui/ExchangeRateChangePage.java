@@ -1,6 +1,11 @@
 package fancybank.gui;
 
+import java.util.ArrayList;
+
 import javax.swing.table.DefaultTableModel;
+
+import fancybank.currency.Currency;
+import fancybank.data.Data;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -20,8 +25,10 @@ public class ExchangeRateChangePage extends javax.swing.JFrame {
         initComponents();
         javax.swing.JTable table = customer_list_table;
         DefaultTableModel model =(DefaultTableModel) table.getModel();
-        model.addRow(new Object[]{"US",1});
-        
+        ArrayList<Currency> all_curr = Data.getInstance().getCurrencyList();
+        for(Currency curr:all_curr) {
+         model.addRow(new Object[]{curr.getName(),curr.getRate()});
+        }
     }
 
     /**

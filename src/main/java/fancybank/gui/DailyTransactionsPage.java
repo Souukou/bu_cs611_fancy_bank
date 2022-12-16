@@ -9,7 +9,9 @@ import javax.swing.table.DefaultTableModel;
 import fancybank.data.Data;
 import fancybank.data.Handlers.SimulateTime;
 import fancybank.stock.Stock;
+import fancybank.transaction.StockTransaction;
 import fancybank.transaction.Transaction;
+import fancybank.transaction.TransactionType;
 import fancybank.user.Manager;
 
 /**
@@ -34,6 +36,13 @@ public class DailyTransactionsPage extends javax.swing.JFrame {
                 	String to = new Integer(t.getTo()).toString();
                 	if(from.equals("-1")) from="cash";
                 	if(to.equals("-1")) to="cash";
+                        if(t.getType() == TransactionType.STOCK) {
+                                StockTransaction tempTran = (StockTransaction) t;
+                                if(from.equals("-2")) from = "Stock: " + tempTran.getSymbol();
+                	        if(to.equals("-2")) to = "Stock: " + tempTran.getSymbol();
+                        }
+                	if(from.equals("-3")) from="Pay Interest";
+                	if(to.equals("-3")) to="Collect Interest";
                 	model.addRow(new Object[]{from, to, t.getMoney().getAmount()});
                 }
         }
