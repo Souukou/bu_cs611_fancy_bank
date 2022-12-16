@@ -4,7 +4,11 @@ package fancybank.gui;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import javax.swing.JOptionPane;
+
 import fancybank.account.SecurityAccount;
+import fancybank.data.Data;
+import fancybank.stock.Stock;
 import fancybank.user.Customer;
 
 /**
@@ -145,8 +149,18 @@ public class StockOperationPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sell_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_sell_buttonActionPerformed
-        String stock_number = this.stock_number_text.getText();
+    	String stock_number = this.stock_number_text.getText();
         String share = this.share_amount_text.getText();
+        
+        Stock s = Data.getInstance().getStockMarket().getStock(stock_number);
+        if(s==null) {
+        	this.stock_number_text.setText("");
+            this.share_amount_text.setText("");
+            JOptionPane.showMessageDialog(this, "This stock doesn't exist!", "Dialog",
+                    JOptionPane.ERROR_MESSAGE);
+        	return;
+        }
+        
         this.stock_number_text.setText("");
         this.share_amount_text.setText("");
         setVisible(false);
@@ -160,6 +174,7 @@ public class StockOperationPage extends javax.swing.JFrame {
                 new OwnStockPage(c,account).setVisible(true);
             }
         });
+
     }// GEN-LAST:event_sell_buttonActionPerformed
 
     private void stock_number_textKeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_stock_number_textKeyTyped
@@ -182,9 +197,16 @@ public class StockOperationPage extends javax.swing.JFrame {
     }// GEN-LAST:event_back_buttonActionPerformed
 
     private void buy_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buy_buttonActionPerformed
-        // TODO add your handling code here:
-        String stock_number = this.stock_number_text.getText();
+    	String stock_number = this.stock_number_text.getText();
         String share = this.share_amount_text.getText();
+        Stock s = Data.getInstance().getStockMarket().getStock(stock_number);
+        if(s==null) {
+        	this.stock_number_text.setText("");
+            this.share_amount_text.setText("");
+            JOptionPane.showMessageDialog(this, "This stock doesn't exist!", "Dialog",
+                    JOptionPane.ERROR_MESSAGE);
+        	return;
+        }
         this.stock_number_text.setText("");
         this.share_amount_text.setText("");
         setVisible(false);
@@ -198,6 +220,7 @@ public class StockOperationPage extends javax.swing.JFrame {
                 new OwnStockPage(c,account).setVisible(true);
             }
         });
+
     }// GEN-LAST:event_buy_buttonActionPerformed
 
     /**

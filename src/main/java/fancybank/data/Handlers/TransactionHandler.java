@@ -3,8 +3,6 @@ package fancybank.data.Handlers;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import fancybank.account.Account;
-import fancybank.account.Money;
 import fancybank.transaction.AccountTransaction;
 import fancybank.transaction.CashTransaction;
 import fancybank.transaction.InterestTransaction;

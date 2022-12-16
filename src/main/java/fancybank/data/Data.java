@@ -311,11 +311,6 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
     }
 
-    public void addTransaction(StockTransaction e) {
-        this.trans.addStockTran(e);
-        WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
-    }
-
     public void updateStockMarket(StockMarket market) {
         this.market = market;
         WriteJsonFile.writeFile(DataFile.STOCKMARKET.getPath(), gson.toJson(market));
