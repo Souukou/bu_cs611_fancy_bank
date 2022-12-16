@@ -6,13 +6,17 @@ import java.util.Arrays;
 import com.google.gson.Gson;
 
 import fancybank.account.Account;
+import fancybank.account.Money;
+import fancybank.account.SavingAccount;
 import fancybank.bank.Bank;
 import fancybank.currency.Currency;
+import fancybank.currency.CurrencyFactory;
 import fancybank.data.Handlers.CurrencyHandler;
 import fancybank.data.Handlers.CustomerHandler;
 import fancybank.data.Handlers.ManagerHandler;
 import fancybank.data.Handlers.SimulateTime;
 import fancybank.data.Handlers.TransactionHandler;
+import fancybank.loan.Loan;
 import fancybank.stock.Stock;
 import fancybank.stock.StockMarket;
 import fancybank.transaction.AccountTransaction;
@@ -24,6 +28,7 @@ import fancybank.transaction.TransferTransaction;
 import fancybank.user.Address;
 import fancybank.user.Customer;
 import fancybank.user.Email;
+import fancybank.user.FeeType;
 import fancybank.user.Manager;
 import fancybank.user.Name;
 import fancybank.user.Password;
@@ -322,7 +327,25 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     }
 
     public void addDays(int days) {
-        this.time.addDay(days);
+        while(days > 0) {
+            for(Customer c: getCustomerAll()) {
+                for(SavingAccount acct: c.getSavingAccount()) {
+                    if(acct.getBalance().get() >= Bank.getInstance().getSavingInterestStart()) {
+                        double interest = acct.getBalance().get() * FeeType.SAVE_INTEREST.getAmount();
+                        addTransaction(new InterestTransaction(-3, acct.getAccountNumber(), new Money(CurrencyFactory.getInstance().getCurrency("USD"), interest)));
+                        acct.getBalance().add(interest);
+                    }
+                }
+                for(Loan loan: c.getLoans()) {
+                    double interest = loan.getUnpaidAmount() * FeeType.LOAN_INTEREST.getAmount();
+                    addTransaction(new InterestTransaction(c.getCheckAccount().get(0).getAccountNumber(), -3, new Money(CurrencyFactory.getInstance().getCurrency("USD"), interest)));
+                    loan.setUnpaidAmount(loan.getUnpaidAmount() + interest);
+                }
+            }
+            this.time.addDay(1);
+        }
+        WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
+        WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
         WriteJsonFile.writeFile(DataFile.SIMULATETIME.getPath(), gson.toJson(time));
     }
 
