@@ -3,6 +3,10 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
+import fancybank.loan.Loan;
+import fancybank.user.Customer;
+import fancybank.user.Manager;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -17,8 +21,16 @@ public class LoanDetailPage extends javax.swing.JFrame {
     /**
      * Creates new form LoanRequestPage
      */
-    public LoanDetailPage() {
+	private Customer customer;
+	private Loan loan;
+	private Manager manager;
+    public LoanDetailPage(Customer c,Loan l,Manager m ) {
         initComponents();
+        this.customer = c;
+        this.loan = l;
+        this.manager = m;
+        this.collateral_text.setText("Item name:"+loan.getCollateral().getItemName()+" Worth value:"+ String.valueOf(loan.getCollateral().getValue()) );
+        this.proof_text.setText(loan.getCollateral().getProof());
     }
 
     /**
@@ -37,7 +49,8 @@ public class LoanDetailPage extends javax.swing.JFrame {
         collateral_text = new javax.swing.JTextField();
         cancel_button = new javax.swing.JButton();
         approve_button = new javax.swing.JButton();
-        proof_pic_container = new javax.swing.JPanel();
+        deny_button = new javax.swing.JButton();
+        proof_text = new javax.swing.JTextField();
 
         jInternalFrame1.setVisible(true);
 
@@ -88,18 +101,13 @@ public class LoanDetailPage extends javax.swing.JFrame {
             }
         });
 
-        proof_pic_container.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout proof_pic_containerLayout = new javax.swing.GroupLayout(proof_pic_container);
-        proof_pic_container.setLayout(proof_pic_containerLayout);
-        proof_pic_containerLayout.setHorizontalGroup(
-            proof_pic_containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
-        );
-        proof_pic_containerLayout.setVerticalGroup(
-            proof_pic_containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 161, Short.MAX_VALUE)
-        );
+        deny_button.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        deny_button.setText("Deny");
+        deny_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deny_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,24 +117,27 @@ public class LoanDetailPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(proof_noti, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(proof_pic_container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(proof_text))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(collateral_noti, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(collateral_text, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(223, 223, 223)
-                        .addComponent(loan_approve_noti))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(approve_button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116)
-                        .addComponent(cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(loan_approve_noti)))
                 .addContainerGap(102, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(161, 161, 161)
+                .addComponent(approve_button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(deny_button, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(114, 114, 114))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,17 +148,20 @@ public class LoanDetailPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(collateral_noti, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(collateral_text, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(proof_noti, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(proof_text, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(proof_pic_container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(proof_noti, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(69, 69, 69)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(approve_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(69, 69, 69)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(approve_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(deny_button, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
 
@@ -156,8 +170,15 @@ public class LoanDetailPage extends javax.swing.JFrame {
 
     private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
         // TODO add your handling code here:
+        
+        Manager m = this.manager;
         this.setVisible(false);
         dispose();
+    	java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ApproveLoanPage(m).setVisible(true);
+            }
+        });
     }//GEN-LAST:event_cancel_buttonActionPerformed
 
     private void collateral_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_collateral_textActionPerformed
@@ -166,7 +187,30 @@ public class LoanDetailPage extends javax.swing.JFrame {
 
     private void approve_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approve_buttonActionPerformed
         // TODO add your handling code here:
+    	Manager m = this.manager;
+    	this.customer.getOneCheckAccount().deposit(this.loan.getAmount());
+    	this.loan.approve();
+    	this.setVisible(false);
+        dispose();
+    	java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ApproveLoanPage(m).setVisible(true);
+            }
+        });
     }//GEN-LAST:event_approve_buttonActionPerformed
+
+    private void deny_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deny_buttonActionPerformed
+        // TODO add your handling code here:
+    	Manager m = this.manager;
+    	this.loan.decline();
+    	this.setVisible(false);
+        dispose();
+    	java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ApproveLoanPage(m).setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_deny_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,7 +251,8 @@ public class LoanDetailPage extends javax.swing.JFrame {
     private javax.swing.JButton approve_button;
     private javax.swing.JButton cancel_button;
     private javax.swing.JTextField collateral_text;
+    private javax.swing.JButton deny_button;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JPanel proof_pic_container;
+    private javax.swing.JTextField proof_text;
     // End of variables declaration//GEN-END:variables
 }

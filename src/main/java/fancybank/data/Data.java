@@ -271,6 +271,26 @@ public class Data implements ReadJsonFile, WriteJsonFile {
         return managerNew;
     }
 
+    public void addTransaction(Transaction e) {
+        switch(e.getType()) {
+            case ACCOUNT:
+                addTransaction((AccountTransaction) e);
+                break;
+            case CASH:
+                addTransaction((CashTransaction) e);
+                break;
+            case INTEREST:
+                addTransaction((InterestTransaction) e);
+                break;
+            case STOCK:
+                addTransaction((StockTransaction) e);
+                break;
+            case TRANSFER:
+                addTransaction((TransferTransaction) e);
+                break;
+        }
+    }
+
     public void addTransaction(AccountTransaction e) {
         this.trans.addAccountTran(e);
         WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
