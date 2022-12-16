@@ -18,6 +18,12 @@ public class Bank {
         return instance;
     }
 
+    public Bank() {
+        fee = 0.01;
+        savingInterestRate = 0.01;
+        loanInterestRate = 0.05;
+    }
+
     public void save() {
         Data.getInstance().updateBank(instance);
     }
@@ -25,6 +31,11 @@ public class Bank {
     private double savingInterestStart = 2000;
     private double savingInterestRate;
     private double loanInterestRate;
+    private double fee;
+
+    public double getSavingInterestStart() {
+        return savingInterestStart;
+    }
 
     public double getSavingInterestStart() {
         return savingInterestStart;
@@ -36,6 +47,15 @@ public class Bank {
 
     public double getLoanInterestRate() {
         return loanInterestRate;
+    }
+
+    public double getFee() {
+        return fee;
+    }
+
+    public void setFee(double fee) {
+        this.fee = fee;
+        this.save();
     }
 
     public void setSavingsInterestRate(double savingInterestRate) {
