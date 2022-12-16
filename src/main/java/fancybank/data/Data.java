@@ -242,9 +242,9 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
     public Customer addCustomer(Username username, Name name, Address address, Email email, Password password) {
         Customer customerNew = this.customers.addCustomer(username, name, address, email, password);
-        //customerNew.createSavingAccount(0, "USD");
-        //customerNew.createSecurityAccount(0);
-        //customerNew.createCheckAccount(0, "USD");
+        // customerNew.createSavingAccount(0, "USD");
+        // customerNew.createSecurityAccount(0);
+        // customerNew.createCheckAccount(0, "USD");
         WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
         return customerNew;
     }
@@ -272,7 +272,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     }
 
     public void addTransaction(Transaction e) {
-        switch(e.getType()) {
+        switch (e.getType()) {
             case ACCOUNT:
                 addTransaction((AccountTransaction) e);
                 break;
@@ -308,6 +308,11 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
     public void addTransaction(TransferTransaction e) {
         this.trans.addTransferTran(e);
+        WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
+    }
+
+    public void addTransaction(StockTransaction e) {
+        this.trans.addStockTran(e);
         WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
     }
 
