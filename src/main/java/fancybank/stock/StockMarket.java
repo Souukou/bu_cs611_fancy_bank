@@ -2,6 +2,12 @@ package fancybank.stock;
 
 import java.util.ArrayList;
 
+/*
+ * Singleton
+ * StockMarket class, stores all the stocks in the market
+ * Initialize the stock market from DB
+ */
+
 import fancybank.data.Data;
 
 public class StockMarket {

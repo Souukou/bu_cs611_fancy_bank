@@ -1,3 +1,7 @@
+/*
+ * Base class for a loan, including the amount borrowed, interest rate, collateral, and the rest of amount to be paid
+ */
+
 package fancybank.loan;
 
 import fancybank.account.Account;
@@ -33,7 +37,7 @@ public class Loan {
         this.isApproved = true;
         this.account.getBalance().add(amount);
         Data.getInstance().getCustomerByUid(uid).save();
-        // TODO @davidchd add transaction record here
+
     }
 
     public boolean isDeclined() {

@@ -1,3 +1,7 @@
+/*
+ * Base tranation class for any kind of stock trades
+ */
+
 package fancybank.transaction;
 
 import fancybank.account.Money;
@@ -5,10 +9,10 @@ import fancybank.data.Data;
 
 /**
  * @author Haodong Chen hjc5283@bu.edu
- * Abstract class for transaction history. 
+ *         Abstract class for transaction history.
  */
 public abstract class Transaction {
-    
+
     private int from;
     private int to;
     private TransactionType type;
@@ -23,14 +27,24 @@ public abstract class Transaction {
         this.date = Data.getInstance().getTime().getDay();
     }
 
-    public int getFrom() { return from; }
+    public int getFrom() {
+        return from;
+    }
 
-    public int getTo() { return to; }
+    public int getTo() {
+        return to;
+    }
 
-    public TransactionType getType() { return type; }
+    public TransactionType getType() {
+        return type;
+    }
 
-    public Money getMoney() { return money; }
+    public Money getMoney() {
+        return money;
+    }
 
-    public int getDate() { return date; }
+    public int getDate() {
+        return date;
+    }
 
 }

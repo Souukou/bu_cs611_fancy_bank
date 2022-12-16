@@ -1,3 +1,6 @@
+/*
+ * Interface for accounts that can withdraw and deposit cash.
+ */
 package fancybank.account;
 
 public interface CashOperable {

@@ -1,3 +1,7 @@
+/*
+ * User attribute address. includes street, city, state, zip, and country
+ */
+
 package fancybank.user;
 
 public class Address {

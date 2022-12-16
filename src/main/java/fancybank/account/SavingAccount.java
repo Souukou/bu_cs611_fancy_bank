@@ -1,3 +1,6 @@
+/*
+ * SavingAccount can be used to withdraw and deposit money. But not for currency exchange.
+ */
 package fancybank.account;
 
 import fancybank.data.Data;

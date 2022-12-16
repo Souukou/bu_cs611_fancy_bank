@@ -1,3 +1,6 @@
+/*
+ * This is the base class for all accounts. It contains the account number, balace and account type.
+ */
 package fancybank.account;
 
 import java.io.Serializable;

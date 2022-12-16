@@ -1,3 +1,7 @@
+/*
+ * Transaction happened when buy/sell stocks.
+ */
+
 package fancybank.transaction;
 
 import fancybank.account.Money;

@@ -1,3 +1,7 @@
+/*
+ * Bank singleton class to store necessary information for the bank
+ */
+
 package fancybank.bank;
 
 import fancybank.data.Data;

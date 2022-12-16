@@ -1,3 +1,7 @@
+/*
+ * This class stores the colleteral information of a loan, including the colleteral name, value and proof
+ * the proof is a path to the proof file
+ */
 package fancybank.loan;
 
 public class Collateral {

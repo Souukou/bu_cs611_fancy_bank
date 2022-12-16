@@ -1,3 +1,6 @@
+/*
+ * User attribute UID
+ */
 package fancybank.user;
 
 public class UID {
