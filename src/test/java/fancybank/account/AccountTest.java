@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import fancybank.account.CheckAccount;
-
+import fancybank.currency.CurrencyFactory;
 import fancybank.stock.Stock;
 import fancybank.stock.StockMarket;
 
@@ -72,7 +72,9 @@ public class AccountTest {
         CheckAccount checkAccount1 = new CheckAccount(10001, 150, "USD");
         CheckAccount checkAccount2 = new CheckAccount(10002, 0, "CNY");
         Balance exBalance = new Balance(100, "USD");
+        CurrencyFactory.getInstance().updateCurrencyRate("CNY", 7);
         boolean result1 = checkAccount1.exchangeTo(checkAccount2, exBalance);
+
         Assertions.assertTrue(result1);
         Assertions.assertEquals(50, checkAccount1.getBalance().get());
         Assertions.assertEquals(700, checkAccount2.getBalance().get());

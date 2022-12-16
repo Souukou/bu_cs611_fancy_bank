@@ -1,6 +1,8 @@
 package fancybank.account;
 
-public abstract class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
     private int accountNumber;
     private Balance balance;
     private String accountType;
@@ -30,7 +32,6 @@ public abstract class Account {
         this.balance = new Balance(balance, currency);
         this.accountType = accountType;
     }
-
 
     public int getAccountNumber() {
         return accountNumber;

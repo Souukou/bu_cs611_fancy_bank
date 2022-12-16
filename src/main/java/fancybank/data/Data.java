@@ -51,6 +51,14 @@ public class Data implements ReadJsonFile, WriteJsonFile {
     public Data() {
         String jsonStr;
 
+        jsonStr = ReadJsonFile.readFile(DataFile.CURRENCY.getPath());
+        if (jsonStr == null) {
+            this.currencies = new CurrencyHandler();
+            WriteJsonFile.writeFile(DataFile.CURRENCY.getPath(), gson.toJson(currencies));
+        } else {
+            this.currencies = gson.fromJson(jsonStr, CurrencyHandler.class);
+        }
+
         jsonStr = ReadJsonFile.readFile(DataFile.CUSTOMER.getPath());
         if (jsonStr == null) {
             this.customers = new CustomerHandler();
@@ -109,14 +117,6 @@ public class Data implements ReadJsonFile, WriteJsonFile {
             WriteJsonFile.writeFile(DataFile.STOCKMARKET.getPath(), gson.toJson(market));
         } else {
             this.market = gson.fromJson(jsonStr, StockMarket.class);
-        }
-
-        jsonStr = ReadJsonFile.readFile(DataFile.CURRENCY.getPath());
-        if (jsonStr == null) {
-            this.currencies = new CurrencyHandler();
-            WriteJsonFile.writeFile(DataFile.CURRENCY.getPath(), gson.toJson(currencies));
-        } else {
-            this.currencies = gson.fromJson(jsonStr, CurrencyHandler.class);
         }
 
         jsonStr = ReadJsonFile.readFile(DataFile.SIMULATETIME.getPath());

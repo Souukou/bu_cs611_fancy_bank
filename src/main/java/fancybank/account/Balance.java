@@ -9,7 +9,7 @@ public class Balance {
 
     public Balance() {
         this.balance = 0;
-        this.currency = CurrencyFactory.getInstance().getCurrency("USD");
+        // this.currency = CurrencyFactory.getInstance().getCurrency("USD");
     }
 
     public Balance(double balance, String currency) {

@@ -8,6 +8,7 @@ import fancybank.account.CheckAccount;
 import fancybank.account.SavingAccount;
 import fancybank.account.SecurityAccount;
 import fancybank.bank.Bank;
+import fancybank.currency.CurrencyFactory;
 import fancybank.loan.Collateral;
 import fancybank.loan.Loan;
 
@@ -88,6 +89,8 @@ public class CustomerTest {
         customer1.createAccount("checking", 0, "USD");
         customer1.createAccount("checking", 0, "CNY");
         customer1.createAccount("checking", 0, "EUR");
+
+        CurrencyFactory.getInstance().updateCurrencyRate("CNY", 7);
 
         CheckAccount curUSDAccount = (CheckAccount) customer1.getOneAccountByCurrency("USD");
         Assertions.assertEquals(0, curUSDAccount.getBalance().get());

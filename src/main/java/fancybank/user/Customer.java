@@ -15,7 +15,10 @@ import fancybank.loan.Loan;
 import fancybank.transaction.Transaction;
 
 public class Customer extends User {
-    ArrayList<Account> accounts;
+    // ArrayList<Account> accounts;
+    ArrayList<CheckAccount> checkAccounts;
+    ArrayList<SavingAccount> savingAccounts;
+    ArrayList<SecurityAccount> securityAccounts;
     ArrayList<Loan> loans;
 
     public ArrayList<Loan> getLoans() {
@@ -31,27 +34,35 @@ public class Customer extends User {
 
     public Customer() {
         super();
-        this.accounts = new ArrayList<Account>();
+        this.checkAccounts = new ArrayList<CheckAccount>();
+        this.savingAccounts = new ArrayList<SavingAccount>();
+        this.securityAccounts = new ArrayList<SecurityAccount>();
         this.loans = new ArrayList<Loan>();
     }
 
     public Customer(UID UID, Username username, Name name, Address address, Email email, Password password) {
         super(UID, username, name, address, email, password);
-        this.accounts = new ArrayList<Account>();
+        this.checkAccounts = new ArrayList<CheckAccount>();
+        this.savingAccounts = new ArrayList<SavingAccount>();
+        this.securityAccounts = new ArrayList<SecurityAccount>();
         this.loans = new ArrayList<Loan>();
     }
 
     public Customer(UID UID, Username username, Name name, Address address, Email email, Password password,
             ArrayList<Account> accounts) {
         super(UID, username, name, address, email, password);
-        this.accounts = accounts;
+        this.checkAccounts = new ArrayList<CheckAccount>();
+        this.savingAccounts = new ArrayList<SavingAccount>();
+        this.securityAccounts = new ArrayList<SecurityAccount>();
         this.loans = new ArrayList<Loan>();
     }
 
     public Customer(int uid, String username, String firstName, String middleName, String lastName, String street,
             String city, String state, String zip, String country, String email, String password) {
         super(uid, username, firstName, middleName, lastName, street, city, state, zip, country, email, password);
-        this.accounts = new ArrayList<Account>();
+        this.checkAccounts = new ArrayList<CheckAccount>();
+        this.savingAccounts = new ArrayList<SavingAccount>();
+        this.securityAccounts = new ArrayList<SecurityAccount>();
         this.loans = new ArrayList<Loan>();
     }
 
@@ -60,19 +71,31 @@ public class Customer extends User {
     }
 
     public ArrayList<Account> getAccounts() {
+        ArrayList<Account> accounts = new ArrayList<Account>();
+        accounts.addAll(checkAccounts);
+        accounts.addAll(savingAccounts);
+        accounts.addAll(securityAccounts);
         return accounts;
     }
 
-    public void setAccounts(ArrayList<Account> accounts) {
-        this.accounts = accounts;
-    }
-
     public void addAccount(Account account) {
-        this.accounts.add(account);
+        if (account instanceof CheckAccount) {
+            checkAccounts.add((CheckAccount) account);
+        } else if (account instanceof SavingAccount) {
+            savingAccounts.add((SavingAccount) account);
+        } else if (account instanceof SecurityAccount) {
+            securityAccounts.add((SecurityAccount) account);
+        }
     }
 
     public void removeAccount(Account account) {
-        this.accounts.remove(account);
+        if (account instanceof CheckAccount) {
+            checkAccounts.remove(account);
+        } else if (account instanceof SavingAccount) {
+            savingAccounts.remove(account);
+        } else if (account instanceof SecurityAccount) {
+            securityAccounts.remove(account);
+        }
     }
 
     public String toString() {
@@ -81,38 +104,20 @@ public class Customer extends User {
     }
 
     public ArrayList<CheckAccount> getCheckAccount() {
-        ArrayList<CheckAccount> checkAccounts = new ArrayList<CheckAccount>();
-        for (Account account : accounts) {
-            if (account instanceof CheckAccount) {
-                checkAccounts.add((CheckAccount) account);
-            }
-        }
         return checkAccounts;
     }
 
     public ArrayList<SavingAccount> getSavingAccount() {
-        ArrayList<SavingAccount> savingAccounts = new ArrayList<SavingAccount>();
-        for (Account account : accounts) {
-            if (account instanceof SavingAccount) {
-                savingAccounts.add((SavingAccount) account);
-            }
-        }
         return savingAccounts;
     }
 
     public ArrayList<SecurityAccount> getSecurityAccounts() {
-        ArrayList<SecurityAccount> securityAccounts = new ArrayList<SecurityAccount>();
-        for (Account account : accounts) {
-            if (account instanceof SecurityAccount) {
-                securityAccounts.add((SecurityAccount) account);
-            }
-        }
         return securityAccounts;
     }
 
     public ArrayList<Account> getAccountByCurrency(String currency) {
         ArrayList<Account> accounts = new ArrayList<Account>();
-        for (Account account : this.accounts) {
+        for (Account account : getAccounts()) {
             if (account.getBalance().getCurrency().getName().equals(currency)) {
                 accounts.add(account);
             }
@@ -157,25 +162,24 @@ public class Customer extends User {
     }
 
     public void createAccount(String type, double balance, String currency) {
-        Account account = null;
         int nextAccountNumber = Data.getInstance().getNextAccountNumber();
 
         if (type.equals("checking")) {
-            account = new CheckAccount(nextAccountNumber, balance, currency);
+            CheckAccount account = new CheckAccount(nextAccountNumber, balance, currency);
+            checkAccounts.add(account);
         } else if (type.equals("saving")) {
-            account = new SavingAccount(nextAccountNumber, balance, currency);
+            SavingAccount account = new SavingAccount(nextAccountNumber, balance, currency);
+            savingAccounts.add(account);
         } else if (type.equals("security")) {
-            account = new SecurityAccount(nextAccountNumber, balance);
-        }
-        if (account != null) {
-            this.accounts.add(account);
+            SecurityAccount account = new SecurityAccount(nextAccountNumber, balance);
+            securityAccounts.add(account);
         }
         this.save();
     }
 
     public ArrayList<Account> getCurrancyAccountList(String currency) {
         ArrayList<Account> currencyAccountList = new ArrayList<Account>();
-        for (Account account : accounts) {
+        for (Account account : getAccounts()) {
             if (account.getBalance().getCurrency().getName().equals(currency)) {
                 currencyAccountList.add(account);
             }
