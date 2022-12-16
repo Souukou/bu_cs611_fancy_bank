@@ -34,6 +34,8 @@ public class DailyTransactionsPage extends javax.swing.JFrame {
                 	String to = new Integer(t.getTo()).toString();
                 	if(from.equals("-1")) from="cash";
                 	if(to.equals("-1")) to="cash";
+                	if(from.equals("-2")) from="Stock";
+                	if(to.equals("-2")) to="Stock";
                 	model.addRow(new Object[]{from, to, t.getMoney().getAmount()});
                 }
         }
