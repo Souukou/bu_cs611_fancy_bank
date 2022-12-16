@@ -31,27 +31,35 @@ public class OwnStockPage extends javax.swing.JFrame {
         this.c = c;
         this.acc = acc;
         StockHoldingList owned = this.acc.getStockHoldingList();
+        
         Hashtable<String,StockHolding> stockholds = new Hashtable<String,StockHolding>();
+        Hashtable<String,Double> unrealized_profit = new Hashtable<String,Double>();
         for(int i=0;i<owned.size();i++){
         	StockHolding curr = owned.getStockHoldingList().get(i);
         	if(stockholds.containsKey(curr.getSymbol())){
         		//current share
+        		Double profit = unrealized_profit.get(curr.getSymbol());
+        		profit += curr.getUnrealizedProfit();
+        		unrealized_profit.put(curr.getSymbol(),profit);
+        		
         		StockHolding stockhold = stockholds.get(curr.getSymbol());
         		int addon = curr.getQuantity();
         		stockhold.setQuantity(addon+stockhold.getQuantity());
         	}
         	else{
         		//owned[sh.getSymbol] = sh.get_quantity;
+        		unrealized_profit.put(curr.getSymbol(),curr.getUnrealizedProfit());
         		StockHolding copy = new StockHolding(curr.getSymbol(),curr.getBoughtPrice(),curr.getQuantity());
         		stockholds.put(curr.getSymbol(), copy);
         	}
         }
         Set<String> keys = stockholds.keySet();
+        DefaultTableModel model = (DefaultTableModel) this.own_stock_table.getModel();
         for(String key: keys){
         	StockHolding currStock = stockholds.get(key);
-        	DefaultTableModel model = (DefaultTableModel) this.own_stock_table.getModel();
+        	Double profit = unrealized_profit.get(key);
         	Stock st = StockMarket.getInstance().getStock(currStock.getSymbol());
-        	model.addRow(new Object[]{currStock.getSymbol(),st.getPrice(),currStock.getQuantity(),st.getPrice()*currStock.getQuantity()});
+        	model.addRow(new Object[]{currStock.getSymbol(),st.getPrice(),currStock.getQuantity(),st.getPrice()*currStock.getQuantity(),profit});
         }
         //
     }
@@ -81,7 +89,7 @@ public class OwnStockPage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Stock Name", "Current Price", "Share Owned", "Current Value"
+                "Stock Name", "Current Price", "Share Owned", "Current Value", "Unrealized Profit"
             }
         ));
         own_stock_table.setShowGrid(true);

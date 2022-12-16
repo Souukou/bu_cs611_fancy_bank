@@ -238,9 +238,10 @@ public class ManagerMainPage extends javax.swing.JFrame {
 
     private void financial_report_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_financial_report_buttonActionPerformed
         // TODO add your handling code here:
+    	Manager ma = this.m;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FinancialReportPage().setVisible(true);
+                new FinancialReportPage(ma).setVisible(true);
             }
         });
     }//GEN-LAST:event_financial_report_buttonActionPerformed
