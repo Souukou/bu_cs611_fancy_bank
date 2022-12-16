@@ -41,10 +41,6 @@ public class Bank {
         return savingInterestStart;
     }
 
-    public double getSavingInterestStart() {
-        return savingInterestStart;
-    }
-
     public double getSavingsInterestRate() {
         return savingInterestRate;
     }
