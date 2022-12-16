@@ -197,7 +197,7 @@ public class TransferPage extends javax.swing.JFrame {
             		return;
             	}
             }
-            from_acc.transferTo(to_acc, transfer_amount);
+            from_acc.transferTo(to_acc, transfer_amount-2);
             
             Currency cur = ((Account)from_acc).getBalance().getCurrency();
         	Transaction t = new CashTransaction( ((Account)from_acc).getAccountNumber(), ((Account)to_acc).getAccountNumber(),  new Money(cur,transfer_amount));

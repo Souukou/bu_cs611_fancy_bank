@@ -4,6 +4,20 @@ package fancybank.gui;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
+
+import fancybank.account.CheckAccount;
+import fancybank.data.Data;
+import fancybank.stock.Stock;
+import fancybank.stock.StockHolding;
+import fancybank.stock.StockMarket;
+import fancybank.transaction.Transaction;
+import fancybank.user.Customer;
+import fancybank.user.Manager;
+import fancybank.user.Report;
+
 /**
  *
  * @author Di Wang
@@ -13,9 +27,18 @@ public class FinancialReportPage extends javax.swing.JFrame {
     /**
      * Creates new form StockMarketPage
      */
-    public FinancialReportPage() {
+	Manager manager;
+    public FinancialReportPage(Manager m) {
+    	this.manager = m;
         initComponents();
-
+        //Data.getInstance().getBank().g
+        Report report = this.manager.getReport(Data.getInstance().getTime());
+        this.Interest_loss_text.setText(String.valueOf(report.getPayInterest())    );
+        this.interest_win_text.setText(String.valueOf(  report.getCollectInterest()));
+        this.fee_win_text.setText(String.valueOf( report.getCollectFee()));
+       
+       
+        
     }
 
     /**
@@ -25,50 +48,19 @@ public class FinancialReportPage extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.JScrollPane PayInterest = new javax.swing.JScrollPane();
-        stack_market_table = new javax.swing.JTable();
         back_button = new javax.swing.JButton();
-        javax.swing.JScrollPane ChargeFee = new javax.swing.JScrollPane();
-        stack_market_table1 = new javax.swing.JTable();
+        javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+        javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
+        Interest_loss_text = new javax.swing.JTextField();
+        interest_win_text = new javax.swing.JTextField();
+        fee_win_text = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Financial Report");
-
-        stack_market_table.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        stack_market_table.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-
-                },
-                new String[] {
-                        "Account", "Operation", "Interest", "Total"
-                }) {
-            Class[] types = new Class[] {
-                    java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean[] {
-                    false, false, false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
-            }
-        });
-        stack_market_table.setRowSelectionAllowed(false);
-        stack_market_table.setShowGrid(true);
-        PayInterest.setViewportView(stack_market_table);
-        if (stack_market_table.getColumnModel().getColumnCount() > 0) {
-            stack_market_table.getColumnModel().getColumn(0).setResizable(false);
-            stack_market_table.getColumnModel().getColumn(1).setResizable(false);
-            stack_market_table.getColumnModel().getColumn(2).setResizable(false);
-            stack_market_table.getColumnModel().getColumn(3).setResizable(false);
-        }
 
         back_button.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         back_button.setText("Back");
@@ -78,75 +70,64 @@ public class FinancialReportPage extends javax.swing.JFrame {
             }
         });
 
-        stack_market_table1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        stack_market_table1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("InterestPaid");
 
-                },
-                new String[] {
-                        "Account", "Operation", "Fee", "Total"
-                }) {
-            Class[] types = new Class[] {
-                    java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean[] {
-                    false, false, false, true
-            };
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Interest Collected");
 
-            public Class getColumnClass(int columnIndex) {
-                return types[columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
-            }
-        });
-        stack_market_table1.setRowSelectionAllowed(false);
-        stack_market_table1.setShowGrid(true);
-        ChargeFee.setViewportView(stack_market_table1);
-        if (stack_market_table1.getColumnModel().getColumnCount() > 0) {
-            stack_market_table1.getColumnModel().getColumn(0).setResizable(false);
-            stack_market_table1.getColumnModel().getColumn(1).setResizable(false);
-            stack_market_table1.getColumnModel().getColumn(2).setResizable(false);
-            stack_market_table1.getColumnModel().getColumn(3).setResizable(false);
-        }
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Fee Collected");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(50, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
-                                                .createSequentialGroup()
-                                                .addGroup(layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(ChargeFee, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(PayInterest,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 750,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(50, 50, 50))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
-                                                .createSequentialGroup()
-                                                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 228,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(307, 307, 307)))));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(72, 72, 72)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Interest_loss_text)
+                            .addComponent(interest_win_text)
+                            .addComponent(fee_win_text)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(315, Short.MAX_VALUE)
+                        .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(307, 307, 307))
+        );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3});
+
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(ChargeFee, javax.swing.GroupLayout.PREFERRED_SIZE, 325,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(PayInterest, javax.swing.GroupLayout.PREFERRED_SIZE, 325,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47,
-                                        Short.MAX_VALUE)
-                                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Interest_loss_text)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(interest_win_text)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                .addGap(74, 74, 74)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                    .addComponent(fee_win_text))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364, Short.MAX_VALUE)
+                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
+        );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -201,8 +182,9 @@ public class FinancialReportPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Interest_loss_text;
     private javax.swing.JButton back_button;
-    private javax.swing.JTable stack_market_table;
-    private javax.swing.JTable stack_market_table1;
+    private javax.swing.JTextField fee_win_text;
+    private javax.swing.JTextField interest_win_text;
     // End of variables declaration//GEN-END:variables
 }

@@ -323,7 +323,7 @@ public class NewCustomerPage extends javax.swing.JFrame {
         String lastname = this.lastname_text.getText();
         String nickname = this.nickname_text.getText();
         if (email.length() == 0 || password.length() == 0 || street.length() == 0||state.length() == 0||zip.length() == 0||country.length() == 0||city.length() == 0||
-                firstname.length() == 0||middlename.length() == 0||lastname.length() == 0) {
+                firstname.length() == 0||lastname.length() == 0) {
             JOptionPane.showMessageDialog(null, "Can't have empty input.", "Empty Input Error",
                     JOptionPane.ERROR_MESSAGE);
         } else {
