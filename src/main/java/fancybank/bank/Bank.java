@@ -22,8 +22,13 @@ public class Bank {
         Data.getInstance().updateBank(instance);
     }
 
+    private double savingInterestStart = 2000;
     private double savingInterestRate;
     private double loanInterestRate;
+
+    public double getSavingInterestStart() {
+        return savingInterestStart;
+    }
 
     public double getSavingsInterestRate() {
         return savingInterestRate;
