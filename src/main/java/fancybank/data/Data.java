@@ -15,12 +15,7 @@ import fancybank.data.Handlers.SimulateTime;
 import fancybank.data.Handlers.TransactionHandler;
 import fancybank.stock.Stock;
 import fancybank.stock.StockMarket;
-import fancybank.transaction.AccountTransaction;
-import fancybank.transaction.CashTransaction;
-import fancybank.transaction.InterestTransaction;
-import fancybank.transaction.StockTransaction;
 import fancybank.transaction.Transaction;
-import fancybank.transaction.TransferTransaction;
 import fancybank.user.Address;
 import fancybank.user.Customer;
 import fancybank.user.Email;
@@ -308,11 +303,6 @@ public class Data implements ReadJsonFile, WriteJsonFile {
 
     public void addTransaction(TransferTransaction e) {
         this.trans.addTransferTran(e);
-        WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
-    }
-
-    public void addTransaction(StockTransaction e) {
-        this.trans.addStockTran(e);
         WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
     }
 
