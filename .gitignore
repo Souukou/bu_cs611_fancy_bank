@@ -47,3 +47,5 @@ buildNumber.properties
 .DS_Store
 
 !lib/*
+bin
+.DS_Store
