@@ -1,5 +1,5 @@
 /*
- * Security Account is for stock trading
+ * Security Account is for stock trading. But it can also be used to transfer money.
  */
 package fancybank.account;
 

@@ -1,3 +1,6 @@
+/*
+ * Interface for those accounts that provide stock trading function
+ */
 package fancybank.account;
 
 import fancybank.stock.Stock;

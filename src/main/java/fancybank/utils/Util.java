@@ -1,3 +1,7 @@
+/*
+ * Utils and need to be used in other classes
+ */
+
 package fancybank.utils;
 
 import java.io.File;

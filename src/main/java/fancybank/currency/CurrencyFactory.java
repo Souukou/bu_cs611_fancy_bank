@@ -1,3 +1,9 @@
+/*
+ * Factory class that holds all the currencies information
+ * Singleton class
+ * Initialized its data from Data class
+ */
+
 package fancybank.currency;
 
 import java.util.ArrayList;

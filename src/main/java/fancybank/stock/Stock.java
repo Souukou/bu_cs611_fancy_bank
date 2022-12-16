@@ -1,5 +1,8 @@
+/*
+ * Base class for any kind of stock.
+ * each stock has a symbol, name, and price
+ */
 package fancybank.stock;
-
 
 public class Stock {
     private String symbol;

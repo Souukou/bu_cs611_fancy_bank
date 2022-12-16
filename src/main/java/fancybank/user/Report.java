@@ -1,3 +1,8 @@
+/*
+ * Class to generate reports for the bank
+ * including the fees collected, interest paid, interest collected
+ */
+
 package fancybank.user;
 
 import java.util.HashMap;
@@ -29,12 +34,12 @@ public class Report {
     public double getCollectFee() {
         return collectFee;
     }
-    
+
     private void generateReport(Transaction[] trans) {
-        for(Transaction t: trans) {
-            switch(t.getType()) {
+        for (Transaction t : trans) {
+            switch (t.getType()) {
                 case ACCOUNT:
-                    if(t.getFrom() < 0) {
+                    if (t.getFrom() < 0) {
                         detail.put(t, FeeType.OPEN_ACCOUNT);
                         collectFee += FeeType.OPEN_ACCOUNT.getAmount();
                     } else {
@@ -47,7 +52,7 @@ public class Report {
                     collectFee += FeeType.CASH_OPERATION.getAmount();
                     break;
                 case INTEREST:
-                    if(t.getFrom() < 0) {
+                    if (t.getFrom() < 0) {
                         detail.put(t, FeeType.SAVE_INTEREST);
                         payInterest += t.getMoney().getAmount() / t.getMoney().getCurrency().getRate();
                     } else {

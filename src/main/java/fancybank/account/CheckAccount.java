@@ -1,3 +1,6 @@
+/*
+ * CheckAccount. Users can deposit, withdraw, transfer, and exchange money.
+ */
 package fancybank.account;
 
 public class CheckAccount extends Account implements CashOperable, Transferable, Exchangeable {

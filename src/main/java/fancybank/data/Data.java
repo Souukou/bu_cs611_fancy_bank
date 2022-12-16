@@ -1,3 +1,11 @@
+/*
+ * Important
+ * Singleton Data class
+ * Stores all the data in the bank
+ * It reads and writes data from files
+ * If the file does not exist, it will create a some sample data and write to the file
+ */
+
 package fancybank.data;
 
 import java.util.ArrayList;

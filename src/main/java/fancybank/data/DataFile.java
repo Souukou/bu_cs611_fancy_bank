@@ -1,3 +1,6 @@
+/*
+ * Pathes of stored data files
+ */
 package fancybank.data;
 
 public enum DataFile {

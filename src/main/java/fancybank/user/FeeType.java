@@ -1,3 +1,7 @@
+/*
+ * Fee schedule of the bank
+ */
+
 package fancybank.user;
 
 public enum FeeType {

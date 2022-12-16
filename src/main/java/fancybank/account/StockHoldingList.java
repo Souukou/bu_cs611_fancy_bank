@@ -1,3 +1,8 @@
+/* 
+ * StockHoldingList contains a list of StockHolding objects.
+ * each stockholding is a stock transaction we bought.
+ */
+
 package fancybank.account;
 
 import java.util.ArrayList;

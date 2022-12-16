@@ -1,3 +1,8 @@
+/*
+ * Base class for any kind of currency. It records the name, symbol and exchange rate of the currency.
+ * exchange rate is the rate of the currency to the base currency (USD).
+ * So the usd's exchange rate is 1.0
+ */
 package fancybank.currency;
 
 public class Currency {
