@@ -5,9 +5,11 @@ package fancybank.account;
 
 import java.util.ArrayList;
 
+import fancybank.data.Data;
 import fancybank.stock.Stock;
 import fancybank.stock.StockHolding;
 import fancybank.stock.StockMarket;
+import fancybank.transaction.StockTransaction;
 
 public class SecurityAccount extends Account implements Transferable, Tradable, CashOperable {
     private StockHoldingList stockHoldingList = new StockHoldingList();
@@ -68,6 +70,9 @@ public class SecurityAccount extends Account implements Transferable, Tradable, 
 
         StockHolding stockHolding = new StockHolding(stock, quantity);
         stockHoldingList.add(stockHolding);
+        Data.getInstance()
+                .addTransaction(new StockTransaction(-1, getAccountNumber(),
+                        new Money(getBalance().getCurrency(), totalCost), quantity, stock.getSymbol()));
         return true;
     }
 
@@ -129,6 +134,9 @@ public class SecurityAccount extends Account implements Transferable, Tradable, 
                 break;
             }
         }
+        Data.getInstance()
+                .addTransaction(new StockTransaction(getAccountNumber(), -1,
+                        new Money(getBalance().getCurrency(), totalValue), quantity, stock.getSymbol()));
         return totalValue - totalBoughtPrice;
     }
 

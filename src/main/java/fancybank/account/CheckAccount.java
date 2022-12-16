@@ -1,5 +1,8 @@
 package fancybank.account;
 
+import fancybank.data.Data;
+import fancybank.transaction.CashTransaction;
+
 public class CheckAccount extends Account implements CashOperable, Transferable, Exchangeable {
 
     public CheckAccount() {
@@ -29,11 +32,15 @@ public class CheckAccount extends Account implements CashOperable, Transferable,
             return;
         }
         getBalance().add(amount);
+        Data.getInstance().addTransaction(
+                new CashTransaction(-1, getAccountNumber(), new Money(getBalance().getCurrency(), amount)));
     }
 
     @Override
     public void withdraw(double amount) {
         getBalance().subtract(amount);
+        Data.getInstance().addTransaction(
+                new CashTransaction(getAccountNumber(), -1, new Money(getBalance().getCurrency(), amount)));
     }
 
     @Override

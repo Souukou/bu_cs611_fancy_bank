@@ -1,5 +1,8 @@
 package fancybank.account;
 
+import fancybank.data.Data;
+import fancybank.transaction.CashTransaction;
+
 public class SavingAccount extends Account implements CashOperable, Transferable {
     public SavingAccount() {
         super();
@@ -16,11 +19,15 @@ public class SavingAccount extends Account implements CashOperable, Transferable
     @Override
     public void deposit(double amount) {
         getBalance().add(amount);
+        Data.getInstance().addTransaction(
+                new CashTransaction(-1, getAccountNumber(), new Money(getBalance().getCurrency(), amount)));
     }
 
     @Override
     public void withdraw(double amount) {
         getBalance().subtract(amount);
+        Data.getInstance().addTransaction(
+                new CashTransaction(getAccountNumber(), -1, new Money(getBalance().getCurrency(), amount)));
     }
 
     @Override
