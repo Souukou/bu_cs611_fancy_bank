@@ -343,6 +343,7 @@ public class Data implements ReadJsonFile, WriteJsonFile {
                 }
             }
             this.time.addDay(1);
+            days --;
         }
         WriteJsonFile.writeFile(DataFile.CUSTOMER.getPath(), gson.toJson(customers));
         WriteJsonFile.writeFile(DataFile.TRANSACTION.getPath(), gson.toJson(trans));
