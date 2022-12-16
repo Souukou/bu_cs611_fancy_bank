@@ -1,3 +1,6 @@
+/*
+ * Page to show customer information
+ */
 package fancybank.gui;
 
 import fancybank.user.Customer;
@@ -16,7 +19,8 @@ public class CustomerInfoPage extends javax.swing.JFrame {
         /**
          * Creates new form CustomerInfoPage
          */
-		Customer c;
+        Customer c;
+
         public CustomerInfoPage(Customer c) {
                 initComponents();
                 this.c = c;
@@ -33,134 +37,205 @@ public class CustomerInfoPage extends javax.swing.JFrame {
          */
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
-            name_noti = new javax.swing.JLabel();
-            javax.swing.JLabel email_noti = new javax.swing.JLabel();
-            javax.swing.JLabel password_noti = new javax.swing.JLabel();
-            javax.swing.JLabel DOB_noti = new javax.swing.JLabel();
-            javax.swing.JLabel address_niti = new javax.swing.JLabel();
-            javax.swing.JTextField name_text = new javax.swing.JTextField();
-            email_text = new javax.swing.JTextField();
-            address_text = new javax.swing.JTextField();
-            password_text = new javax.swing.JTextField();
-            dob_text = new javax.swing.JTextField();
-            Info_noti = new javax.swing.JLabel();
-            back_button = new javax.swing.JButton();
+                name_noti = new javax.swing.JLabel();
+                javax.swing.JLabel email_noti = new javax.swing.JLabel();
+                javax.swing.JLabel password_noti = new javax.swing.JLabel();
+                javax.swing.JLabel DOB_noti = new javax.swing.JLabel();
+                javax.swing.JLabel address_niti = new javax.swing.JLabel();
+                javax.swing.JTextField name_text = new javax.swing.JTextField();
+                email_text = new javax.swing.JTextField();
+                address_text = new javax.swing.JTextField();
+                password_text = new javax.swing.JTextField();
+                dob_text = new javax.swing.JTextField();
+                Info_noti = new javax.swing.JLabel();
+                back_button = new javax.swing.JButton();
 
-            setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-            setTitle("Customer Information");
+                setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+                setTitle("Customer Information");
 
-            name_noti.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
-            name_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            name_noti.setText(" Name :");
+                name_noti.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+                name_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                name_noti.setText(" Name :");
 
-            email_noti.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
-            email_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            email_noti.setText(" Email :");
+                email_noti.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+                email_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                email_noti.setText(" Email :");
 
-            password_noti.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
-            password_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            password_noti.setText("Password :");
+                password_noti.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+                password_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                password_noti.setText("Password :");
 
-            DOB_noti.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-            DOB_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            DOB_noti.setText("DOB :");
+                DOB_noti.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+                DOB_noti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                DOB_noti.setText("DOB :");
 
-            address_niti.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
-            address_niti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            address_niti.setText("Address :");
+                address_niti.setFont(new java.awt.Font("Helvetica Neue", 1, 16)); // NOI18N
+                address_niti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                address_niti.setText("Address :");
 
-            name_text.setEditable(false);
+                name_text.setEditable(false);
 
-            email_text.setEditable(false);
+                email_text.setEditable(false);
 
-            address_text.setEditable(false);
+                address_text.setEditable(false);
 
-            password_text.setEditable(false);
+                password_text.setEditable(false);
 
-            dob_text.setEditable(false);
+                dob_text.setEditable(false);
 
-            Info_noti.setFont(new java.awt.Font("Helvetica Neue", 1, 28)); // NOI18N
-            Info_noti.setText("Personal Information:");
+                Info_noti.setFont(new java.awt.Font("Helvetica Neue", 1, 28)); // NOI18N
+                Info_noti.setText("Personal Information:");
 
-            back_button.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-            back_button.setText("Back");
-            back_button.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    back_buttonActionPerformed(evt);
-                }
-            });
+                back_button.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+                back_button.setText("Back");
+                back_button.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                back_buttonActionPerformed(evt);
+                        }
+                });
 
-            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-            getContentPane().setLayout(layout);
-            layout.setHorizontalGroup(
-                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                    .addGap(112, 112, 112)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                            .addComponent(password_noti, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(address_niti, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(DOB_noti, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(email_noti, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(name_noti, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                    .addGap(30, 30, 30)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(password_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(address_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(email_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(name_text, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(dob_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                    .addGap(178, 178, 178)
-                                                    .addComponent(Info_noti, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(118, 118, 118))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(0, 211, Short.MAX_VALUE)
-                                    .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(211, 211, 211))
-            );
+                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+                getContentPane().setLayout(layout);
+                layout.setHorizontalGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                .addGap(112, 112, 112)
+                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                                                                .addComponent(password_noti,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                Short.MAX_VALUE)
+                                                                                                                .addComponent(address_niti,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                Short.MAX_VALUE)
+                                                                                                                .addComponent(DOB_noti,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                Short.MAX_VALUE)
+                                                                                                                .addComponent(email_noti,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                Short.MAX_VALUE)
+                                                                                                                .addComponent(name_noti,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                Short.MAX_VALUE))
+                                                                                                .addGap(30, 30, 30)
+                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                .addComponent(password_text,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                .addComponent(address_text,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                .addComponent(email_text,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                .addComponent(name_text,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                246,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                .addComponent(dob_text,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                .addGap(178, 178, 178)
+                                                                                                .addComponent(Info_noti,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                300,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                .addGap(118, 118, 118))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
+                                                                .createSequentialGroup()
+                                                                .addGap(0, 211, Short.MAX_VALUE)
+                                                                .addComponent(back_button,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                228,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(211, 211, 211)));
 
-            layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {address_text, dob_text, email_text, name_text, password_text});
+                layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] { address_text,
+                                dob_text, email_text, name_text, password_text });
 
-            layout.setVerticalGroup(
-                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(50, 50, 50)
-                                    .addComponent(Info_noti)
-                                    .addGap(45, 45, 45)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(name_noti, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(name_text, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(28, 28, 28)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(email_noti)
-                                            .addComponent(email_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(28, 28, 28)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(DOB_noti)
-                                            .addComponent(dob_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(28, 28, 28)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(password_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(password_noti))
-                                    .addGap(28, 28, 28)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(address_niti)
-                                            .addComponent(address_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                                    .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(55, 55, 55))
-            );
+                layout.setVerticalGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
+                                                                .createSequentialGroup()
+                                                                .addGap(50, 50, 50)
+                                                                .addComponent(Info_noti)
+                                                                .addGap(45, 45, 45)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                .addComponent(name_noti,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                34,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(name_text,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                39,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(28, 28, 28)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                .addComponent(email_noti)
+                                                                                .addComponent(email_text,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(28, 28, 28)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                .addComponent(DOB_noti)
+                                                                                .addComponent(dob_text,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(28, 28, 28)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                .addComponent(password_text,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(password_noti))
+                                                                .addGap(28, 28, 28)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                .addComponent(address_niti)
+                                                                                .addComponent(address_text,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                68, Short.MAX_VALUE)
+                                                                .addComponent(back_button,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                40,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(55, 55, 55)));
 
-            layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {DOB_noti, address_niti, email_noti, name_noti, password_noti});
+                layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] { DOB_noti, address_niti,
+                                email_noti, name_noti, password_noti });
 
-            layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {address_text, dob_text, email_text, name_text, password_text});
+                layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] { address_text, dob_text,
+                                email_text, name_text, password_text });
 
-            pack();
+                pack();
         }// </editor-fold>
 
         private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_back_buttonActionPerformed
@@ -209,23 +284,24 @@ public class CustomerInfoPage extends javax.swing.JFrame {
                 }
                 // </editor-fold>
 
-                /* Create and display the form 
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                        public void run() {
-                                new CustomerInfoPage().setVisible(true);
-                        }
-                });
-                */
+                /*
+                 * Create and display the form
+                 * java.awt.EventQueue.invokeLater(new Runnable() {
+                 * public void run() {
+                 * new CustomerInfoPage().setVisible(true);
+                 * }
+                 * });
+                 */
         }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField address_text;
-    private javax.swing.JButton back_button;
-    private javax.swing.JTextField dob_text;
-    private javax.swing.JTextField email_text;
-    private javax.swing.JLabel Info_noti;
-    private javax.swing.JLabel name_noti;
-    private javax.swing.JTextField name_text;
-    private javax.swing.JTextField password_text;
-    // End of variables declaration//GEN-END:variables
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JTextField address_text;
+        private javax.swing.JButton back_button;
+        private javax.swing.JTextField dob_text;
+        private javax.swing.JTextField email_text;
+        private javax.swing.JLabel Info_noti;
+        private javax.swing.JLabel name_noti;
+        private javax.swing.JTextField name_text;
+        private javax.swing.JTextField password_text;
+        // End of variables declaration//GEN-END:variables
 }

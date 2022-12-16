@@ -1,3 +1,6 @@
+/*
+ * User attribute name, includes first name, middle name, and last name
+ */
 package fancybank.user;
 
 public class Name {

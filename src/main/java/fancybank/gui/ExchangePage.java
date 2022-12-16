@@ -1,3 +1,7 @@
+/*
+ * Page for customer to exchange currency
+ */
+
 package fancybank.gui;
 
 import java.io.File;
@@ -24,27 +28,30 @@ public class ExchangePage extends javax.swing.JFrame {
         /**
          * Creates new form NewJFrame
          */
-		private Customer c;
-		private CheckAccount acc;
-		private int check_ind;
-		private ArrayList<CheckAccount> selection;
+        private Customer c;
+        private CheckAccount acc;
+        private int check_ind;
+        private ArrayList<CheckAccount> selection;
+
         public ExchangePage(Customer c, CheckAccount acc, int checking_index) {
                 initComponents();
                 this.c = c;
                 this.acc = acc;
                 this.check_ind = checking_index;
-                this.from_acc_box.addItem(acc.getAccountNumber()+": "+acc.getBalance().getCurrency().getName());
+                this.from_acc_box.addItem(acc.getAccountNumber() + ": " + acc.getBalance().getCurrency().getName());
                 ArrayList<CheckAccount> checks = c.getCheckAccount();
                 ArrayList<CheckAccount> selection = new ArrayList<CheckAccount>();
-                for(int i=0;i<checks.size();i++) {
-                	CheckAccount curr = checks.get(i);
-                	if(this.acc.getBalance().getCurrency().getSymbol().equals(curr.getBalance().getCurrency().getSymbol())) {
-                		continue;
-                	} 
-                	selection.add(curr);
-                	this.to_acc_box.addItem(curr.getAccountNumber()+": "+curr.getBalance().getCurrency().getName());
+                for (int i = 0; i < checks.size(); i++) {
+                        CheckAccount curr = checks.get(i);
+                        if (this.acc.getBalance().getCurrency().getSymbol()
+                                        .equals(curr.getBalance().getCurrency().getSymbol())) {
+                                continue;
+                        }
+                        selection.add(curr);
+                        this.to_acc_box.addItem(
+                                        curr.getAccountNumber() + ": " + curr.getBalance().getCurrency().getName());
                 }
-                this.selection=selection;
+                this.selection = selection;
         }
 
         /**
@@ -217,26 +224,26 @@ public class ExchangePage extends javax.swing.JFrame {
                 setVisible(false);
                 dispose();
                 java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                            new CheckingAccountPage(c,check_ind).setVisible(true);
-                    }
+                        public void run() {
+                                new CheckingAccountPage(c, check_ind).setVisible(true);
+                        }
                 });
         }// GEN-LAST:event_exchange_cancel_buttonActionPerformed
 
         private void exchange_submit_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_exchange_submit_buttonActionPerformed
                 // TODO add your handling code here:
-        		setVisible(false);
-        		dispose();
-        		double am = Double.parseDouble(amount_text.getText());
-        		int ind = this.to_acc_box.getSelectedIndex();
-        		CheckAccount to = this.selection.get(ind);
-        		Balance ex_bal = new Balance(am,this.acc.getBalance().getCurrency());
-        		this.acc.exchangeTo(to, ex_bal);
-        		this.c.save();
-        		java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                            new CheckingAccountPage(c,check_ind).setVisible(true);
-                    }
+                setVisible(false);
+                dispose();
+                double am = Double.parseDouble(amount_text.getText());
+                int ind = this.to_acc_box.getSelectedIndex();
+                CheckAccount to = this.selection.get(ind);
+                Balance ex_bal = new Balance(am, this.acc.getBalance().getCurrency());
+                this.acc.exchangeTo(to, ex_bal);
+                this.c.save();
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                                new CheckingAccountPage(c, check_ind).setVisible(true);
+                        }
                 });
         }// GEN-LAST:event_exchange_submit_buttonActionPerformed
 
@@ -285,13 +292,14 @@ public class ExchangePage extends javax.swing.JFrame {
                 // </editor-fold>
                 // </editor-fold>
 
-                /* Create and display the form 
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                        public void run() {
-                                new CheckingAccountPage().setVisible(true);
-                        }
-                });
-                */
+                /*
+                 * Create and display the form
+                 * java.awt.EventQueue.invokeLater(new Runnable() {
+                 * public void run() {
+                 * new CheckingAccountPage().setVisible(true);
+                 * }
+                 * });
+                 */
         }
 
         // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,3 +1,7 @@
+/*
+ * Interface for those accounts than can transfer money to other accounts.
+ */
+
 package fancybank.account;
 
 public interface Transferable {

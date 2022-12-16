@@ -1,3 +1,7 @@
+/*
+ * General money class for passing amount of money and currency information between classes.
+ */
+
 package fancybank.account;
 
 import fancybank.currency.Currency;
@@ -15,7 +19,7 @@ public class Money {
     public Currency getCurrency() {
         return currency;
     }
-    
+
     public double getAmount() {
         return amount;
     }

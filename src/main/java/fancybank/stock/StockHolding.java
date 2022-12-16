@@ -1,3 +1,6 @@
+/*
+ * Every time you buy a stock, you will have a stock holding.
+ */
 package fancybank.stock;
 
 public class StockHolding {

@@ -1,3 +1,7 @@
+/*
+ * Page for manager to view all customers' information
+ */
+
 package fancybank.gui;
 
 import java.util.ArrayList;
@@ -23,23 +27,24 @@ public class CustomerListPage extends javax.swing.JFrame {
     /**
      * Creates new form StockMarketPage
      */
-	private Manager m;
-    public CustomerListPage(Manager m ) {
+    private Manager m;
+
+    public CustomerListPage(Manager m) {
         initComponents();
-        this.m=m;
+        this.m = m;
         DefaultTableModel model = (DefaultTableModel) this.customer_list_table.getModel();
-    	ArrayList<Customer>all_cus = this.m.getAllCustomers();
-    	System.out.println(all_cus.get(0).getName().toString());
-        for(int i =0;i<all_cus.size();i++) {
-        	Customer c = all_cus.get(i);
-        	double total_loan = 0;
-        	ArrayList<Loan> loans = c.getLoans();
-        	for(int j =0;j<loans.size();j++) {
-        		total_loan+=loans.get(j).getUnpaidAmount();
-        	}
-        	String name = c.getName().toString();
-        	int d = c.getAccounts().size();
-        	model.addRow(new Object[]{name, d, total_loan});
+        ArrayList<Customer> all_cus = this.m.getAllCustomers();
+        System.out.println(all_cus.get(0).getName().toString());
+        for (int i = 0; i < all_cus.size(); i++) {
+            Customer c = all_cus.get(i);
+            double total_loan = 0;
+            ArrayList<Loan> loans = c.getLoans();
+            for (int j = 0; j < loans.size(); j++) {
+                total_loan += loans.get(j).getUnpaidAmount();
+            }
+            String name = c.getName().toString();
+            int d = c.getAccounts().size();
+            model.addRow(new Object[] { name, d, total_loan });
         }
     }
 
@@ -63,26 +68,25 @@ public class CustomerListPage extends javax.swing.JFrame {
 
         customer_list_table.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         customer_list_table.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
+                new Object[][] {
 
                 },
-                new String [] {
+                new String[] {
                         "Name", "Account", "Loan"
-                }
-        ) {
-            Class[] types = new Class [] {
+                }) {
+            Class[] types = new Class[] {
                     java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean[] {
                     false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         customer_list_table.setRowSelectionAllowed(false);
@@ -116,26 +120,30 @@ public class CustomerListPage extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(50, 50, 50)
-                                .addComponent(customer_list, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(customer_list, javax.swing.GroupLayout.PREFERRED_SIZE, 750,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(50, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Edit_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Edit_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(114, 114, 114)
-                                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(248, 248, 248))
-        );
+                                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 120,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(248, 248, 248)));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(60, 60, 60)
-                                .addComponent(customer_list, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(customer_list, javax.swing.GroupLayout.PREFERRED_SIZE, 600,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(72, 72, 72)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Edit_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(66, Short.MAX_VALUE))
-        );
+                                        .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Edit_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(66, Short.MAX_VALUE)));
 
         pack();
     }// </editor-fold>
@@ -148,21 +156,21 @@ public class CustomerListPage extends javax.swing.JFrame {
 
     private void Edit_buttonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    	int row = this.customer_list_table.getSelectedRow();
-    	ArrayList<Customer> all_cus =  this.m.getAllCustomers();
+        int row = this.customer_list_table.getSelectedRow();
+        ArrayList<Customer> all_cus = this.m.getAllCustomers();
 
-    	String selected_name = customer_list_table.getModel().getValueAt(row, 0).toString();
-    	for(int i=0;i<all_cus.size();i++) {
-    		if(all_cus.get(i).getName().toString().equals(selected_name)) {
-    			Customer selected_c = all_cus.get(i);
-    			java.awt.EventQueue.invokeLater(new Runnable() {
-    	            public void run() {
-    	                new CustomerEditPage(selected_c).setVisible(true);
-    	            }
-    	        });
-    		}
-    	}
-        
+        String selected_name = customer_list_table.getModel().getValueAt(row, 0).toString();
+        for (int i = 0; i < all_cus.size(); i++) {
+            if (all_cus.get(i).getName().toString().equals(selected_name)) {
+                Customer selected_c = all_cus.get(i);
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new CustomerEditPage(selected_c).setVisible(true);
+                    }
+                });
+            }
+        }
+
     }
 
     /**

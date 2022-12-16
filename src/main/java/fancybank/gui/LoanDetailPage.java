@@ -1,3 +1,6 @@
+/*
+ * Page to show loan detail
+ */
 package fancybank.gui;
 import java.io.File;
 import javax.swing.JFileChooser;

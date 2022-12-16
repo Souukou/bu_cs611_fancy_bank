@@ -1,3 +1,7 @@
+/*
+ * Page to show security account information, including stock trades
+ */
+
 package fancybank.gui;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,8 +20,9 @@ public class SecurityAccountPage extends javax.swing.JFrame {
     /**
      * Creates new form SecurityAccountPage
      */
-	Customer c;
-	SecurityAccount acc;
+    Customer c;
+    SecurityAccount acc;
+
     public SecurityAccountPage(Customer c) {
         initComponents();
         this.c = c;
@@ -33,7 +38,8 @@ public class SecurityAccountPage extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         owned_stock_button = new javax.swing.JButton();
@@ -116,100 +122,136 @@ public class SecurityAccountPage extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(deposit_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addComponent(owned_stock_button, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(balance_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(acc_num_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(115, 115, 115)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(withdraw_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(stock_market_button, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(100, Short.MAX_VALUE))
-        );
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(95, 95, 95)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
+                                                                false)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(26, 26, 26)
+                                                                .addComponent(deposit_button,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        Short.MAX_VALUE))
+                                                        .addGroup(layout
+                                                                .createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel2,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                186,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLabel3))
+                                                                .addComponent(owned_stock_button,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE, 160,
+                                                                        Short.MAX_VALUE)))
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(51, 51, 51)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(balance_text1,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                278,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(acc_num_text1,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                278,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(115, 115, 115)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                        false)
+                                                                        .addComponent(withdraw_button,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)
+                                                                        .addComponent(stock_market_button,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                160, Short.MAX_VALUE)))))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(238, 238, 238)
+                                                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 228,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(100, Short.MAX_VALUE)));
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {owned_stock_button, stock_market_button});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+                new java.awt.Component[] { owned_stock_button, stock_market_button });
 
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(acc_num_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(balance_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deposit_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(withdraw_button, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(owned_stock_button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(stock_market_button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(acc_num_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(45, 45, 45)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel3)
+                                        .addComponent(balance_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 36,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(44, 44, 44)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(deposit_button, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(withdraw_button, javax.swing.GroupLayout.DEFAULT_SIZE, 56,
+                                                Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(owned_stock_button, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(stock_market_button, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(44, 44, 44)
+                                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(55, 55, 55)));
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {owned_stock_button, stock_market_button});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL,
+                new java.awt.Component[] { owned_stock_button, stock_market_button });
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void deposit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deposit_buttonActionPerformed
+    private void deposit_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_deposit_buttonActionPerformed
         // TODO add your handling code here:
-    	SecurityAccount acc = this.acc;
-    	Customer c = this.c;
-    	java.awt.EventQueue.invokeLater(new Runnable() {
+        SecurityAccount acc = this.acc;
+        Customer c = this.c;
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MoneyOperationPage(c,acc,2, 0,0).setVisible(true);
+                new MoneyOperationPage(c, acc, 2, 0, 0).setVisible(true);
             }
         });
-    	setVisible(false);
+        setVisible(false);
         dispose();
-    }//GEN-LAST:event_deposit_buttonActionPerformed
+    }// GEN-LAST:event_deposit_buttonActionPerformed
 
-    private void withdraw_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdraw_buttonActionPerformed
-    	SecurityAccount acc = this.acc;
-    	Customer c = this.c;
-    	java.awt.EventQueue.invokeLater(new Runnable() {
+    private void withdraw_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_withdraw_buttonActionPerformed
+        SecurityAccount acc = this.acc;
+        Customer c = this.c;
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MoneyOperationPage(c,acc,2, 1,0).setVisible(true);
+                new MoneyOperationPage(c, acc, 2, 1, 0).setVisible(true);
             }
         });
-    	setVisible(false);
+        setVisible(false);
         dispose();
-    }//GEN-LAST:event_withdraw_buttonActionPerformed
+    }// GEN-LAST:event_withdraw_buttonActionPerformed
 
     private void owned_stock_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_owned_stock_buttonActionPerformed
         // TODO add your handling code here:
-    	SecurityAccount acc = this.acc;
-    	Customer c = this.c;
+        SecurityAccount acc = this.acc;
+        Customer c = this.c;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OwnStockPage(c,acc).setVisible(true);
+                new OwnStockPage(c, acc).setVisible(true);
             }
         });
         this.setVisible(false);
@@ -235,8 +277,7 @@ public class SecurityAccountPage extends javax.swing.JFrame {
                 new CustomerMainPage(c).setVisible(true);
             }
         });
-        
-        
+
     }// GEN-LAST:event_back_buttonActionPerformed
 
     private void acc_num_text1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_acc_num_text1ActionPerformed
@@ -282,13 +323,14 @@ public class SecurityAccountPage extends javax.swing.JFrame {
         }
         // </editor-fold>
 
-        /* Create and display the form 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SecurityAccountPage().setVisible(true);
-            }
-        });
-        */
+        /*
+         * Create and display the form
+         * java.awt.EventQueue.invokeLater(new Runnable() {
+         * public void run() {
+         * new SecurityAccountPage().setVisible(true);
+         * }
+         * });
+         */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,3 +1,7 @@
+/*
+ * Page to make money operation in an account
+ */
+
 package fancybank.gui;
 
 import fancybank.account.Account;
@@ -35,7 +39,8 @@ public class MoneyOperationPage extends javax.swing.JFrame {
     private CashOperable acc;
     private Customer c;
     private int checkingInd;
-    public MoneyOperationPage(Customer c, CashOperable acc,int account_type, int operation,int checkingInd) {
+
+    public MoneyOperationPage(Customer c, CashOperable acc, int account_type, int operation, int checkingInd) {
         initComponents();
         this.account_type = account_type;
         this.operation_type = operation;
@@ -229,15 +234,15 @@ public class MoneyOperationPage extends javax.swing.JFrame {
 
     private void submit_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_submit_buttonActionPerformed
         // TODO add your handling code here:
-    	if(this.amount_text.getText().isEmpty()) return;
+        if (this.amount_text.getText().isEmpty())
+            return;
         String amount = this.amount_text.getText();
         this.amount_text.setText("");
         Customer c = this.c;
         double operation_amount;
         try {
-        	operation_amount = Double.parseDouble(amount);
-        }
-        catch (NumberFormatException e) {
+            operation_amount = Double.parseDouble(amount);
+        } catch (NumberFormatException e) {
             return;
         }
         this.setVisible(false);
@@ -247,53 +252,52 @@ public class MoneyOperationPage extends javax.swing.JFrame {
             // do request a loan,need to submit a file as proof
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new LoanRequestPage(c,operation_amount,checkingind).setVisible(true);
+                    new LoanRequestPage(c, operation_amount, checkingind).setVisible(true);
                 }
             });
-        }
-        else {
-        	//deposit
-        	if(this.operation_type==0) {
-        		this.acc.deposit(operation_amount+2);
-        		Currency cur = ((Account)this.acc).getBalance().getCurrency();
-            	Transaction t = new CashTransaction( -1, ((Account)acc).getAccountNumber(),  new Money(cur,operation_amount));
-            	Data.getInstance().addTransaction(t);
-            	
-        		this.c.save();
-        		System.out.println("deposit");
-        	}
-        	//withdraw
-        	else if(this.operation_type==1) {
-        		this.acc.withdraw(operation_amount-2);
-        		
-        		Currency cur = ((Account)this.acc).getBalance().getCurrency();
-            	Transaction t = new CashTransaction(((Account)acc).getAccountNumber(), -1, new Money(cur,operation_amount));
-            	Data.getInstance().addTransaction(t);
-        		this.c.save();
-        		System.out.println("withdraw");
-        	}
-        	
-        	if(this.account_type==0) {
-        		java.awt.EventQueue.invokeLater(new Runnable() {
+        } else {
+            // deposit
+            if (this.operation_type == 0) {
+                this.acc.deposit(operation_amount + 2);
+                Currency cur = ((Account) this.acc).getBalance().getCurrency();
+                Transaction t = new CashTransaction(-1, ((Account) acc).getAccountNumber(),
+                        new Money(cur, operation_amount));
+                Data.getInstance().addTransaction(t);
+
+                this.c.save();
+                System.out.println("deposit");
+            }
+            // withdraw
+            else if (this.operation_type == 1) {
+                this.acc.withdraw(operation_amount - 2);
+
+                Currency cur = ((Account) this.acc).getBalance().getCurrency();
+                Transaction t = new CashTransaction(((Account) acc).getAccountNumber(), -1,
+                        new Money(cur, operation_amount));
+                Data.getInstance().addTransaction(t);
+                this.c.save();
+                System.out.println("withdraw");
+            }
+
+            if (this.account_type == 0) {
+                java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
-                        new CheckingAccountPage(c,checkingind).setVisible(true);
+                        new CheckingAccountPage(c, checkingind).setVisible(true);
                     }
                 });
-        	}
-        	else if(this.account_type==1) {
-        		java.awt.EventQueue.invokeLater(new Runnable() {
+            } else if (this.account_type == 1) {
+                java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
                         new SavingAccountPage(c).setVisible(true);
                     }
                 });
-        	}
-        	else {
-        		java.awt.EventQueue.invokeLater(new Runnable() {
+            } else {
+                java.awt.EventQueue.invokeLater(new Runnable() {
                     public void run() {
                         new SecurityAccountPage(c).setVisible(true);
                     }
                 });
-        	}
+            }
         }
     }// GEN-LAST:event_submit_buttonActionPerformed
 
@@ -315,27 +319,25 @@ public class MoneyOperationPage extends javax.swing.JFrame {
         dispose();
         Customer c = this.c;
         int checkingind = this.checkingInd;
-        if(this.account_type==0) {
-    		java.awt.EventQueue.invokeLater(new Runnable() {
+        if (this.account_type == 0) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new CheckingAccountPage(c,checkingind).setVisible(true);
+                    new CheckingAccountPage(c, checkingind).setVisible(true);
                 }
             });
-    	}
-    	else if(this.account_type==1) {
-    		java.awt.EventQueue.invokeLater(new Runnable() {
+        } else if (this.account_type == 1) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new SavingAccountPage(c).setVisible(true);
                 }
             });
-    	}
-    	else {
-    		java.awt.EventQueue.invokeLater(new Runnable() {
+        } else {
+            java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new SecurityAccountPage(c).setVisible(true);
                 }
             });
-    	}
+        }
     }// GEN-LAST:event_cancel_buttonActionPerformed
 
     /**
@@ -373,13 +375,14 @@ public class MoneyOperationPage extends javax.swing.JFrame {
         }
         // </editor-fold>
 
-        /* Create and display the form 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MoneyOperationPage(0, 2).setVisible(true);
-            }
-        });
-        */
+        /*
+         * Create and display the form
+         * java.awt.EventQueue.invokeLater(new Runnable() {
+         * public void run() {
+         * new MoneyOperationPage(0, 2).setVisible(true);
+         * }
+         * });
+         */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

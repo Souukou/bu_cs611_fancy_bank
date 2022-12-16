@@ -1,3 +1,6 @@
+/*
+ * Page to show the owned stock
+ */
 package fancybank.gui;
 
 import fancybank.account.SecurityAccount;
@@ -24,42 +27,43 @@ public class OwnStockPage extends javax.swing.JFrame {
     /**
      * Creates new form OwnStockPage
      */
-	private SecurityAccount acc;
-	private Customer c;
-    public OwnStockPage(Customer c,SecurityAccount acc) {// StockHoldingList ownedStockList) {
+    private SecurityAccount acc;
+    private Customer c;
+
+    public OwnStockPage(Customer c, SecurityAccount acc) {// StockHoldingList ownedStockList) {
         initComponents();
         this.c = c;
         this.acc = acc;
         StockHoldingList owned = this.acc.getStockHoldingList();
-        
-        Hashtable<String,StockHolding> stockholds = new Hashtable<String,StockHolding>();
-        Hashtable<String,Double> unrealized_profit = new Hashtable<String,Double>();
-        for(int i=0;i<owned.size();i++){
-        	StockHolding curr = owned.getStockHoldingList().get(i);
-        	if(stockholds.containsKey(curr.getSymbol())){
-        		//current share
-        		Double profit = unrealized_profit.get(curr.getSymbol());
-        		profit += curr.getUnrealizedProfit();
-        		unrealized_profit.put(curr.getSymbol(),profit);
-        		
-        		StockHolding stockhold = stockholds.get(curr.getSymbol());
-        		int addon = curr.getQuantity();
-        		stockhold.setQuantity(addon+stockhold.getQuantity());
-        	}
-        	else{
-        		//owned[sh.getSymbol] = sh.get_quantity;
-        		unrealized_profit.put(curr.getSymbol(),curr.getUnrealizedProfit());
-        		StockHolding copy = new StockHolding(curr.getSymbol(),curr.getBoughtPrice(),curr.getQuantity());
-        		stockholds.put(curr.getSymbol(), copy);
-        	}
+
+        Hashtable<String, StockHolding> stockholds = new Hashtable<String, StockHolding>();
+        Hashtable<String, Double> unrealized_profit = new Hashtable<String, Double>();
+        for (int i = 0; i < owned.size(); i++) {
+            StockHolding curr = owned.getStockHoldingList().get(i);
+            if (stockholds.containsKey(curr.getSymbol())) {
+                // current share
+                Double profit = unrealized_profit.get(curr.getSymbol());
+                profit += curr.getUnrealizedProfit();
+                unrealized_profit.put(curr.getSymbol(), profit);
+
+                StockHolding stockhold = stockholds.get(curr.getSymbol());
+                int addon = curr.getQuantity();
+                stockhold.setQuantity(addon + stockhold.getQuantity());
+            } else {
+                // owned[sh.getSymbol] = sh.get_quantity;
+                unrealized_profit.put(curr.getSymbol(), curr.getUnrealizedProfit());
+                StockHolding copy = new StockHolding(curr.getSymbol(), curr.getBoughtPrice(), curr.getQuantity());
+                stockholds.put(curr.getSymbol(), copy);
+            }
         }
         Set<String> keys = stockholds.keySet();
         DefaultTableModel model = (DefaultTableModel) this.own_stock_table.getModel();
-        for(String key: keys){
-        	StockHolding currStock = stockholds.get(key);
-        	Double profit = unrealized_profit.get(key);
-        	Stock st = StockMarket.getInstance().getStock(currStock.getSymbol());
-        	model.addRow(new Object[]{currStock.getSymbol(),st.getPrice(),currStock.getQuantity(),st.getPrice()*currStock.getQuantity(),profit});
+        for (String key : keys) {
+            StockHolding currStock = stockholds.get(key);
+            Double profit = unrealized_profit.get(key);
+            Stock st = StockMarket.getInstance().getStock(currStock.getSymbol());
+            model.addRow(new Object[] { currStock.getSymbol(), st.getPrice(), currStock.getQuantity(),
+                    st.getPrice() * currStock.getQuantity(), profit });
         }
         //
     }
@@ -71,7 +75,8 @@ public class OwnStockPage extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
@@ -85,13 +90,12 @@ public class OwnStockPage extends javax.swing.JFrame {
 
         own_stock_table.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         own_stock_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][] {
 
-            },
-            new String [] {
-                "Stock Name", "Current Price", "Share Owned", "Current Value", "Unrealized Profit"
-            }
-        ));
+                },
+                new String[] {
+                        "Stock Name", "Current Price", "Share Owned", "Current Value", "Unrealized Profit"
+                }));
         own_stock_table.setShowGrid(true);
         jScrollPane1.setViewportView(own_stock_table);
 
@@ -122,50 +126,61 @@ public class OwnStockPage extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(trade_button, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
-                        .addComponent(stockmarket_button, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(back_button)))
-                .addGap(28, 28, 28))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(28, 28, 28)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 694,
+                                                        Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(113, 113, 113)
+                                                .addComponent(trade_button, javax.swing.GroupLayout.PREFERRED_SIZE, 228,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(70, 70, 70)
+                                                .addComponent(stockmarket_button,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 219,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(back_button)))
+                                .addGap(28, 28, 28)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(back_button)
-                        .addGap(18, 18, 18))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(stockmarket_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(trade_button, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
-                        .addContainerGap(40, Short.MAX_VALUE))))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 485,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(back_button)
+                                                .addGap(18, 18, 18))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(33, 33, 33)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
+                                                                false)
+                                                        .addComponent(stockmarket_button,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(trade_button,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 52,
+                                                                Short.MAX_VALUE))
+                                                .addContainerGap(40, Short.MAX_VALUE)))));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void stockmarket_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockmarket_buttonActionPerformed
+    private void stockmarket_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_stockmarket_buttonActionPerformed
         // TODO add your handling code here:
-    	java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new StockMarketPage().setVisible(true);
             }
         });
-    }//GEN-LAST:event_stockmarket_buttonActionPerformed
+    }// GEN-LAST:event_stockmarket_buttonActionPerformed
 
     private void back_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_back_buttonActionPerformed
         // TODO add your handling code here:
@@ -181,11 +196,11 @@ public class OwnStockPage extends javax.swing.JFrame {
 
     private void trade_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_trade_buttonActionPerformed
         // TODO add your handling code here:
-    	Customer c = this.c;
-    	SecurityAccount acc = this.acc;
+        Customer c = this.c;
+        SecurityAccount acc = this.acc;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StockOperationPage(c,acc).setVisible(true);
+                new StockOperationPage(c, acc).setVisible(true);
             }
         });
         setVisible(false);
@@ -227,13 +242,14 @@ public class OwnStockPage extends javax.swing.JFrame {
         }
         // </editor-fold>
 
-        /* Create and display the form 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new OwnStockPage().setVisible(true);
-            }
-        });
-        */
+        /*
+         * Create and display the form
+         * java.awt.EventQueue.invokeLater(new Runnable() {
+         * public void run() {
+         * new OwnStockPage().setVisible(true);
+         * }
+         * });
+         */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

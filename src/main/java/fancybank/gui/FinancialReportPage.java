@@ -1,3 +1,6 @@
+/*
+ * Page for manager to view financial report, including interest paid/collected, fee collected, etc.
+ */
 package fancybank.gui;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -27,18 +30,17 @@ public class FinancialReportPage extends javax.swing.JFrame {
     /**
      * Creates new form StockMarketPage
      */
-	Manager manager;
+    Manager manager;
+
     public FinancialReportPage(Manager m) {
-    	this.manager = m;
+        this.manager = m;
         initComponents();
-        //Data.getInstance().getBank().g
+        // Data.getInstance().getBank().g
         Report report = this.manager.getReport(Data.getInstance().getTime());
-        this.Interest_loss_text.setText(String.valueOf(report.getPayInterest())    );
-        this.interest_win_text.setText(String.valueOf(  report.getCollectInterest()));
-        this.fee_win_text.setText(String.valueOf( report.getCollectFee()));
-       
-       
-        
+        this.Interest_loss_text.setText(String.valueOf(report.getPayInterest()));
+        this.interest_win_text.setText(String.valueOf(report.getCollectInterest()));
+        this.fee_win_text.setText(String.valueOf(report.getCollectFee()));
+
     }
 
     /**
@@ -48,7 +50,8 @@ public class FinancialReportPage extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         back_button = new javax.swing.JButton();
@@ -85,49 +88,60 @@ public class FinancialReportPage extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(72, 72, 72)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Interest_loss_text)
-                            .addComponent(interest_win_text)
-                            .addComponent(fee_win_text)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(315, Short.MAX_VALUE)
-                        .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(307, 307, 307))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout
+                                                .createSequentialGroup()
+                                                .addGap(87, 87, 87)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
+                                                                false)
+                                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                145, Short.MAX_VALUE)
+                                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGap(72, 72, 72)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(Interest_loss_text)
+                                                        .addComponent(interest_win_text)
+                                                        .addComponent(fee_win_text)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addContainerGap(315, Short.MAX_VALUE)
+                                                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 228,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(307, 307, 307)));
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] { jLabel1, jLabel2, jLabel3 });
 
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Interest_loss_text)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
-                .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(interest_win_text)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
-                .addGap(74, 74, 74)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                    .addComponent(fee_win_text))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364, Short.MAX_VALUE)
-                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(Interest_loss_text)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 48,
+                                                Short.MAX_VALUE))
+                                .addGap(70, 70, 70)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(interest_win_text)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 47,
+                                                Short.MAX_VALUE))
+                                .addGap(74, 74, 74)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 49,
+                                                Short.MAX_VALUE)
+                                        .addComponent(fee_win_text))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364,
+                                        Short.MAX_VALUE)
+                                .addComponent(back_button, javax.swing.GroupLayout.PREFERRED_SIZE, 52,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)));
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] { jLabel1, jLabel2, jLabel3 });
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

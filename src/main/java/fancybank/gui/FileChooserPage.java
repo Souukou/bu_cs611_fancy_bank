@@ -1,3 +1,7 @@
+/*
+ * Page to choose a file for loan proof
+ */
+
 package fancybank.gui;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

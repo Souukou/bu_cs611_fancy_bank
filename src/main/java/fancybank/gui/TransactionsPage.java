@@ -1,3 +1,7 @@
+/*
+ * Page to show the transactions
+ */
+
 package fancybank.gui;
 
 import java.util.ArrayList;
@@ -24,28 +28,31 @@ public class TransactionsPage extends javax.swing.JFrame {
     /**
      * Creates new form TransactionsPage
      */
-	private Customer c;
+    private Customer c;
+
     public TransactionsPage(Customer c) {// Arraylist<Transaction>l) {
         initComponents();
         this.c = c;
         javax.swing.JTable table = this.transaction_table;
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         ArrayList<CheckAccount> acc = c.getCheckAccount();
-        ArrayList<Transaction> trans= new ArrayList<Transaction>();
-        for(int i=0;i<acc.size();i++) {
-        	CheckAccount check = acc.get(i);
-        	Transaction[] transactions = Data.getInstance().getTransactionByAccount(check.getAccountNumber());
-        	for(int j=0;j<transactions.length;j++){
-            	String from = Integer.toString(  transactions[j].getFrom());
-            	String to = Integer.toString(  transactions[j].getTo());
-            	int d = transactions[j].getDate();
-            	if(from.equals("-1")) from = "Cash";
-            	if(to.equals("-1")) to = "Cash";
-            	double amount = transactions[j].getMoney().getAmount();
-            	model.addRow(new Object[]{from,to,d,amount});
+        ArrayList<Transaction> trans = new ArrayList<Transaction>();
+        for (int i = 0; i < acc.size(); i++) {
+            CheckAccount check = acc.get(i);
+            Transaction[] transactions = Data.getInstance().getTransactionByAccount(check.getAccountNumber());
+            for (int j = 0; j < transactions.length; j++) {
+                String from = Integer.toString(transactions[j].getFrom());
+                String to = Integer.toString(transactions[j].getTo());
+                int d = transactions[j].getDate();
+                if (from.equals("-1"))
+                    from = "Cash";
+                if (to.equals("-1"))
+                    to = "Cash";
+                double amount = transactions[j].getMoney().getAmount();
+                model.addRow(new Object[] { from, to, d, amount });
             }
         }
-      
+
     }
 
     /**
@@ -134,7 +141,7 @@ public class TransactionsPage extends javax.swing.JFrame {
             public void run() {
                 new CustomerMainPage(c).setVisible(true);
             }
-        }); 
+        });
     }// GEN-LAST:event_back_buttonActionPerformed
 
     /**
@@ -172,12 +179,14 @@ public class TransactionsPage extends javax.swing.JFrame {
         }
         // </editor-fold>
 
-        /* Create and display the form
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TransactionsPage().setVisible(true);
-            }
-        }); */
+        /*
+         * Create and display the form
+         * java.awt.EventQueue.invokeLater(new Runnable() {
+         * public void run() {
+         * new TransactionsPage().setVisible(true);
+         * }
+         * });
+         */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

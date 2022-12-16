@@ -1,3 +1,6 @@
+/*
+ * User attribute email, provide a simple checker to validate email address
+ */
 package fancybank.user;
 
 public class Email {

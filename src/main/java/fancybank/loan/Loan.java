@@ -1,3 +1,7 @@
+/*
+ * Base class for a loan, including the amount borrowed, interest rate, collateral, and the rest of amount to be paid
+ */
+
 package fancybank.loan;
 
 import fancybank.account.Account;

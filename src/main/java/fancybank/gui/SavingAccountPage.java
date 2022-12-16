@@ -1,3 +1,6 @@
+/*
+ * Page to show saving account information
+ */
 package fancybank.gui;
 
 import fancybank.account.SavingAccount;
@@ -17,8 +20,9 @@ public class SavingAccountPage extends javax.swing.JFrame {
     /**
      * Creates new form SavingAccountPage
      */
-	Customer c;
-	SavingAccount account;
+    Customer c;
+    SavingAccount account;
+
     public SavingAccountPage(Customer c) {
         initComponents();
         this.c = c;
@@ -170,11 +174,11 @@ public class SavingAccountPage extends javax.swing.JFrame {
 
     private void deposit_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_deposit_buttonActionPerformed
         // TODO add your handling code here:
-    	SavingAccount a = this.account;
-    	Customer c = this.c;
+        SavingAccount a = this.account;
+        Customer c = this.c;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MoneyOperationPage(c,a, 1, 0,0).setVisible(true);
+                new MoneyOperationPage(c, a, 1, 0, 0).setVisible(true);
             }
         });
         this.setVisible(false);
@@ -191,16 +195,16 @@ public class SavingAccountPage extends javax.swing.JFrame {
                 new CustomerMainPage(c).setVisible(true);
             }
         });
-        
+
     }// GEN-LAST:event_back_buttonActionPerformed
 
     private void withdraw_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_withdraw_buttonActionPerformed
         // TODO add your handling code here:
-    	SavingAccount a = this.account;
-    	Customer c = this.c;
+        SavingAccount a = this.account;
+        Customer c = this.c;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MoneyOperationPage(c,a, 1, 1,0).setVisible(true);
+                new MoneyOperationPage(c, a, 1, 1, 0).setVisible(true);
             }
         });
         this.setVisible(false);
@@ -242,13 +246,14 @@ public class SavingAccountPage extends javax.swing.JFrame {
         }
         // </editor-fold>
 
-        /* Create and display the form 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SavingAccountPage().setVisible(true);
-            }
-        });
-        */
+        /*
+         * Create and display the form
+         * java.awt.EventQueue.invokeLater(new Runnable() {
+         * public void run() {
+         * new SavingAccountPage().setVisible(true);
+         * }
+         * });
+         */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

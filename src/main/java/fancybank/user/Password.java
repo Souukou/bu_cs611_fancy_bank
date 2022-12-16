@@ -1,3 +1,9 @@
+/*
+ * An important user attribute password
+ * we store the salted hash of the password and the salt
+ * the salt is randomly generated to prevent rainbow table attack
+ */
+
 package fancybank.user;
 
 import java.util.Random;
@@ -22,7 +28,6 @@ public class Password {
 // @formatter:on
         return generatedString;
     }
-
 
     public String getEncryptedPassword(String password) {
         String re = DigestUtils.sha256Hex(salt + String.format("%-32s", password));

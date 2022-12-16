@@ -1,3 +1,7 @@
+/*
+ * Base class for any kind of user, including customer and manager
+ * They all have a sort of basic infomation, such as UID, username, name, address, email, password
+ */
 package fancybank.user;
 
 public abstract class User {
@@ -25,7 +29,8 @@ public abstract class User {
         this.password = password;
     }
 
-    public User(int uid, String username, String firstName, String middleName, String lastName, String street, String city, String state, String zip, String country, String email, String password) {
+    public User(int uid, String username, String firstName, String middleName, String lastName, String street,
+            String city, String state, String zip, String country, String email, String password) {
         this.UID = new UID(uid);
         this.username = new Username(username);
         this.name = new Name(firstName, middleName, lastName);

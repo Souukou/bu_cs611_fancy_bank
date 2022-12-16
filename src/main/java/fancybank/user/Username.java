@@ -1,3 +1,6 @@
+/*
+ * User attribute username
+ */
 package fancybank.user;
 
 public class Username {

@@ -1,3 +1,7 @@
+/*
+ * The balance contains the amount of money and the currency information.
+ */
+
 package fancybank.account;
 
 import fancybank.currency.Currency;

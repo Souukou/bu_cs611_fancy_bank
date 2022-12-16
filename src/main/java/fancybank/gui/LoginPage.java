@@ -1,3 +1,7 @@
+/*
+ * Page to login
+ */
+
 package fancybank.gui;
 
 import java.util.ArrayList;
@@ -33,26 +37,29 @@ public class LoginPage extends javax.swing.JFrame {
     /**
      * Creates new form LoginPage
      */
-	private Customer customer;
-	private Bank bank;
+    private Customer customer;
+    private Bank bank;
+
     public LoginPage() {
         initComponents();
         Bank bank = Data.getInstance().getBank();
         this.bank = bank;
         /**
-        Customer customer = new Customer(1,"username","firstname","middle","lastname","888 Commonwealth","boston","MA","02446","US","gmail.com","123456");
-        customer.createCheckAccount(0, "USD");
-        customer.createCheckAccount(0, "EUR");
-        customer.createSavingAccount(0, "USD");
-        customer.createSecurityAccount(100000);
-        Stock apple = StockMarket.getInstance().getStock("AAPL");
-        Stock google = StockMarket.getInstance().getStock("GOOG");
-        //customer.getOneSecurityAccount().buyStock(apple, 100);
-        //customer.getOneSecurityAccount().buyStock(apple, 100);
-        //customer.getOneSecurityAccount().buyStock(google, 100);
-        //customer.getOneSecurityAccount().buyStock(google, 100);
-        this.customer = customer;
-        **/
+         * Customer customer = new
+         * Customer(1,"username","firstname","middle","lastname","888
+         * Commonwealth","boston","MA","02446","US","gmail.com","123456");
+         * customer.createCheckAccount(0, "USD");
+         * customer.createCheckAccount(0, "EUR");
+         * customer.createSavingAccount(0, "USD");
+         * customer.createSecurityAccount(100000);
+         * Stock apple = StockMarket.getInstance().getStock("AAPL");
+         * Stock google = StockMarket.getInstance().getStock("GOOG");
+         * //customer.getOneSecurityAccount().buyStock(apple, 100);
+         * //customer.getOneSecurityAccount().buyStock(apple, 100);
+         * //customer.getOneSecurityAccount().buyStock(google, 100);
+         * //customer.getOneSecurityAccount().buyStock(google, 100);
+         * this.customer = customer;
+         **/
         // connect the database
     }
 
@@ -189,68 +196,73 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_login_buttonActionPerformed
         // TODO add your handling code here:
-    	Bank.getInstance().ManagerRegister("admin", "Michael", "", "Jackson", "1601 Queens Road, Hollywood Hills",
+        Bank.getInstance().ManagerRegister("admin", "Michael", "", "Jackson", "1601 Queens Road, Hollywood Hills",
                 "Los Olivos", "California", "93441", "US", "mike@gmail.com", "12345678");
-    	//admin 12345678 
+        // admin 12345678
         String acc = this.account_text.getText();
-        //String password = this.password_text.toString();
+        // String password = this.password_text.toString();
         String password = String.valueOf(this.password_text.getPassword());
-        System.out.println(acc+"  "+password);
-        //Customer customer = new Customer(1,"username","firstname","middle","lastname","888 Commonwealth","boston","MA","02446","US","gmail.com","123456");
-        //this.customer = customer;
-        
-        //customer.createCheckAccount(0, "USD");
-        //customer.createCheckAccount(0, "EUR");
-        //customer.createSavingAccount(0, "USD");
-        //customer.createSecurityAccount(100000);
-        
+        System.out.println(acc + "  " + password);
+        // Customer customer = new
+        // Customer(1,"username","firstname","middle","lastname","888
+        // Commonwealth","boston","MA","02446","US","gmail.com","123456");
+        // this.customer = customer;
+
+        // customer.createCheckAccount(0, "USD");
+        // customer.createCheckAccount(0, "EUR");
+        // customer.createSavingAccount(0, "USD");
+        // customer.createSecurityAccount(100000);
+
         /**
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CustomerMainPage(c).setVisible(true);
-               
-            }
-        });
-        **/
-        
+         * java.awt.EventQueue.invokeLater(new Runnable() {
+         * public void run() {
+         * new CustomerMainPage(c).setVisible(true);
+         * 
+         * }
+         * });
+         **/
+
         Manager m = this.bank.ManagerLogin(acc, password);
-        //System.out.println(m.getEmail().get());
-        if(m==null) {
-        	Customer customer = this.bank.Login(acc, password);
-        	if(customer==null) {
-        		JOptionPane.showMessageDialog(this, "No user credential matches your account/password.");
-        		return;
-        	}
-        	java.awt.EventQueue.invokeLater(new Runnable() {
+        // System.out.println(m.getEmail().get());
+        if (m == null) {
+            Customer customer = this.bank.Login(acc, password);
+            if (customer == null) {
+                JOptionPane.showMessageDialog(this, "No user credential matches your account/password.");
+                return;
+            }
+            java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new CustomerMainPage(customer).setVisible(true);
                 }
             });
-        }
-        else {
-        	java.awt.EventQueue.invokeLater(new Runnable() {
+        } else {
+            java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new ManagerMainPage(m).setVisible(true);
                 }
             });
         }
-        
-        //Manager m  = new Manager(new UID(1),new Username("managerUsername"),new Name("f","m","l"),new Address("888","boston","MA","02446","US"),new Email("gmail"),new Password("123456"));     
-    	/***
-        Customer customer = new Customer(1,"username","firstname","middle","lastname","888 Commonwealth","boston","MA","02446","US","gmail.com","123456");
-        customer.createCheckAccount(0, "USD");
-        customer.createCheckAccount(0, "EUR");
-        customer.createSavingAccount(0, "USD");
-        customer.createSecurityAccount(100000);
-        m.getAllCustomers().add(customer);
-        **/
+
+        // Manager m = new Manager(new UID(1),new Username("managerUsername"),new
+        // Name("f","m","l"),new Address("888","boston","MA","02446","US"),new
+        // Email("gmail"),new Password("123456"));
+        /***
+         * Customer customer = new
+         * Customer(1,"username","firstname","middle","lastname","888
+         * Commonwealth","boston","MA","02446","US","gmail.com","123456");
+         * customer.createCheckAccount(0, "USD");
+         * customer.createCheckAccount(0, "EUR");
+         * customer.createSavingAccount(0, "USD");
+         * customer.createSecurityAccount(100000);
+         * m.getAllCustomers().add(customer);
+         **/
         /**
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-            	new ManagerMainPage(m).setVisible(true);
-            }
-        });
-        **/
+         * java.awt.EventQueue.invokeLater(new Runnable() {
+         * public void run() {
+         * new ManagerMainPage(m).setVisible(true);
+         * }
+         * });
+         **/
     }// GEN-LAST:event_login_buttonActionPerformed
 
     private void new_user_buttonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_new_user_buttonActionPerformed

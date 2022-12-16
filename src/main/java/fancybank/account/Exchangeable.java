@@ -1,3 +1,7 @@
+/*
+ * Interface for those accounts that can exchange different currencies.
+ */
+
 package fancybank.account;
 
 public interface Exchangeable {

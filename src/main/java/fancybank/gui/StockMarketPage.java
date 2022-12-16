@@ -1,3 +1,7 @@
+/*
+ * Page to show the stock market
+ */
+
 package fancybank.gui;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,16 +27,16 @@ public class StockMarketPage extends javax.swing.JFrame {
      */
     public StockMarketPage() {
         initComponents();
-        
+
         StockMarket m = Data.getInstance().getStockMarket();
         ArrayList<Stock> stocks = m.getStockList();
-        
+
         DefaultTableModel model = (DefaultTableModel) this.stack_market_table.getModel();
-    	
-        for(int i =0;i<stocks.size();i++) {
-        	Stock s = stocks.get(i);
-        	model.addRow(new Object[]{s.getSymbol(),s.getName(),s.getPrice()});
-            
+
+        for (int i = 0; i < stocks.size(); i++) {
+            Stock s = stocks.get(i);
+            model.addRow(new Object[] { s.getSymbol(), s.getName(), s.getPrice() });
+
         }
     }
 
@@ -43,7 +47,8 @@ public class StockMarketPage extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         javax.swing.JScrollPane stock_market_table = new javax.swing.JScrollPane();
@@ -54,19 +59,18 @@ public class StockMarketPage extends javax.swing.JFrame {
 
         stack_market_table.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         stack_market_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+                new Object[][] {
 
-            },
-            new String [] {
-                "Stock Symbol", "Stock Name", "Current Price"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
+                },
+                new String[] {
+                        "Stock Symbol", "Stock Name", "Current Price"
+                }) {
+            boolean[] canEdit = new boolean[] {
+                    false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         stack_market_table.setRowSelectionAllowed(false);
@@ -76,24 +80,22 @@ public class StockMarketPage extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(stock_market_table, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(stock_market_table, javax.swing.GroupLayout.PREFERRED_SIZE, 754,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(46, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(stock_market_table, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(stock_market_table, javax.swing.GroupLayout.PREFERRED_SIZE, 676,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(124, Short.MAX_VALUE)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-
 
     /**
      * @param args the command line arguments
