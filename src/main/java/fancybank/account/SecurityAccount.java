@@ -71,7 +71,7 @@ public class SecurityAccount extends Account implements Transferable, Tradable, 
         StockHolding stockHolding = new StockHolding(stock, quantity);
         stockHoldingList.add(stockHolding);
         Data.getInstance()
-                .addTransaction(new StockTransaction(-1, getAccountNumber(),
+                .addTransaction(new StockTransaction(-2, getAccountNumber(),
                         new Money(getBalance().getCurrency(), totalCost), quantity, stock.getSymbol()));
         return true;
     }
@@ -135,7 +135,7 @@ public class SecurityAccount extends Account implements Transferable, Tradable, 
             }
         }
         Data.getInstance()
-                .addTransaction(new StockTransaction(getAccountNumber(), -1,
+                .addTransaction(new StockTransaction(getAccountNumber(), -2,
                         new Money(getBalance().getCurrency(), totalValue), quantity, stock.getSymbol()));
         return totalValue - totalBoughtPrice;
     }
