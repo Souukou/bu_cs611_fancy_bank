@@ -254,7 +254,7 @@ public class MoneyOperationPage extends javax.swing.JFrame {
         else {
         	//deposit
         	if(this.operation_type==0) {
-        		this.acc.deposit(operation_amount);
+        		this.acc.deposit(operation_amount+2);
         		Currency cur = ((Account)this.acc).getBalance().getCurrency();
             	Transaction t = new CashTransaction( -1, ((Account)acc).getAccountNumber(),  new Money(cur,operation_amount));
             	Data.getInstance().addTransaction(t);
@@ -264,7 +264,8 @@ public class MoneyOperationPage extends javax.swing.JFrame {
         	}
         	//withdraw
         	else if(this.operation_type==1) {
-        		this.acc.withdraw(operation_amount);
+        		this.acc.withdraw(operation_amount-2);
+        		
         		Currency cur = ((Account)this.acc).getBalance().getCurrency();
             	Transaction t = new CashTransaction(((Account)acc).getAccountNumber(), -1, new Money(cur,operation_amount));
             	Data.getInstance().addTransaction(t);
