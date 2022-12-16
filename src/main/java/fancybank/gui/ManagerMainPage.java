@@ -256,9 +256,12 @@ public class ManagerMainPage extends javax.swing.JFrame {
 
     private void approve_loan_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approve_loan_buttonActionPerformed
         // TODO add your handling code here:
+    	this.setVisible(false);
+    	dispose();
+    	Manager m = this.m;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ApproveLoanPage().setVisible(true);
+                new ApproveLoanPage(m).setVisible(true);
             }
         });
     }//GEN-LAST:event_approve_loan_buttonActionPerformed

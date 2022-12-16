@@ -4,6 +4,17 @@ package fancybank.gui;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
+
+import fancybank.account.CheckAccount;
+import fancybank.data.Data;
+import fancybank.loan.Loan;
+import fancybank.transaction.Transaction;
+import fancybank.user.Customer;
+import fancybank.user.Manager;
+
 /**
  *
  * @author Di Wang
@@ -13,8 +24,33 @@ public class ApproveLoanPage extends javax.swing.JFrame {
     /**
      * Creates new form StockMarketPage
      */
-    public ApproveLoanPage() {
+	private ArrayList<Customer> refers;
+	private ArrayList<Loan> all_loans;
+	private Manager manager;
+    public ApproveLoanPage(Manager m) {
+    	this.manager = m;
         initComponents();
+        this.all_loans = new ArrayList<Loan>();
+        DefaultTableModel model = (DefaultTableModel) this.customer_list_table.getModel();
+        this.refers = new ArrayList<Customer>();
+        Customer[] cuss = Data.getInstance().getCustomerAll();
+        System.out.println("approveloan"+ cuss.length);
+        //System.out.println("approveloan"+ cuss.size());
+        for(int i=0;i<cuss.length;i++) {
+        	Customer c = cuss[i];
+        	CheckAccount acc = c.getOneCheckAccount();
+        	ArrayList<Loan> loan = c.getLoans();
+        	System.out.println("approveloan"+ loan.size());
+        	for(int j=0;j<loan.size();j++) {
+        		Loan l = loan.get(j);
+        		this.all_loans.add(l);
+        		System.out.println(l.getCollateral().getItemName());
+        		if(l.isApproved()) continue;
+        		if(l.isDeclined()) continue;
+        		refers.add(c);
+        		model.addRow(new Object[]{c.getName().getFirstName()+" "+c.getName().getLastName(),acc.getAccountNumber(),l.getAmount()});
+        	}
+        }
         
     }
 
@@ -118,13 +154,25 @@ public class ApproveLoanPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
         dispose();
+        Manager m = this.manager;
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ManagerMainPage(m).setVisible(true);
+            }
+        });
     }//GEN-LAST:event_back_buttonActionPerformed
 
     private void detail_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detail_buttonActionPerformed
         // TODO add your handling code here:
+    	int row = this.customer_list_table.getSelectedRow();
+    	Customer c = this.refers.get(row);
+    	Loan l = this.all_loans.get(row);
+    	Manager m = this.manager;
+    	this.setVisible(false);
+    	dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoanDetailPage().setVisible(true);
+                new LoanDetailPage(c,l,m).setVisible(true);
             }
         });
     }//GEN-LAST:event_detail_buttonActionPerformed
